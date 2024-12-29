@@ -57,6 +57,8 @@ case 'test-only':
 
 	break;
 case '':
+	console.log('Compiling TypeScript files...');
+	execSync(`npx tsc`, options);
 	break;
 default:
 	console.log(`Unrecognized command ${process.argv[2]}`);

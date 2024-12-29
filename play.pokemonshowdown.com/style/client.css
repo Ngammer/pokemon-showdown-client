@@ -991,27 +991,27 @@ p.or:after {
 }
 .roomcounters .usercount {
 	display: block;
-	width: 49px;
-	height: 63px;
+	width: 100px;
+	height: 90px;
 	position: absolute;
-	left: -30px;
-	bottom: -5px;
-	background: url(https://play.pokemonshowdown.com/sprites/gen5/meloetta.png) center no-repeat;
+	left: -70px;
+	bottom: -15px;
+	background: url(https://play.pokemonshowdown.com/sprites/gen5/butterfree-gmax.png) center no-repeat;
 }
 .roomcounters button:hover .usercount {
-	background: url(https://play.pokemonshowdown.com/sprites/gen5ani/meloetta.gif) center no-repeat;
+	background: url(https://play.pokemonshowdown.com/sprites/gen5/butterfree-gmax.png) center no-repeat;
 }
 .roomcounters .battlecount {
 	display: block;
-	width: 46px;
+	width: 86px;
 	height: 76px;
 	position: absolute;
-	right: -30px;
+	right: -60px;
 	bottom: -10px;
-	background: url(https://play.pokemonshowdown.com/sprites/gen5/meloetta-pirouette.png) center no-repeat;
+	background: url(https://play.pokemonshowdown.com/sprites/gen5/arcanine-hisui.png) center no-repeat;
 }
 .roomcounters button:hover .battlecount {
-	background: url(https://play.pokemonshowdown.com/sprites/gen5ani/meloetta-pirouette.gif) center no-repeat;
+	background: url(https://play.pokemonshowdown.com/sprites/gen5/arcanine-hisui.png) center no-repeat;
 }
 
 .roomlist {

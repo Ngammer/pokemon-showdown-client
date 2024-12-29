@@ -160,7 +160,7 @@
 						html += '</p></div>';
 					}
 					self.addPseudoPM({
-						title: 'Latest News',
+						title: 'Anuncios',
 						html: html,
 						attributes: 'data-newsid="' + (data[0].id ? data[0].id : '1990') + '"',
 						cssClass: 'news-embed',
