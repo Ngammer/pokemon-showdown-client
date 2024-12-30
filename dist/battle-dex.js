@@ -139,7 +139,7 @@ const Dex = new class {
         if (window.document?.location?.protocol !== 'http:')
             prefix = 'https:';
         return `${prefix}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/`;
-    })();
+	})();
     fxPrefix = (() => {
         const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';
         return `${protocol}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/fx/`;

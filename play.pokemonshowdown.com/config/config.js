@@ -438,8 +438,8 @@ Config.customcolors = {
 // address bar is `Config.routes.client`.
 Config.defaultserver = {
 	id: 'showdown',
-	host: 'sim3.psim.us',
-	port: 443,
+	host: 'localhost',
+	port: 8000,
 	httpport: 8000,
 	altport: 80,
 	registered: true

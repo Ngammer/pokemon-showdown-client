@@ -466,8 +466,8 @@ Config.customcolors = {
 // address bar is `Config.routes.client`.
 Config.defaultserver = {
 	id: 'showdown',
-	host: 'sim3.psim.us',
-	port: 443,
+	host: 'localhost',
+	port: 8000,
 	httpport: 8000,
 	altport: 80,
 	registered: true
@@ -478,7 +478,7 @@ Config.version = "0.11.2 (3a9c9c6b)";
 
 Config.routes = {
 	root: 'pokemonshowdown.com',
-	client: 'play.pokemonshowdown.com',
+	client: '192.168.0.112:3000',
 	dex: 'dex.pokemonshowdown.com',
 	replays: 'replay.pokemonshowdown.com',
 	users: 'pokemonshowdown.com/users',
