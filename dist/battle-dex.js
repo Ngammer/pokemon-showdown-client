@@ -135,10 +135,9 @@ const Dex = new class {
     statNamesExceptHP = ['atk', 'def', 'spa', 'spd', 'spe'];
     pokeballs = null;
     resourcePrefix = (() => {
-        let prefix = '';
-        if (window.document?.location?.protocol !== 'http:')
-            prefix = 'https:';
-        return `${prefix}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/`;
+		let prefix = '';
+		if (document.location.protocol === 'file:') prefix = 'http:';
+		return prefix + '//192.168.0.112:3000';
 	})();
     fxPrefix = (() => {
         const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';

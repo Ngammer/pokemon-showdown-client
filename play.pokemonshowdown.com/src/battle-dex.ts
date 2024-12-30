@@ -181,8 +181,8 @@ const Dex = new class implements ModdedDex {
 
 	resourcePrefix = (() => {
 		let prefix = '';
-		if (window.document?.location?.protocol !== 'http:') prefix = 'https:';
-		return `${prefix}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/`;
+		if (document.location.protocol === 'file:') prefix = 'http:';
+		return prefix + '//192.168.0.112:3000';
 	})();
 
 	fxPrefix = (() => {
