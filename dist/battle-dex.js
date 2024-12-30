@@ -137,7 +137,7 @@ const Dex = new class {
     resourcePrefix = (() => {
 		let prefix = '';
 		if (document.location.protocol === 'file:') prefix = 'http:';
-		return prefix + '//192.168.0.112:3000';
+		return prefix + '//192.168.0.112:3000/';
 	})();
     fxPrefix = (() => {
         const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';

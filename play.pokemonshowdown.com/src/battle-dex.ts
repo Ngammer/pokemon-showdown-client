@@ -182,7 +182,7 @@ const Dex = new class implements ModdedDex {
 	resourcePrefix = (() => {
 		let prefix = '';
 		if (document.location.protocol === 'file:') prefix = 'http:';
-		return prefix + '//192.168.0.112:3000';
+		return prefix + '//192.168.0.112:3000/';
 	})();
 
 	fxPrefix = (() => {
