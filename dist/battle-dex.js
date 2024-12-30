@@ -137,7 +137,7 @@ const Dex = new class {
     resourcePrefix = (() => {
 		let prefix = '';
 		if (document.location.protocol === 'file:') prefix = 'http:';
-		return prefix + '//192.168.0.112:3000/';
+		return prefix + '//181.89.215.24:3000/';
 	})();
     fxPrefix = (() => {
         const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';
@@ -498,7 +498,7 @@ const Dex = new class {
         let graphicsGen = mechanicsGen;
         if (Dex.prefs('nopastgens'))
             graphicsGen = 6;
-        if (Dex.prefs('bwgfx') && graphicsGen >= 6)
+        if (/*Dex.prefs('bwgfx') &&*/ graphicsGen >= 6)
             graphicsGen = 5;
         spriteData.gen = Math.max(graphicsGen, Math.min(species.gen, 5));
         const baseDir = ['', 'gen1', 'gen2', 'gen3', 'gen4', 'gen5', '', '', '', ''][spriteData.gen];
@@ -725,7 +725,7 @@ const Dex = new class {
             spriteData.shiny = true;
         if (Dex.prefs('nopastgens'))
             gen = 6;
-        if (Dex.prefs('bwgfx') && gen > 5)
+        if (/*Dex.prefs('bwgfx') &&*/ gen > 5)
             gen = 5;
         let xydexExists = (!species.isNonstandard || species.isNonstandard === 'Past' || species.isNonstandard === 'CAP') || [
             "pikachustarter", "eeveestarter", "meltan", "melmetal", "pokestarufo", "pokestarufo2", "pokestarbrycenman", "pokestarmt", "pokestarmt2", "pokestargiant", "pokestarhumanoid", "pokestarmonster", "pokestarf00", "pokestarf002", "pokestarspirit",
