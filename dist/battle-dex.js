@@ -136,9 +136,15 @@ const Dex = new class {
     pokeballs = null;
     resourcePrefix = (() => {
 		let prefix = '';
-		if (document.location.protocol === 'file:') prefix = 'http:';
-		return prefix + '//181.89.215.24:3000/';
-	})();
+		if (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')) {
+			 // Local network or localhost
+			 prefix = 'http://192.168.0.112:3000/'; // Replace with your private IP
+		} else {
+			 // External
+			 prefix = 'http://181.89.215.24:3000/'; // Replace with your public IP
+		}
+		return prefix;
+  })();
     fxPrefix = (() => {
         const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';
         return `${protocol}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/fx/`;
