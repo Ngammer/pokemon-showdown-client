@@ -440,7 +440,6 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	gumshoostotem: 735,
 	raticatealolatotem: 1032 + 120,
 	marowakalolatotem: 1032 + 136,
-	electrodehisuitotem: 1032 + 209,
 	araquanidtotem: 752,
 	lurantistotem: 754,
 	salazzletotem: 758,
@@ -630,7 +629,8 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	shox: 1512 + 75,
 	// Nuevo Meta
 	arcaninehisuitotem: 1596 + 0,
-	fearill: 22,
+	fearill: 1596 + 1,
+	electrodehisuitotem: 1596 + 2,
 };
 
 const BattlePokemonIconIndexesLeft: {[id: string]: number} = {
