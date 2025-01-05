@@ -2731,6 +2731,7 @@ export class PokemonSprite extends Sprite {
 
 		let symbol = '';
 		if (pokemon.speciesForme.indexOf('-Mega') >= 0) symbol = 'mega';
+		else if (pokemon.speciesForme.indexOf('-Totem') >= 0) symbol = 'zsymbol';
 		else if (pokemon.speciesForme === 'Kyogre-Primal') symbol = 'alpha';
 		else if (pokemon.speciesForme === 'Groudon-Primal') symbol = 'omega';
 		if (symbol) {
