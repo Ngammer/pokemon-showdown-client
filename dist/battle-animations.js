@@ -2738,7 +2738,7 @@ class PokemonSprite extends Sprite {
         if (pokemon.speciesForme.indexOf('-Mega') >= 0)
             symbol = 'mega';
         else if (pokemon.speciesForme.indexOf('-Totem') >= 0)
-			symbol = 'zsymbol';
+			symbol = 'totem';
 			 else if (pokemon.speciesForme === 'Kyogre-Primal')
             symbol = 'alpha';
         else if (pokemon.speciesForme === 'Groudon-Primal')
@@ -3150,6 +3150,10 @@ const BattleEffects = {
         url: 'omega.png',
         w: 80, h: 80,
     },
+	 totem: {
+		url: 'rotating_bronze.png',
+		w: 80, h: 80,
+	},
     rainbow: {
         url: 'rainbow.png',
         w: 128, h: 128,

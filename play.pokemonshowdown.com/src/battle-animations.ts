@@ -2731,7 +2731,7 @@ export class PokemonSprite extends Sprite {
 
 		let symbol = '';
 		if (pokemon.speciesForme.indexOf('-Mega') >= 0) symbol = 'mega';
-		else if (pokemon.speciesForme.indexOf('-Totem') >= 0) symbol = 'zsymbol';
+		else if (pokemon.speciesForme.indexOf('-Totem') >= 0) symbol = 'totem';
 		else if (pokemon.speciesForme === 'Kyogre-Primal') symbol = 'alpha';
 		else if (pokemon.speciesForme === 'Groudon-Primal') symbol = 'omega';
 		if (symbol) {
@@ -3132,6 +3132,10 @@ const BattleEffects: {[k: string]: SpriteData} = {
 	},
 	omega: {
 		url: 'omega.png', // Ripped from Pokemon Global Link
+		w: 80, h: 80,
+	},
+	totem: {
+		url: 'rotating_bronze.png', // Ripped from Pokemon Global Link
 		w: 80, h: 80,
 	},
 	rainbow: {
