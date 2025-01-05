@@ -612,7 +612,7 @@ const BattlePokemonIconIndexes = {
     chuggalong: 1512 + 74,
     shox: 1512 + 75,
 	 // Nuevo Meta
-	 fearill: 1512 + 75,
+	 fearill: 1596 + 0,
 
 };
 const BattlePokemonIconIndexesLeft = {
