@@ -438,8 +438,6 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	// alt forms with duplicate icons
 	greninjabond: 658,
 	gumshoostotem: 735,
-	raticatealolatotem: 1032 + 120,
-	marowakalolatotem: 1032 + 136,
 	araquanidtotem: 752,
 	lurantistotem: 754,
 	salazzletotem: 758,
@@ -631,6 +629,8 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	arcaninehisuitotem: 1596 + 0,
 	fearill: 1596 + 1,
 	electrodehisuitotem: 1596 + 2,
+	raticatealolatotem: 1596 + 3,
+	marowakalolatotem: 1032 + 136,
 };
 
 const BattlePokemonIconIndexesLeft: {[id: string]: number} = {
@@ -741,6 +741,7 @@ const BattlePokemonIconIndexesLeft: {[id: string]: number} = {
 	necrozmaultra: 1404 + 103,
 	stakataka: 1404 + 104,
 	blacephalon: 1404 + 105,
+
 };
 
 const BattleAvatarNumbers: {[k: string]: string} = {

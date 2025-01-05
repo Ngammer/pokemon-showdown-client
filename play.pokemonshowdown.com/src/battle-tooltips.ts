@@ -1531,7 +1531,11 @@ class BattleTooltips {
 			moveType = pokemonTypes[0];
 		}
 		if (move.id === 'bide' || move.id === 'jawlock') {
+			if(pokemonTypes[1]){
 			moveType = pokemonTypes[1];
+			} else {
+				moveType = pokemonTypes[0];
+			}
 	  }
 		// Moves that require an item to change their type.
 		let item = this.battle.dex.items.get(value.itemName);

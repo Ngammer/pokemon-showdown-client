@@ -422,8 +422,6 @@ const BattlePokemonIconIndexes = {
     // alt forms with duplicate icons
     greninjabond: 658,
     gumshoostotem: 735,
-    raticatealolatotem: 1032 + 120,
-    marowakalolatotem: 1032 + 136,
     araquanidtotem: 752,
     lurantistotem: 754,
     salazzletotem: 758,
@@ -611,8 +609,10 @@ const BattlePokemonIconIndexes = {
     shox: 1512 + 75,
 	 // Nuevo Meta
 	 arcaninehisuitotem: 1596 + 0,
-	 fearill: 1596 + 1,
-	 electrodehisuitotem: 1596 + 2,
+	fearill: 1596 + 1,
+	electrodehisuitotem: 1596 + 2,
+	raticatealolatotem: 1596 + 3,
+	marowakalolatotem: 1032 + 136,
 };
 const BattlePokemonIconIndexesLeft = {
     pikachubelle: 1404 + 0,
