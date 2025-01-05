@@ -1240,7 +1240,7 @@ class BattleTooltips {
 			stats.def *= 2;
 		}
 		if (ability === 'waterveil') {
-			stats.def *= 1.2;
+			stats.spd *= 1.2;
 		}
 		if (this.battle.abilityActive('Vessel of Ruin')) {
 			if (ability !== 'vesselofruin') {
@@ -2062,7 +2062,7 @@ class BattleTooltips {
 		}
 		// Base power based on times hit
 		if (move.id === 'ragefist') {
-			value.set(Math.min(350, 50 + 50 * pokemon.timesAttacked),
+			value.set(Math.min(200, 50 + 25 * pokemon.timesAttacked),
 				pokemon.timesAttacked > 0
 					? `Hit ${pokemon.timesAttacked} time${pokemon.timesAttacked > 1 ? 's' : ''}`
 					: undefined);

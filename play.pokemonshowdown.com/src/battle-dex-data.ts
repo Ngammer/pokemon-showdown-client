@@ -630,7 +630,7 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	fearill: 1596 + 1,
 	electrodehisuitotem: 1596 + 2,
 	raticatealolatotem: 1596 + 3,
-	marowakalolatotem: 1032 + 136,
+	marowakalolatotem: 1596 + 4,
 };
 
 const BattlePokemonIconIndexesLeft: {[id: string]: number} = {
