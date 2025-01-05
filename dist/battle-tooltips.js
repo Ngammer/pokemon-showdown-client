@@ -1943,6 +1943,9 @@ class BattleTooltips {
         if (move.id === 'lastrespects') {
             value.set(Math.min(50 + 50 * pokemon.side.faintCounter));
         }
+		  if (move.id === 'beatup') {
+			value.set(Math.min(140 - 20 * pokemon.side.faintCounter));
+	  }
         if (move.id === 'punishment' && target) {
             let boostCount = 0;
             for (const boost of Object.values(target.boosts)) {
@@ -1963,19 +1966,6 @@ class BattleTooltips {
                     boostCount += boost;
             }
             value.set(20 + 20 * boostCount);
-        }
-        if (move.id === 'trumpcard') {
-            const ppLeft = 5 - this.ppUsed(move, pokemon);
-            let basePower = 40;
-            if (ppLeft === 1)
-                basePower = 200;
-            else if (ppLeft === 2)
-                basePower = 80;
-            else if (ppLeft === 3)
-                basePower = 60;
-            else if (ppLeft === 4)
-                basePower = 50;
-            value.set(basePower);
         }
         if (move.id === 'magnitude') {
             value.setRange(10, 150);

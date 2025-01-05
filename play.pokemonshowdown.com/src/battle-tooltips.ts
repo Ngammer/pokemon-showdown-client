@@ -1922,6 +1922,9 @@ class BattleTooltips {
 		if (move.id === 'lastrespects') {
 			value.set(Math.min(50 + 50 * pokemon.side.faintCounter));
 		}
+		if (move.id === 'lastrespects') {
+			value.set(Math.min(140 - 20 * pokemon.side.faintCounter));
+		}
 		if (move.id === 'punishment' && target) {
 			let boostCount = 0;
 			for (const boost of Object.values(target.boosts)) {
@@ -1940,15 +1943,6 @@ class BattleTooltips {
 				if (boost > 0) boostCount += boost;
 			}
 			value.set(20 + 20 * boostCount);
-		}
-		if (move.id === 'trumpcard') {
-			const ppLeft = 5 - this.ppUsed(move, pokemon);
-			let basePower = 40;
-			if (ppLeft === 1) basePower = 200;
-			else if (ppLeft === 2) basePower = 80;
-			else if (ppLeft === 3) basePower = 60;
-			else if (ppLeft === 4) basePower = 50;
-			value.set(basePower);
 		}
 		if (move.id === 'magnitude') {
 			value.setRange(10, 150);
@@ -1984,7 +1978,7 @@ class BattleTooltips {
 				value.modify(2, 'Terrain Pulse boost');
 			}
 		}
-		
+
 		if (
 			move.id === 'watershuriken' && pokemon.getSpeciesForme() === 'Greninja-Ash' && pokemon.ability === 'Battle Bond'
 		) {
@@ -2930,7 +2924,7 @@ class BattleStatGuesser {
 			'Bulky Physical Sweeper': ['atk', 'hp'],
 			'Bulky Special Sweeper': ['spa', 'hp'],
 			'Fast Bulky Support': ['spe', 'hp'],
-			'Physically Defensive': ['def', 'hp'], 
+			'Physically Defensive': ['def', 'hp'],
 			'Specially Defensive': ['spd', 'hp'],
 		};
 
