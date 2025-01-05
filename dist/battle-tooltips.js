@@ -1538,6 +1538,9 @@ class BattleTooltips {
 		  if (move.id === 'synchronoise') {
 			moveType = pokemonTypes[0];
 		}
+		if (move.id === 'snaptrap') {
+			moveType = pokemonTypes[0];
+		}
 		  if (move.id === 'bide' || move.id === 'jawlock') {
 			if(pokemonTypes[1]){
 			moveType = pokemonTypes[1];
@@ -1805,6 +1808,9 @@ class BattleTooltips {
                 value.modify(1.1, "Victory Star");
             }
         }
+		  if(this.battle.gameType === 'doubles' && move.id === 'darkvoid'){
+			value.modify(0.5, "Doubles")
+		}
 		  if (value.tryAbility('Inteligencia Artificial')) {
 			accuracyModifiers.push(3891);
 			value.abilityModify(0.95, "Inteligencia Artificial");
@@ -1892,11 +1898,11 @@ class BattleTooltips {
         // apply modifiers for moves that depend on the actual stats
         const modifiedStats = this.calculateModifiedStats(pokemon, serverPokemon);
         value.reset(move.basePower);
-        if (move.id === 'acrobatics') {
-            if (!serverPokemon.item) {
-                value.modify(2, "Acrobatics + no item");
-            }
-        }
+        if (move.id === 'acrobatics' || move.id === 'belch') {
+			if (!serverPokemon.item) {
+				value.modify(2, "Acrobatics + no item");
+			}
+		}
         let variableBPCap = ['crushgrip', 'wringout'].includes(move.id) ? 120 : move.id === 'hardpress' ? 100 : undefined;
         if (variableBPCap && target) {
             value.set(Math.floor(Math.floor((variableBPCap * (100 * Math.floor(target.hp * 4096 / target.maxhp)) + 2048 - 1) / 4096) / 100) || 1, 'approximate');
@@ -1907,7 +1913,7 @@ class BattleTooltips {
         if (move.id === 'brine' && target && target.hp * 2 <= target.maxhp) {
             value.modify(2, 'Brine + target below half HP');
         }
-        if (move.id === 'eruption' || move.id === 'waterspout' || move.id === 'dragonenergy' || move.id === 'hardpress') {
+        if (move.id === 'eruption' || move.id === 'waterspout' || move.id === 'dragonenergy' || move.id === 'hardpress' || move.id === 'crushgrip' || move.id === 'wringout') {
             value.set(Math.floor(150 * pokemon.hp / pokemon.maxhp) || 1);
         }
         if (move.id === 'facade' && !['', 'slp', 'frz'].includes(pokemon.status)) {
@@ -1940,7 +1946,7 @@ class BattleTooltips {
                 basePower = 20;
             value.set(basePower);
         }
-        if (['hex', 'infernalparade'].includes(move.id) && target?.status) {
+        if (['hex', 'infernalparade', 'seedbomb'].includes(move.id) && target?.status) {
             value.modify(2, move.name + ' + status');
         }
         if (move.id === 'lastrespects') {
@@ -1973,10 +1979,12 @@ class BattleTooltips {
         if (move.id === 'magnitude') {
             value.setRange(10, 150);
         }
-        if (['venoshock', 'barbbarrage'].includes(move.id) && target) {
-            if (['psn', 'tox'].includes(target.status)) {
+        if (['venoshock'].includes(move.id) && target) {
+            if (['psn'].includes(target.status)) {
                 value.modify(2, move.name + ' + Poison');
-            }
+            } else if (['tox'].includes(target.status)) {
+					value.modify(3, move.name + ' + Poison');
+			  }
         }
         if ((move.id === 'wakeupslap' || 'nightmare' ) && target) {
             if (target.status === 'slp') {
@@ -2021,34 +2029,7 @@ class BattleTooltips {
             value.set(20, 'Battle Bond');
         }
         // Moves that check opponent speed
-        if (move.id === 'electroball' && target) {
-            let [minSpe, maxSpe] = this.getSpeedRange(target);
-            let minRatio = (modifiedStats.spe / maxSpe);
-            let maxRatio = (modifiedStats.spe / minSpe);
-            let min;
-            let max;
-            if (minRatio >= 4)
-                min = 150;
-            else if (minRatio >= 3)
-                min = 120;
-            else if (minRatio >= 2)
-                min = 80;
-            else if (minRatio >= 1)
-                min = 60;
-            else
-                min = 40;
-            if (maxRatio >= 4)
-                max = 150;
-            else if (maxRatio >= 3)
-                max = 120;
-            else if (maxRatio >= 2)
-                max = 80;
-            else if (maxRatio >= 1)
-                max = 60;
-            else
-                max = 40;
-            value.setRange(min, max);
-        }
+
         if (move.id === 'gyroball' && target) {
             let [minSpe, maxSpe] = this.getSpeedRange(target);
             let min = (Math.floor(25 * minSpe / modifiedStats.spe) || 1);

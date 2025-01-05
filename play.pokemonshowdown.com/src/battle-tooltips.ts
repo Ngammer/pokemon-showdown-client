@@ -1530,6 +1530,9 @@ class BattleTooltips {
 		if (move.id === 'synchronoise') {
 			moveType = pokemonTypes[0];
 		}
+		if (move.id === 'snaptrap') {
+			moveType = pokemonTypes[0];
+		}
 		if (move.id === 'bide' || move.id === 'jawlock') {
 			if(pokemonTypes[1]){
 			moveType = pokemonTypes[1];
@@ -1552,7 +1555,7 @@ class BattleTooltips {
 			if (value.itemModify(0)) moveType = item.naturalGift.type;
 		}
 		// Weather and pseudo-weather type changes.
-		if (move.id === 'weatherball' && value.weatherModify(0)) {
+		if ((move.id === 'weatherball' || move.id === 'secretpower' || move.id === 'naturepower')&& value.weatherModify(0)) {
 			switch (this.battle.weather) {
 			case 'sunnyday':
 			case 'desolateland':
@@ -1573,7 +1576,7 @@ class BattleTooltips {
 				break;
 			}
 		}
-		if ((move.id === 'terrainpulse') && pokemon.isGrounded(serverPokemon)) {
+		if ((move.id === 'terrainpulse' || move.id === 'secretpower' || move.id === 'naturepower') && pokemon.isGrounded(serverPokemon)) {
 			if (this.battle.hasPseudoWeather('Electric Terrain')) {
 				moveType = 'Electric';
 			} else if (this.battle.hasPseudoWeather('Grassy Terrain')) {
@@ -1780,6 +1783,10 @@ class BattleTooltips {
 			}
 		}
 
+		if(this.battle.gameType === 'doubles' && move.id === 'darkvoid'){
+			value.modify(0.5, "Doubles")
+		}
+
 		if (value.tryAbility('Inteligencia Artificial')) {
 			accuracyModifiers.push(3891);
 			value.abilityModify(0.95, "Inteligencia Artificial");
@@ -1876,7 +1883,7 @@ class BattleTooltips {
 
 		value.reset(move.basePower);
 
-		if (move.id === 'acrobatics') {
+		if (move.id === 'acrobatics' || move.id === 'belch') {
 			if (!serverPokemon.item) {
 				value.modify(2, "Acrobatics + no item");
 			}
@@ -1896,7 +1903,7 @@ class BattleTooltips {
 		if (move.id === 'brine' && target && target.hp * 2 <= target.maxhp) {
 			value.modify(2, 'Brine + target below half HP');
 		}
-		if (move.id === 'eruption' || move.id === 'waterspout' || move.id === 'dragonenergy' || move.id === 'hardpress') {
+		if (move.id === 'eruption' || move.id === 'waterspout' || move.id === 'dragonenergy' || move.id === 'hardpress' || move.id === 'crushgrip' || move.id === 'wringout') {
 			value.set(Math.floor(150 * pokemon.hp / pokemon.maxhp) || 1);
 		}
 		if (move.id === 'facade' && !['', 'slp', 'frz'].includes(pokemon.status)) {
@@ -1922,9 +1929,9 @@ class BattleTooltips {
 			else basePower = 20;
 			value.set(basePower);
 		}
-		if (['hex', 'infernalparade'].includes(move.id) && target?.status) {
+		if (['hex', 'infernalparade', 'seedbomb'].includes(move.id) && target?.status) {
 			value.modify(2, move.name + ' + status');
-		}
+	  }
 		if (move.id === 'lastrespects') {
 			value.set(Math.min(50 + 50 * pokemon.side.faintCounter));
 		}
@@ -1953,11 +1960,13 @@ class BattleTooltips {
 		if (move.id === 'magnitude') {
 			value.setRange(10, 150);
 		}
-		if (['venoshock', 'barbbarrage'].includes(move.id) && target) {
-			if (['psn', 'tox'].includes(target.status)) {
-				value.modify(2, move.name + ' + Poison');
-			}
-		}
+		if (['venoshock'].includes(move.id) && target) {
+			if (['psn'].includes(target.status)) {
+				 value.modify(2, move.name + ' + Poison');
+			} else if (['tox'].includes(target.status)) {
+				value.modify(3, move.name + ' + Poison');
+		  }
+	  }
 		if ((move.id === 'wakeupslap' || 'nightmare' )&& target) {
 			if (target.status === 'slp') {
 				value.modify(2, 'Wake-Up Slap + Sleep');
@@ -2005,27 +2014,6 @@ class BattleTooltips {
 			value.set(20, 'Battle Bond');
 		}
 		// Moves that check opponent speed
-		if (move.id === 'electroball' && target) {
-			let [minSpe, maxSpe] = this.getSpeedRange(target);
-			let minRatio = (modifiedStats.spe / maxSpe);
-			let maxRatio = (modifiedStats.spe / minSpe);
-			let min;
-			let max;
-
-			if (minRatio >= 4) min = 150;
-			else if (minRatio >= 3) min = 120;
-			else if (minRatio >= 2) min = 80;
-			else if (minRatio >= 1) min = 60;
-			else min = 40;
-
-			if (maxRatio >= 4) max = 150;
-			else if (maxRatio >= 3) max = 120;
-			else if (maxRatio >= 2) max = 80;
-			else if (maxRatio >= 1) max = 60;
-			else max = 40;
-
-			value.setRange(min, max);
-		}
 		if (move.id === 'gyroball' && target) {
 			let [minSpe, maxSpe] = this.getSpeedRange(target);
 			let min = (Math.floor(25 * minSpe / modifiedStats.spe) || 1);
