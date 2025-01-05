@@ -1896,7 +1896,7 @@ class BattleTooltips {
 		if (move.id === 'brine' && target && target.hp * 2 <= target.maxhp) {
 			value.modify(2, 'Brine + target below half HP');
 		}
-		if (move.id === 'eruption' || move.id === 'waterspout' || move.id === 'dragonenergy') {
+		if (move.id === 'eruption' || move.id === 'waterspout' || move.id === 'dragonenergy' || move.id === 'hardpress') {
 			value.set(Math.floor(150 * pokemon.hp / pokemon.maxhp) || 1);
 		}
 		if (move.id === 'facade' && !['', 'slp', 'frz'].includes(pokemon.status)) {
@@ -1974,6 +1974,13 @@ class BattleTooltips {
 		if (move.id === 'psyblade' && this.battle.hasPseudoWeather('Electric Terrain')) {
 			value.modify(1.5, 'Electric Terrain');
 		}
+		if (move.id === 'ancientpower' && (pokemon.name === 'Aerodactyl' || pokemon.name === 'Kabutops' || pokemon.name === 'Cradily'
+			|| pokemon.name === 'Armaldo' || pokemon.name === 'Rampardos' || pokemon.name === 'Omastar'
+			 || pokemon.name === 'Bastiodon' || pokemon.name === 'Carracosta' || pokemon.name === 'Archeops'
+			 || pokemon.name === 'Tyrantrum' || pokemon.name === 'Aurorus' || pokemon.name === 'Dracozolt'
+			 || pokemon.name === 'Dracovish' || pokemon.name === 'Arctozolt' || pokemon.name === 'Arctovish')) {
+			value.modify(1.5, 'Fossil');
+		}
 		if ((move.id === 'terrainpulse' || move.id === 'secretpower' ||move.id === 'naturepower') && pokemon.isGrounded(serverPokemon)) {
 			if (
 				this.battle.hasPseudoWeather('Electric Terrain') ||
@@ -1984,7 +1991,14 @@ class BattleTooltips {
 				value.modify(2, 'Terrain Pulse boost');
 			}
 		}
-
+		if ((move.id === 'steelroller') && pokemon.isGrounded(serverPokemon)) {
+			if (this.battle.hasPseudoWeather('Electric Terrain') ||
+				 this.battle.hasPseudoWeather('Grassy Terrain') ||
+				 this.battle.hasPseudoWeather('Misty Terrain') ||
+				 this.battle.hasPseudoWeather('Psychic Terrain')) {
+				 value.modify(1.52941176470588, 'Steel Roller boost');
+			}
+	  }
 		if (
 			move.id === 'watershuriken' && pokemon.getSpeciesForme() === 'Greninja-Ash' && pokemon.ability === 'Battle Bond'
 		) {
@@ -2114,6 +2128,9 @@ class BattleTooltips {
 		}
 		if (move.flags['slicing']) {
 			value.abilityModify(1.5, "Sharpness");
+		}
+		if (move.flags['bullet']) {
+			value.abilityModify(1.5, "Sniper");
 		}
 		if (move.type === 'Bug') {
 			value.abilityModify(1.2, "Swarm");
@@ -2690,7 +2707,7 @@ class BattleStatGuesser {
 					moveCount['Special'] += 0.5;
 				} else if (move.id === 'naturepower') {
 					moveCount['Special']++;
-				} else if (['protect', 'detect', 'spikyshield', 'kingsshield'].includes(move.id)) {
+				} else if (['protect', 'detect', 'spikyshield', 'kingsshield', 'shelter'].includes(move.id)) {
 					moveCount['Stall']++;
 				} else if (move.id === 'wish') {
 					moveCount['Restoration']++;
@@ -2719,7 +2736,7 @@ class BattleStatGuesser {
 			} else if (['counter', 'endeavor', 'metalburst', 'mirrorcoat', 'rapidspin'].includes(move.id)) {
 				moveCount['Support']++;
 			} else if ([
-				'nightshade', 'seismictoss', 'psywave', 'superfang', 'naturesmadness', 'foulplay', 'endeavor', 'finalgambit', 'bodypress',
+				'nightshade', 'seismictoss', 'psywave', 'superfang', 'naturesmadness', 'foulplay', 'endeavor', 'finalgambit', 'bodypress', 'psywave'
 			].includes(move.id)) {
 				moveCount['Offense']++;
 			} else if (move.id === 'fellstinger') {
@@ -2791,7 +2808,7 @@ class BattleStatGuesser {
 			physicalBulk *= 1.1;
 			specialBulk *= 1.1;
 		}
-		if (hasMove['gigadrain'] || hasMove['drainpunch'] || hasMove['hornleech']) {
+		if (hasMove['gigadrain'] || hasMove['drainpunch'] || hasMove['hornleech'] || hasMove['bouncybubble'] || hasMove['dreameater']) {
 			physicalBulk *= 1.15;
 			specialBulk *= 1.15;
 		}
