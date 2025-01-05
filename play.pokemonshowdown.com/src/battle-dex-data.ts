@@ -1558,7 +1558,7 @@ class Species implements Effect {
 		this.requiredItems = data.requiredItems || (data.requiredItem ? [data.requiredItem] : []);
 		this.tier = data.tier || '';
 
-		this.isTotem = !!(this.forme && ['-totem', '-alolatotem', '--hisuitotem'].includes(this.formeid));
+		this.isTotem = !!(this.forme && ['-totem', '-alolatotem', '-hisuitotem'].includes(this.formeid));
 		this.isMega = !!(this.forme && ['-mega', '-megax', '-megay'].includes(this.formeid));
 		this.isPrimal = !!(this.forme && this.formeid === '-primal');
 		this.canGigantamax = !!data.canGigantamax;

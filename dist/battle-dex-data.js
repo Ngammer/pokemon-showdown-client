@@ -613,7 +613,6 @@ const BattlePokemonIconIndexes = {
 	 arcaninehisuitotem: 1596 + 0,
 	 fearill: 1596 + 1,
 	 electrodehisuitotem: 1596 + 2,
-
 };
 const BattlePokemonIconIndexesLeft = {
     pikachubelle: 1404 + 0,
@@ -1454,7 +1453,7 @@ class Species {
         this.evoCondition = data.evoCondition || '';
         this.requiredItems = data.requiredItems || (data.requiredItem ? [data.requiredItem] : []);
         this.tier = data.tier || '';
-        this.isTotem = !!(this.forme && ['-totem'].includes(this.formeid));;
+        this.isTotem = !!(this.forme && ['-totem'].includes(this.formeid));
         this.isMega = !!(this.forme && ['-mega', '-megax', '-megay'].includes(this.formeid));
         this.isPrimal = !!(this.forme && this.formeid === '-primal');
         this.canGigantamax = !!data.canGigantamax;
