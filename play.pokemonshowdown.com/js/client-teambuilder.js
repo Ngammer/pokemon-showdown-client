@@ -1503,6 +1503,9 @@
 					if (species.isMega) {
 						species = dex.species.get(species.baseSpecies);
 					}
+					if (species.isTotem) {
+						species = dex.species.get(species.baseSpecies);
+					}
 					if (!species.exists) continue;
 					if (!formatid.includes('monothreat')) {
 						if (i === 0) {

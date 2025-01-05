@@ -526,6 +526,7 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	laprasmega: 1320 + 57,
 	eeveegmax: 1320 + 58,
 	snorlaxgmax: 1320 + 59,
+	snorlaxmega: 1320 + 59,
 	garbodorgmax: 1320 + 60,
 	melmetalgmax: 1320 + 61,
 	corviknightgmax: 1320 + 62,
@@ -1555,13 +1556,13 @@ class Species implements Effect {
 		this.requiredItems = data.requiredItems || (data.requiredItem ? [data.requiredItem] : []);
 		this.tier = data.tier || '';
 
-		this.isTotem = false;
+		this.isTotem = !!(this.forme && ['-totem', '-alolatotem', '--hisuitotem'].includes(this.formeid));
 		this.isMega = !!(this.forme && ['-mega', '-megax', '-megay'].includes(this.formeid));
 		this.isPrimal = !!(this.forme && this.formeid === '-primal');
 		this.canGigantamax = !!data.canGigantamax;
 		this.cannotDynamax = !!data.cannotDynamax;
 		this.forceTeraType = data.forceTeraType || '';
-		this.battleOnly = data.battleOnly || (this.isMega ? this.baseSpecies : undefined);
+		this.battleOnly = data.battleOnly || (this.isMega ? this.baseSpecies : undefined) || (this.isTotem ? this.baseSpecies : undefined);
 		this.isNonstandard = data.isNonstandard || null;
 		this.unreleasedHidden = data.unreleasedHidden || false;
 		this.changesFrom = data.changesFrom ||

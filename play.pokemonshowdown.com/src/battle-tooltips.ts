@@ -2915,7 +2915,7 @@ class BattleStatGuesser {
 			'Bulky Physical Sweeper': ['atk', 'hp'],
 			'Bulky Special Sweeper': ['spa', 'hp'],
 			'Fast Bulky Support': ['spe', 'hp'],
-			'Physically Defensive': ['def', 'hp'],
+			'Physically Defensive': ['def', 'hp'], 
 			'Specially Defensive': ['spd', 'hp'],
 		};
 

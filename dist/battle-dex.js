@@ -531,7 +531,7 @@ const Dex = new class {
             let baseSpeciesid = toID(species.baseSpecies);
             spriteData.cryurl = 'audio/cries/' + baseSpeciesid;
             let formeid = species.formeid;
-            if (species.isMega || formeid && (formeid === '-crowned' ||
+            if (species.isMega || species.isTotem || formeid && (formeid === '-crowned' ||
                 formeid === '-eternal' ||
                 formeid === '-eternamax' ||
                 formeid === '-four' ||

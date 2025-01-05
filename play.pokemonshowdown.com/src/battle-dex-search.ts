@@ -368,6 +368,7 @@ class DexSearch {
 			if (qFilterType === 'type' && typeIndex !== 2) continue;
 			// hardcode cases of duplicate non-consecutive aliases
 			if ((id === 'megax' || id === 'megay') && 'mega'.startsWith(query)) continue;
+			
 
 			let matchStart = 0;
 			let matchEnd = 0;

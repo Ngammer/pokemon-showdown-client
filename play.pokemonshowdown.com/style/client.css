@@ -1004,14 +1004,14 @@ p.or:after {
 .roomcounters .battlecount {
 	display: block;
 	width: 86px;
-	height: 76px;
+	height: 85px;
 	position: absolute;
 	right: -60px;
-	bottom: -10px;
-	background: url(https://play.pokemonshowdown.com/sprites/gen5/arcanine-hisui.png) center no-repeat;
+	bottom: -5px;
+	background: url(../sprites/gen5/fearill.png) center no-repeat;
 }
 .roomcounters button:hover .battlecount {
-	background: url(https://play.pokemonshowdown.com/sprites/gen5/arcanine-hisui.png) center no-repeat;
+	background: url(../sprites/gen5/fearill.png) center no-repeat;
 }
 
 .roomlist {

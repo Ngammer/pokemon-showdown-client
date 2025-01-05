@@ -509,6 +509,7 @@ const BattlePokemonIconIndexes = {
 	 laprasmega: 1320 + 57,
     eeveegmax: 1320 + 58,
     snorlaxgmax: 1320 + 59,
+	 snorlaxmega: 1320 + 59,
     garbodorgmax: 1320 + 60,
     melmetalgmax: 1320 + 61,
     corviknightgmax: 1320 + 62,
@@ -1419,7 +1420,7 @@ class Species {
         const baseId = toID(this.baseSpecies);
         this.formeid = (baseId === this.id ? '' : '-' + toID(this.forme));
         this.spriteid = baseId + this.formeid;
-        if (this.spriteid.slice(-5) === 'totem')
+        if (this.spriteid.slice(-5) === 'totem' || this.spriteid.slice(-10) === 'alolatotem' || this.spriteid.slice(-10) === 'hisuitotem')
             this.spriteid = this.spriteid.slice(0, -5);
         if (this.spriteid === 'greninja-bond')
             this.spriteid = 'greninja';
