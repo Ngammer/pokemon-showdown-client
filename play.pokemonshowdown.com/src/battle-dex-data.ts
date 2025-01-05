@@ -629,6 +629,8 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	cresceidon: 1512 + 73,
 	chuggalong: 1512 + 74,
 	shox: 1512 + 75,
+	// Nuevo Meta
+	fearill: 1596 + 0,
 };
 
 const BattlePokemonIconIndexesLeft: {[id: string]: number} = {
