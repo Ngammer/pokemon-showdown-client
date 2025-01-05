@@ -611,6 +611,9 @@ const BattlePokemonIconIndexes = {
     cresceidon: 1512 + 73,
     chuggalong: 1512 + 74,
     shox: 1512 + 75,
+	 // Nuevo Meta
+	 fearill: 1512 + 75,
+
 };
 const BattlePokemonIconIndexesLeft = {
     pikachubelle: 1404 + 0,
