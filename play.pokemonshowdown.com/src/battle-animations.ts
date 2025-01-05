@@ -3135,7 +3135,7 @@ const BattleEffects: {[k: string]: SpriteData} = {
 		w: 80, h: 80,
 	},
 	totem: {
-		url: 'rotating_bronze.png', // Ripped from Pokemon Global Link
+		url: 'angry.png', // Ripped from Pokemon Global Link
 		w: 80, h: 80,
 	},
 	rainbow: {

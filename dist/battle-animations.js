@@ -3151,7 +3151,7 @@ const BattleEffects = {
         w: 80, h: 80,
     },
 	 totem: {
-		url: 'rotating_bronze.png',
+		url: 'angry.png',
 		w: 80, h: 80,
 	},
     rainbow: {
