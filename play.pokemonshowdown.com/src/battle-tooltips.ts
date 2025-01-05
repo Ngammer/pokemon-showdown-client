@@ -1922,7 +1922,7 @@ class BattleTooltips {
 		if (move.id === 'lastrespects') {
 			value.set(Math.min(50 + 50 * pokemon.side.faintCounter));
 		}
-		if (move.id === 'lastrespects') {
+		if (move.id === 'beatup') {
 			value.set(Math.min(140 - 20 * pokemon.side.faintCounter));
 		}
 		if (move.id === 'punishment' && target) {
@@ -1952,7 +1952,7 @@ class BattleTooltips {
 				value.modify(2, move.name + ' + Poison');
 			}
 		}
-		if (move.id === 'wakeupslap' && target) {
+		if ((move.id === 'wakeupslap' || 'nightmare' )&& target) {
 			if (target.status === 'slp') {
 				value.modify(2, 'Wake-Up Slap + Sleep');
 			}
