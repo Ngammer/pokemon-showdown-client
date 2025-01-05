@@ -1936,7 +1936,7 @@ class BattleTooltips {
 			value.set(Math.min(50 + 50 * pokemon.side.faintCounter));
 		}
 		if (move.id === 'beatup') {
-			value.set(Math.min(140 - 20 * pokemon.side.faintCounter));
+			value.set(Math.max(140 - 20 * pokemon.side.faintCounter));
 		}
 		if (move.id === 'punishment' && target) {
 			let boostCount = 0;
