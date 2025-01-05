@@ -1074,17 +1074,14 @@ class BattleTooltips {
 			}
 		}
 
-		if (speciesName === 'Ditto' && !(clientPokemon && 'transform' in clientPokemon.volatiles)) {
+		if (speciesName === 'Ditto') {
 			if (item === 'quickpowder') {
-				speedModifiers.push(2);
+				speedModifiers.push(1.2);
 			}
 			if (item === 'metalpowder') {
-				if (this.battle.gen === 2) {
-					stats.def = Math.floor(stats.def * 1.5);
-					stats.spd = Math.floor(stats.spd * 1.5);
-				} else {
-					stats.def *= 2;
-				}
+					stats.def = Math.floor(stats.def * 1.2);
+					stats.spd = Math.floor(stats.spd * 1.2);
+
 			}
 		}
 
@@ -1105,7 +1102,7 @@ class BattleTooltips {
 		if (ability === 'purepower' || ability === 'hugepower') {
 			stats.atk *= 2;
 		}
-		if (ability === 'hustle' || (ability === 'gorillatactics' && !clientPokemon?.volatiles['dynamax'])) {
+		if ((ability === 'gorillatactics' && !clientPokemon?.volatiles['dynamax'])) {
 			stats.atk = Math.floor(stats.atk * 1.5);
 		}
 		if (weather) {
@@ -1241,6 +1238,9 @@ class BattleTooltips {
 		}
 		if (ability === 'furcoat') {
 			stats.def *= 2;
+		}
+		if (ability === 'waterveil') {
+			stats.def *= 1.2;
 		}
 		if (this.battle.abilityActive('Vessel of Ruin')) {
 			if (ability !== 'vesselofruin') {
@@ -1776,10 +1776,12 @@ class BattleTooltips {
 			}
 		}
 
-		if (value.tryAbility('Hustle') && move.category === 'Physical') {
-			accuracyModifiers.push(3277);
-			value.abilityModify(0.8, "Hustle");
-		} else if (value.tryAbility('Compound Eyes')) {
+		if (value.tryAbility('Inteligencia Artificial')) {
+			accuracyModifiers.push(3891);
+			value.abilityModify(0.95, "Inteligencia Artificial");
+	  }
+
+		if (value.tryAbility('Compound Eyes')) {
 			accuracyModifiers.push(5325);
 			value.abilityModify(1.3, "Compound Eyes");
 		}
@@ -2070,6 +2072,9 @@ class BattleTooltips {
 		if (move.flags['punch']) {
 			value.abilityModify(1.2, 'Iron Fist');
 		}
+		if (move.flags['punch']) {
+			value.abilityModify(2, 'Nudillos De Piedra');
+		}
 		if (move.flags['pulse']) {
 			value.abilityModify(1.5, "Mega Launcher");
 		}
@@ -2083,7 +2088,10 @@ class BattleTooltips {
 			value.abilityModify(1.5, "Toxic Boost");
 		}
 		if (['Rock', 'Ground', 'Steel'].includes(moveType) && this.battle.weather === 'sandstorm') {
-			if (value.tryAbility("Sand Force")) value.weatherModify(1.3, "Sandstorm", "Sand Force");
+			if (value.tryAbility("Sand Force")) value.weatherModify(1.5, "Sandstorm", "Sand Force");
+		}
+		if (['Rock', 'Ground', 'Steel'].includes(moveType) && this.battle.weather !== 'sandstorm') {
+			value.abilityModify(1.25, "Sand Force");
 		}
 		if (move.secondaries) {
 			value.abilityModify(1.3, "Sheer Force");
@@ -2091,22 +2099,61 @@ class BattleTooltips {
 		if (move.flags['contact']) {
 			value.abilityModify(1.3, "Tough Claws");
 		}
+		if (!move.flags['contact'] && move.category === 'Special') {
+		value.abilityModify(1.15, "Mente Fria");
+	  	}
+		if (move.category === 'Physical' || move.category === 'Special') {
+		value.abilityModify(1.4, "Inteligencia Artificial");
+		}
 		if (move.flags['sound']) {
 			value.abilityModify(1.3, "Punk Rock");
 		}
 		if (move.flags['slicing']) {
 			value.abilityModify(1.5, "Sharpness");
 		}
+		if (move.type === 'Bug') {
+			value.abilityModify(1.2, "Swarm");
+		}
+		if (move.type === 'Grass') {
+		value.abilityModify(1.2, "Overgrow");
+		}
+		if (move.type === 'Ice') {
+		value.abilityModify(1.1, "Ice Body");
+		}
+		if (move.type === 'Poison') {
+		value.abilityModify(1.1, "Stench");
+		}
+		if (move.type === 'Poison') {
+		value.abilityModify(1.1, "Liquid Ooze");
+		}
+		if (move.type === 'Fire') {
+		value.abilityModify(1.2, "Blaze");
+		}
+		if (move.type === 'Water') {
+		value.abilityModify(1.2, "Torrent");
+		}
+		if (move.type === 'Psychic') {
+		value.abilityModify(1.1, "Pastel Veil");
+		}
+		if (move.type === 'Dark') {
+		value.abilityModify(1.2, "Malicia");
+		}
+		if (move.type === 'Electric') {
+		value.abilityModify(1.2, "Vatios");
+		}
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
 				value.abilityModify(1 + 0.1 * i, "Supreme Overlord");
 			}
 		}
+		for (let i = 1; i <= 10 && i <= pokemon.side.faintCounter + pokemon.side.foe.faintCounter; i++) {
+			if (pokemon.volatiles[`fallen${i}`]) {
+				value.abilityModify(1 + 0.05 * i, "Come Almas");
+			}
+		}
 		if (target) {
-			if (["MF", "FM"].includes(pokemon.gender + target.gender)) {
-				value.abilityModify(0.75, "Rivalry");
-			} else if (["MM", "FF"].includes(pokemon.gender + target.gender)) {
-				value.abilityModify(1.25, "Rivalry");
+			if (["MM", "FF"].includes(pokemon.gender + target.gender)) {
+				value.abilityModify(1.5, "Rivalry");
 			}
 		}
 		const noTypeOverride = [
@@ -2128,7 +2175,7 @@ class BattleTooltips {
 			}
 		}
 		if (move.recoil || move.hasCrashDamage) {
-			value.abilityModify(1.2, 'Reckless');
+			value.abilityModify(1.5, 'Reckless');
 		}
 
 		if (move.category !== 'Status') {
