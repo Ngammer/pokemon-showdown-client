@@ -745,6 +745,9 @@ class BattleTooltips {
 			if (move.flags.punch && ability === 'ironfist') {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Iron Fist)</small></p>`;
 			}
+			if (move.flags.punch && ability === 'nudillosdepiedra') {
+				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Nudillos De Piedra)</small></p>`;
+		  }
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
 			}
@@ -1023,6 +1026,8 @@ class BattleTooltips {
 				stats.atk = Math.floor(stats.atk * 1.5);
 			} else if (this.battle.gen < 2 && pokemon.status === 'brn') {
 				stats.atk = Math.floor(stats.atk * 0.5);
+			} else if (this.battle.gen < 2 && pokemon.status === 'frz') {
+				stats.atk = Math.floor(stats.spa * 0.5);
 			}
 
 			// Paralysis is calculated later in newer generations, so we need to apply it early here
@@ -1522,6 +1527,12 @@ class BattleTooltips {
 		if (move.id === 'revelationdance') {
 			moveType = pokemonTypes[0];
 		}
+		if (move.id === 'synchronoise') {
+			moveType = pokemonTypes[0];
+		}
+		if (move.id === 'bide' || move.id === 'jawlock') {
+			moveType = pokemonTypes[1];
+	  }
 		// Moves that require an item to change their type.
 		let item = this.battle.dex.items.get(value.itemName);
 		if (move.id === 'multiattack' && item.onMemory) {
@@ -1558,7 +1569,7 @@ class BattleTooltips {
 				break;
 			}
 		}
-		if (move.id === 'terrainpulse' && pokemon.isGrounded(serverPokemon)) {
+		if ((move.id === 'terrainpulse') && pokemon.isGrounded(serverPokemon)) {
 			if (this.battle.hasPseudoWeather('Electric Terrain')) {
 				moveType = 'Electric';
 			} else if (this.battle.hasPseudoWeather('Grassy Terrain')) {
@@ -1611,7 +1622,7 @@ class BattleTooltips {
 
 		// Other abilities that change the move type.
 		const noTypeOverride = [
-			'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball',
+			'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball', 'synchronoise', 'bide', 'jawlock'
 		];
 		const allowTypeOverride = !noTypeOverride.includes(move.id) && (move.id !== 'terablast' || !pokemon.terastallized);
 		if (allowTypeOverride) {
@@ -1641,6 +1652,9 @@ class BattleTooltips {
 			).flags['sound'];
 			if (isSound && value.abilityModify(0, 'Liquid Voice')) {
 				moveType = 'Water';
+			}
+			if (isSound && value.abilityModify(0, 'Canto Helado')) {
+				moveType = 'Ice';
 			}
 		}
 
@@ -1949,7 +1963,7 @@ class BattleTooltips {
 				value.modify(2, 'Wake-Up Slap + Sleep');
 			}
 		}
-		if (move.id === 'weatherball') {
+		if (move.id === 'weatherball' || move.id === 'secretpower' || move.id === 'naturepower') {
 			if (this.battle.weather !== 'deltastream') {
 				value.weatherModify(2);
 			}
@@ -1960,7 +1974,7 @@ class BattleTooltips {
 		if (move.id === 'psyblade' && this.battle.hasPseudoWeather('Electric Terrain')) {
 			value.modify(1.5, 'Electric Terrain');
 		}
-		if (move.id === 'terrainpulse' && pokemon.isGrounded(serverPokemon)) {
+		if ((move.id === 'terrainpulse' || move.id === 'secretpower' ||move.id === 'naturepower') && pokemon.isGrounded(serverPokemon)) {
 			if (
 				this.battle.hasPseudoWeather('Electric Terrain') ||
 				this.battle.hasPseudoWeather('Grassy Terrain') ||
@@ -1970,6 +1984,7 @@ class BattleTooltips {
 				value.modify(2, 'Terrain Pulse boost');
 			}
 		}
+		
 		if (
 			move.id === 'watershuriken' && pokemon.getSpeciesForme() === 'Greninja-Ash' && pokemon.ability === 'Battle Bond'
 		) {
@@ -2101,7 +2116,7 @@ class BattleTooltips {
 			}
 		}
 		const noTypeOverride = [
-			'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball',
+			'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball', 'synchronoise', 'bide', 'jawlock'
 		];
 		const allowTypeOverride = !noTypeOverride.includes(move.id) && (move.id !== 'terablast' || !pokemon.terastallized);
 		if (
