@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<title>Replays - Pok&eacute;mon Showdown!</title>
+
+
+<!--
+
+Hey, you! Looking in the source for the replay log?
+
+You can find them in JSON format, just add `.json` at the end of a replay URL.
+
+https://re192.168.0.112:3000/gen7randomdoublesbattle-865046831.json
+
+Or, if you only need the log itself, add `.log` instead:
+
+https://re192.168.0.112:3000/gen7randomdoublesbattle-865046831.log
+
+-->
+
+<link rel="stylesheet" href="//pokemonshowdown.com/style/global.css?0.5525554121313905" />
+<link rel="stylesheet" href="//192.168.0.112:3000/style/font-awesome.css?0.9224258107669803" />
+<link rel="stylesheet" href="//192.168.0.112:3000/style/battle.css?0.680569864536207" />
+<link rel="stylesheet" href="//192.168.0.112:3000/style/utilichart.css?0.6385457373295396" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-26211653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-26211653-1');
+</script>
+<!-- End Google Analytics -->
+<!-- Venatus Ad Manager - Install in <HEAD> of page -->
+	<script src="https://hb.vntsm.com/v3/live/ad-manager.min.js" type="text/javascript" data-site-id="642aba63ec9a7b11c3c9c1be" data-mode="scan" async></script>
+<!-- / Venatus Ad Manager -->
+
+<style>
+	@media (max-width:820px) {
+		.battle {
+			margin: 0 auto;
+		}
+		.battle-log {
+			margin: 7px auto 0;
+			max-width: 640px;
+			height: 300px;
+			position: static;
+		}
+	}
+	.optgroup {
+		display: inline-block;
+		line-height: 22px;
+		font-size: 10pt;
+	}
+	.optgroup .button {
+		height: 25px;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.optgroup button.button {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	.linklist {
+		list-style: none;
+		margin: 0.5em 0;
+		padding: 0;
+	}
+	.linklist li {
+		padding: 2px 0;
+	}
+	.sidebar {
+		float: left;
+		width: 320px;
+	}
+	.bar-wrapper {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+	.bar-wrapper.has-sidebar {
+		max-width: 1430px;
+	}
+	.mainbar {
+		margin: 0;
+		padding-right: 1px;
+	}
+	.mainbar.has-sidebar {
+		margin-left: 330px;
+	}
+	@media (min-width: 1511px) {
+		.sidebar {
+			width: 400px;
+		}
+		.bar-wrapper.has-sidebar {
+			max-width: 1510px;
+		}
+		.mainbar.has-sidebar {
+			margin-left: 410px;
+		}
+	}
+	.section.first-section {
+		margin-top: 9px;
+	}
+	.blocklink small {
+		white-space: normal;
+	}
+	.button {
+		vertical-align: middle;
+	}
+	.replay-controls {
+		padding-top: 10px;
+	}
+	.replay-controls h1 {
+		font-size: 16pt;
+		font-weight: normal;
+		color: #CCC;
+	}
+	.pagelink {
+		text-align: center;
+	}
+	.pagelink a {
+		width: 150px;
+	}
+	.textbox, .button {
+		font-size: 11pt;
+		vertical-align: middle;
+	}
+	@media (max-width: 450px) {
+		.button {
+			font-size: 9pt;
+		}
+	}
+</style>
+
+<div>
+
+	<header>
+		<div class="nav-wrapper"><ul class="nav">
+			<li><a class="button nav-first" href="//pokemonshowdown.com/"><img src="//pokemonshowdown.com/images/pokemonshowdownbeta.png" srcset="//pokemonshowdown.com/images/pokemonshowdownbeta.png 1x, //pokemonshowdown.com/images/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
+			<li><a class="button" href="//pokemonshowdown.com/dex/">Pok&eacute;dex</a></li>
+			<li><a class="button cur" href="/">Replays</a></li>
+			<li><a class="button" href="//pokemonshowdown.com/ladder/">Ladder</a></li>
+			<li><a class="button nav-last" href="//pokemonshowdown.com/forums/">Forum</a></li>
+			<li><a class="button greenbutton nav-first nav-last" href="//192.168.0.112:3000/">Play</a></li>
+		</ul></div>
+	</header>
+
+	<div class="main" id="main">
+
+		<noscript><section class="section">You need to enable JavaScript to use this page; sorry!</section></noscript>
+
+	</div>
+
+</div>
+
+<script defer nomodule src="//192.168.0.112:3000/js/lib/ps-polyfill.js"></script>
+<script defer src="//192.168.0.112:3000/js/lib/preact.min.js"></script>
+
+<script defer src="//192.168.0.112:3000/config/config.js?57f36214"></script>
+<script defer src="//192.168.0.112:3000/js/lib/jquery-1.11.0.min.js"></script>
+<script defer src="//192.168.0.112:3000/js/lib/html-sanitizer-minified.js"></script>
+<script defer src="//192.168.0.112:3000/js/battle-sound.js"></script>
+<script defer src="//192.168.0.112:3000/js/battledata.js?0.9485646556111467"></script>
+<script defer src="//192.168.0.112:3000/data/pokedex-mini.js?0.06704780302877977"></script>
+<script defer src="//192.168.0.112:3000/data/pokedex-mini-bw.js?0.8151573181703424"></script>
+<script defer src="//192.168.0.112:3000/data/graphics.js?0.5566854844923728"></script>
+<script defer src="//192.168.0.112:3000/data/pokedex.js?0.8438085942456066"></script>
+<script defer src="//192.168.0.112:3000/data/moves.js?0.08592012687552408"></script>
+<script defer src="//192.168.0.112:3000/data/abilities.js?0.7567646560605212"></script>
+<script defer src="//192.168.0.112:3000/data/items.js?0.7962075618882003"></script>
+<script defer src="//192.168.0.112:3000/data/teambuilder-tables.js?0.06090224067220018"></script>
+<script defer src="//192.168.0.112:3000/js/battle-tooltips.js?0.4479789393623539"></script>
+<script defer src="//192.168.0.112:3000/js/battle.js?0.614313706978252"></script>
+
+<script defer src="js/utils.js?e31f9a17"></script>
+<script defer src="js/replays-battle.js?7008c182"></script>
+
+
+<script defer src="js/replays.js?9d40a366"></script>
