@@ -1986,7 +1986,7 @@ class BattleTooltips {
 					value.modify(3, move.name + ' + Poison');
 			  }
         }
-        if ((move.id === 'wakeupslap' || 'nightmare' ) && target) {
+        if ((move.id === 'wakeupslap' || move.id === 'nightmare' ) && target) {
             if (target.status === 'slp') {
                 value.modify(2, 'Wake-Up Slap + Sleep');
             }
