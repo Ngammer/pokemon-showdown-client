@@ -1478,10 +1478,6 @@ class Species {
                 this.gen = 6;
                 this.battleOnly = this.baseSpecies;
             }
-            else if (this.formeid === '-totem' || this.formeid === '-alolatotem') {
-                this.gen = 7;
-                this.isTotem = true;
-            }
             else if (this.num >= 650) {
                 this.gen = 6;
             }

@@ -953,9 +953,9 @@ class ModdedDex {
             const table = window.BattleTeambuilderTable[this.modid];
             if (id in table.overrideTier)
                 data.tier = table.overrideTier[id];
-            if (!data.tier && id.slice(-5) === 'totem') {
+            /*if (!data.tier && id.slice(-5) === 'totem') {
                 data.tier = this.species.get(id.slice(0, -5)).tier;
-            }
+            }*/
             if (!data.tier && data.baseSpecies && toID(data.baseSpecies) !== id) {
                 data.tier = this.species.get(data.baseSpecies).tier;
             }

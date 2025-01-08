@@ -92,6 +92,11 @@ function requireNoCache(pathSpec) {
 			index.push('m' + toID(name.slice(0, -5)) + ' ' + type + ' ' + id + ' 0');
 			return;
 		}
+		if (name.endsWith('-Totem')) {
+			index.push('totem' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
+			index.push('t' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
+			return;
+		}
 		if (name.endsWith('-Alola')) {
 			index.push('alolan' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
 			return;
@@ -460,7 +465,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				if (
 					[
 						'Aegislash', 'Castform', 'Cherrim', 'Cramorant', 'Eiscue', 'Meloetta', 'Mimikyu', 'Minior', 'Morpeko', 'Wishiwashi',
-					].includes(species.baseSpecies) || species.forme.includes('Totem') || species.forme.includes('Zen') ||
+					].includes(species.baseSpecies) ||/* species.forme.includes('Totem') ||*/ species.forme.includes('Zen') ||
 					(species.baseSpecies === 'Ogerpon' && species.forme.includes('Tera'))
 				) {
 					continue;

@@ -864,9 +864,9 @@ abstract class BattleTypedSearch<T extends SearchType> {
 		if (id in table.overrideTier) {
 			return table.overrideTier[id];
 		}
-		if (id.slice(-5) === 'totem' && id.slice(0, -5) in table.overrideTier) {
+		/*if (id.slice(-5) === 'totem' && id.slice(0, -5) in table.overrideTier) {
 			return table.overrideTier[id.slice(0, -5)];
-		}
+		}*/
 		id = toID(pokemon.baseSpecies);
 		if (id in table.overrideTier) {
 			return table.overrideTier[id];
@@ -1199,6 +1199,10 @@ class BattleAbilitySearch extends BattleTypedSearch<'ability'> {
 
 		if (species.isMega) {
 			abilitySet.unshift(['html', `Will be <strong>${species.abilities['0']}</strong> after Mega Evolving.`]);
+			species = dex.species.get(species.baseSpecies);
+		}
+		if (species.isTotem) {
+			abilitySet.unshift(['html', `Will be <strong>${species.abilities['0']}</strong> after Totem.`]);
 			species = dex.species.get(species.baseSpecies);
 		}
 		abilitySet.push(['ability', toID(species.abilities['0'])]);
