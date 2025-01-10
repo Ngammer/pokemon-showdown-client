@@ -434,7 +434,7 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 	 * copyAll = true means Illusion breaking
 	 * copyAll = 'shedtail' means Shed Tail
 	 */
-	copyVolatileFrom(pokemon: Pokemon, copySource?: | 'shedtail' | boolean) {
+	copyVolatileFrom(pokemon: Pokemon, copySource?: | 'shedtail' | 'doubleteam' | boolean) {
 		this.boosts = pokemon.boosts;
 		this.volatiles = pokemon.volatiles;
 		// this.lastMove = pokemon.lastMove; // I think
@@ -456,6 +456,12 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 				delete this.volatiles[i];
 			}
 			this.boosts = {};
+		}
+		if (copySource === 'doubleteam') {
+			for (let i in this.volatiles) {
+				delete this.volatiles[i];
+			}
+			this.boosts = {spe: 1};
 		}
 		delete this.volatiles['transform'];
 		delete this.volatiles['formechange'];
@@ -834,8 +840,8 @@ export class Side {
 		pokemon.lastMove = '';
 		this.battle.lastMove = 'switch-in';
 		const effect = Dex.getEffect(kwArgs.from);
-		if (['batonpass', 'zbatonpass', 'shedtail'].includes(effect.id)) {
-			pokemon.copyVolatileFrom(this.lastPokemon!, effect.id === 'shedtail' ? 'shedtail' : false);
+		if (['batonpass', 'zbatonpass', 'shedtail', 'doubleteam'].includes(effect.id)) {
+			pokemon.copyVolatileFrom(this.lastPokemon!, effect.id === 'shedtail' ? 'shedtail' : effect.id === 'doubleteam' ? 'doubleteam' : false);
 		}
 
 		this.battle.scene.animSummon(pokemon, slot);
@@ -891,13 +897,13 @@ export class Side {
 	}
 	switchOut(pokemon: Pokemon, kwArgs: KWArgs, slot = pokemon.slot) {
 		const effect = Dex.getEffect(kwArgs.from);
-		if (!['batonpass', 'zbatonpass', 'shedtail'].includes(effect.id)) {
+		if (!['batonpass', 'zbatonpass', 'shedtail', 'doubleteam'].includes(effect.id)) {
 			pokemon.clearVolatile();
 		} else {
 			pokemon.removeVolatile('transform' as ID);
 			pokemon.removeVolatile('formechange' as ID);
 		}
-		if (!['batonpass', 'zbatonpass', 'shedtail', 'teleport'].includes(effect.id)) {
+		if (!['batonpass', 'zbatonpass', 'shedtail', 'teleport', 'doubleteam'].includes(effect.id)) {
 			this.battle.log(['switchout', pokemon.ident], {from: effect.id});
 		}
 		pokemon.statusData.toxicTurns = 0;
