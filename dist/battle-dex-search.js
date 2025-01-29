@@ -1039,6 +1039,8 @@ class BattlePokemonSearch extends BattleTypedSearch {
         }
         else if (format === 'ou')
             tierSet = tierSet.slice(slices.OU);
+		  else if (format === 'pendiente')
+			tierSet = tierSet.slice(slices.Pendiente);
         else if (format === 'uu')
             tierSet = tierSet.slice(slices.UU);
         else if (format === 'ru')
