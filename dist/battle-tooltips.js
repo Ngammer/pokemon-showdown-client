@@ -2116,6 +2116,9 @@ class BattleTooltips {
         if (move.flags['bite']) {
             value.abilityModify(1.5, "Strong Jaw");
         }
+		  if (move.flags['bite']) {
+			value.abilityModify(1.2, "Vampirismo");
+		}
         if (value.value <= 60) {
             value.abilityModify(1.5, "Technician");
         }
