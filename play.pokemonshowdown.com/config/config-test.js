@@ -478,7 +478,7 @@ Config.version = "0.11.2 (3a9c9c6b)";
 
 Config.routes = {
 	root: 'pokemonshowdown.com',
-	client: '192.168.0.112:3000',
+	client: '192.168.0.20:3000',
 	dex: 'dex.pokemonshowdown.com',
 	replays: 'replay.pokemonshowdown.com',
 	users: 'pokemonshowdown.com/users',

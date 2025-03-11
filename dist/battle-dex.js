@@ -138,7 +138,7 @@ const Dex = new class {
 		let prefix = '';
 		if (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')) {
 			 // Local network or localhost
-			 prefix = 'http://192.168.0.112:3000/'; // Replace with your private IP
+			 prefix = 'http://192.168.0.20:3000/'; // Replace with your private IP
 		} else {
 			 // External
 			 prefix = 'http://181.89.215.24:3000/'; // Replace with your public IP
