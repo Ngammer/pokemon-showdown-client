@@ -1402,6 +1402,7 @@ class BattleMoveSearch extends BattleTypedSearch {
         const dex = this.dex;
         let abilityid = set ? toID(set.ability) : '';
         const itemid = set ? toID(set.item) : '';
+		  // otros formatos
         if (dex.gen === 1) {
             // Usually not useless for Gen 1
             if ([
@@ -1449,6 +1450,8 @@ class BattleMoveSearch extends BattleTypedSearch {
             if (id === 'metronome')
                 return true;
         }
+		  ///////////////////////////
+		  // habilidades de megas/cambio de forma
         if (itemid === 'pidgeotite')
             abilityid = 'noguard';
         if (itemid === 'blastoisinite')
@@ -1457,6 +1460,8 @@ class BattleMoveSearch extends BattleTypedSearch {
             abilityid = 'toughclaws';
         if (itemid === 'glalitite')
             abilityid = 'refrigerate';
+			/////////////////////////////
+			// excepciones situacionales
         switch (id) {
             case 'fakeout':
             case 'flamecharge':
@@ -1635,15 +1640,20 @@ class BattleMoveSearch extends BattleTypedSearch {
             case 'zapcannon':
                 return abilityid === 'noguard' || (dex.gen < 4 && !moves.includes('thunderwave'));
         }
+		  ///////////////////
+		  // dobles
         if (this.formatType === 'doubles' && BattleMoveSearch.GOOD_DOUBLES_MOVES.includes(id)) {
             return true;
         }
+		  ///////////////////////
         const move = dex.moves.get(id);
         if (!move.exists)
             return true;
+			// sleep clause gen 9
         if ((move.status === 'slp' || id === 'yawn') && dex.gen === 9 && !this.formatType) {
             return false;
         }
+		  ////////////////
         if (move.category === 'Status') {
             return BattleMoveSearch.GOOD_STATUS_MOVES.includes(id);
         }
@@ -1664,6 +1674,7 @@ class BattleMoveSearch extends BattleTypedSearch {
         }
         return !BattleMoveSearch.BAD_STRONG_MOVES.includes(id);
     }
+	 // listas de excepciones
     static GOOD_STATUS_MOVES = [
         'acidarmor', 'agility', 'aromatherapy', 'auroraveil', 'autotomize', 'banefulbunker', 'batonpass', 'bellydrum', 'bulkup', 'burningbulwark', 'calmmind', 'chillyreception', 'clangoroussoul', 'coil', 'cottonguard', 'courtchange', 'curse', 'defog', 'destinybond', 'detect', 'disable', 'dragondance', 'encore', 'extremeevoboost', 'filletaway', 'geomancy', 'glare', 'haze', 'healbell', 'healingwish', 'healorder', 'heartswap', 'honeclaws', 'kingsshield', 'leechseed', 'lightscreen', 'lovelykiss', 'lunardance', 'magiccoat', 'maxguard', 'memento', 'milkdrink', 'moonlight', 'morningsun', 'nastyplot', 'naturesmadness', 'noretreat', 'obstruct', 'painsplit', 'partingshot', 'perishsong', 'protect', 'quiverdance', 'recover', 'reflect', 'reflecttype', 'rest', 'revivalblessing', 'roar', 'rockpolish', 'roost', 'shedtail', 'shellsmash', 'shiftgear', 'shoreup', 'silktrap', 'slackoff', 'sleeppowder', 'sleeptalk', 'softboiled', 'spikes', 'spikyshield', 'spore', 'stealthrock', 'stickyweb', 'strengthsap', 'substitute', 'switcheroo', 'swordsdance', 'synthesis', 'tailglow', 'tailwind', 'taunt', 'thunderwave', 'tidyup', 'toxic', 'transform', 'trick', 'victorydance', 'whirlwind', 'willowisp', 'wish', 'yawn',
     ];
