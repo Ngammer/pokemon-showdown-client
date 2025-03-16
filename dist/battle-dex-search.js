@@ -1687,6 +1687,7 @@ class BattleMoveSearch extends BattleTypedSearch {
     static GOOD_DOUBLES_MOVES = [
         'allyswitch', 'bulldoze', 'coaching', 'electroweb', 'faketears', 'fling', 'followme', 'healpulse', 'helpinghand', 'junglehealing', 'lifedew', 'lunarblessing', 'muddywater', 'pollenpuff', 'psychup', 'ragepowder', 'safeguard', 'skillswap', 'snipeshot', 'wideguard',
     ];
+	 ///////////////////////////////
     getBaseResults() {
         if (!this.species)
             return this.getDefaultResults();
