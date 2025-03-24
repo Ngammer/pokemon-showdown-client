@@ -1,7 +1,7 @@
 {
-    "root": "pokemonshowdown.com",
-    "client": "192.168.0.112:3000",
-    "dex": "dex.pokemonshowdown.com",
-    "replays": "replay.pokemonshowdown.com",
+    "root": "192.168.0.20:3001",
+    "client": "192.168.0.20:3000",
+    "dex": "192.168.0.20:3003",
+    "replays": "192.168.0.20:3002",
     "users": "pokemonshowdown.com/users"
 }
