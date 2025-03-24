@@ -40,7 +40,6 @@ function sizeObj(path) {
 		};
 	} catch (e) {}
 }
- 
 function updateSizes() {
 	for (let baseid in Dex.data.Pokedex) {
 		let species = Dex.species.get(baseid);
