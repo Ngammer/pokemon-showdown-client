@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<title>[Gen 9] Unrated Random Battle: los chipirones vs. Nitrochill - Replays - Pok&eacute;mon Showdown!</title>
+
+<meta name="description" content="Watch a replay of a Pok&eacute;mon battle between los chipirones and Nitrochill! Format: [Gen 9] Unrated Random Battle; Date: Mar 27, 2025" />
+<!--
+
+Hey, you! Looking in the source for the replay log?
+
+You can find them in JSON format, just add `.json` at the end of a replay URL.
+
+https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.json
+
+Or, if you only need the log itself, add `.log` instead:
+
+https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
+
+-->
+
+<link rel="stylesheet" href="//pokemonshowdown.com/style/global.css?0.04227826065277518" />
+<link rel="stylesheet" href="//play.pokemonshowdown.com/style/font-awesome.css?0.3912416940279677" />
+<link rel="stylesheet" href="//play.pokemonshowdown.com/style/battle.css?0.0213108563589397" />
+<link rel="stylesheet" href="//play.pokemonshowdown.com/style/utilichart.css?0.6815593015168242" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-26211653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-26211653-1');
+</script>
+<!-- End Google Analytics -->
+<!-- Venatus Ad Manager - Install in <HEAD> of page -->
+	<script src="https://hb.vntsm.com/v3/live/ad-manager.min.js" type="text/javascript" data-site-id="642aba63ec9a7b11c3c9c1be" data-mode="scan" async></script>
+<!-- / Venatus Ad Manager -->
+
+<style>
+	@media (max-width:820px) {
+		.battle {
+			margin: 0 auto;
+		}
+		.battle-log {
+			margin: 7px auto 0;
+			max-width: 640px;
+			height: 300px;
+			position: static;
+		}
+	}
+	.optgroup {
+		display: inline-block;
+		line-height: 22px;
+		font-size: 10pt;
+	}
+	.optgroup .button {
+		height: 25px;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.optgroup button.button {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	.linklist {
+		list-style: none;
+		margin: 0.5em 0;
+		padding: 0;
+	}
+	.linklist li {
+		padding: 2px 0;
+	}
+	.sidebar {
+		float: left;
+		width: 320px;
+	}
+	.bar-wrapper {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+	.bar-wrapper.has-sidebar {
+		max-width: 1430px;
+	}
+	.mainbar {
+		margin: 0;
+		padding-right: 1px;
+	}
+	.mainbar.has-sidebar {
+		margin-left: 330px;
+	}
+	@media (min-width: 1511px) {
+		.sidebar {
+			width: 400px;
+		}
+		.bar-wrapper.has-sidebar {
+			max-width: 1510px;
+		}
+		.mainbar.has-sidebar {
+			margin-left: 410px;
+		}
+	}
+	.section.first-section {
+		margin-top: 9px;
+	}
+	.blocklink small {
+		white-space: normal;
+	}
+	.button {
+		vertical-align: middle;
+	}
+	.replay-controls {
+		padding-top: 10px;
+	}
+	.replay-controls h1 {
+		font-size: 16pt;
+		font-weight: normal;
+		color: #CCC;
+	}
+	.pagelink {
+		text-align: center;
+	}
+	.pagelink a {
+		width: 150px;
+	}
+	.textbox, .button {
+		font-size: 11pt;
+		vertical-align: middle;
+	}
+	@media (max-width: 450px) {
+		.button {
+			font-size: 9pt;
+		}
+	}
+</style>
+
+<div>
+
+	<header>
+		<div class="nav-wrapper"><ul class="nav">
+			<li><a class="button nav-first" href="//pokemonshowdown.com/"><img src="//pokemonshowdown.com/images/pokemonshowdownbeta.png" srcset="//pokemonshowdown.com/images/pokemonshowdownbeta.png 1x, //pokemonshowdown.com/images/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
+			<li><a class="button" href="//pokemonshowdown.com/dex/">Pok&eacute;dex</a></li>
+			<li><a class="button cur" href="/">Replays</a></li>
+			<li><a class="button" href="//pokemonshowdown.com/ladder/">Ladder</a></li>
+			<li><a class="button nav-last" href="//pokemonshowdown.com/forums/">Forum</a></li>
+			<li><a class="button greenbutton nav-first nav-last" href="//play.pokemonshowdown.com/">Play</a></li>
+		</ul></div>
+	</header>
+
+	<div class="main" id="main">
+
+		<noscript><section class="section">You need to enable JavaScript to use this page; sorry!</section></noscript>
+
+	</div>
+
+</div>
+
+<script defer nomodule src="//play.pokemonshowdown.com/js/lib/ps-polyfill.js"></script>
+<script defer src="//play.pokemonshowdown.com/js/lib/preact.min.js"></script>
+
+<script defer src="//play.pokemonshowdown.com/config/config.js?0997b8ff"></script>
+<script defer src="//play.pokemonshowdown.com/js/lib/jquery-1.11.0.min.js"></script>
+<script defer src="//play.pokemonshowdown.com/js/lib/html-sanitizer-minified.js"></script>
+<script defer src="//play.pokemonshowdown.com/js/battle-sound.js"></script>
+<script defer src="//play.pokemonshowdown.com/js/battledata.js?0.22116287105091592"></script>
+<script defer src="//play.pokemonshowdown.com/data/pokedex-mini.js?0.5803745518386088"></script>
+<script defer src="//play.pokemonshowdown.com/data/pokedex-mini-bw.js?0.46534250452115966"></script>
+<script defer src="//play.pokemonshowdown.com/data/graphics.js?0.5258470052765143"></script>
+<script defer src="//play.pokemonshowdown.com/data/pokedex.js?0.9247062341395613"></script>
+<script defer src="//play.pokemonshowdown.com/data/moves.js?0.45360554672367837"></script>
+<script defer src="//play.pokemonshowdown.com/data/abilities.js?0.45904349402804856"></script>
+<script defer src="//play.pokemonshowdown.com/data/items.js?0.9863945232227194"></script>
+<script defer src="//play.pokemonshowdown.com/data/teambuilder-tables.js?0.37982510413704973"></script>
+<script defer src="//play.pokemonshowdown.com/js/battle-tooltips.js?0.5836038630790268"></script>
+<script defer src="//play.pokemonshowdown.com/js/battle.js?0.9365124832331018"></script>
+
+<script defer src="js/utils.js?0abca7ba"></script>
+<script defer src="js/replays-battle.js?208ecb6b"></script>
+
+<!-- don't scrape this data! just add .json or .log after the URL!
+Full API docs: https://github.com/smogon/pokemon-showdown-client/blob/master/WEB-API.md -->
+<script type="text/plain" class="log" id="replaylog-gen9unratedrandombattle-2328817636">
+|j|☆yrythr5th
+|j|☆Ngammer
+|t:|1743023278
+|gametype|singles
+|player|p1|yrythr5th|1|
+|player|p2|Ngammer|265|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|9
+|tier|[Gen 9] Nuevo Meta Random
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Species Clause: Limit one of each Pokémon
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Illusion Level Mod: Illusion disguises the Pokémon's true level
+|rule|Terastal Clause: You cannot Terastallize
+|rule|Item Clause: Limit 1 of each item
+|
+|t:|1743023302
+|start
+|switch|p1a: Kangaskhan|Kangaskhan, L88, F|365/365
+|switch|p2a: Starmie|Starmie, L80|210/210
+|turn|1
+|
+|t:|1743023333
+|switch|p2a: Furrful|Furrful, L88, F|301/301
+|-ability|p2a: Furrful|Keen Eye|boost
+|-boost|p2a: Furrful|accuracy|1
+|move|p1a: Kangaskhan|Fake Out|p2a: Furrful
+|-damage|p2a: Furrful|255/301
+|
+|upkeep
+|turn|2
+|
+|t:|1743038743
+|switch|p2a: Reshiram|Reshiram, L76|277/277
+|-ability|p2a: Reshiram|Turboblaze
+|move|p1a: Volbeat|U-turn|p2a: Reshiram
+|-resisted|p2a: Reshiram
+|-damage|p2a: Reshiram|241/277
+|
+|t:|1743038759
+|switch|p1a: Smeargle|Smeargle, L95, M|258/258|[from] U-turn
+|
+|upkeep
+|turn|3
+|
+|t:|1743038773
+|move|p1a: Smeargle|Spore|p2a: Reshiram
+|-status|p2a: Reshiram|slp|[from] move: Spore
+|cant|p2a: Reshiram|slp
+|
+|upkeep
+|turn|4
+|
+|t:|1743038779
+|switch|p2a: Lapras|Lapras, L87, M|368/368 par
+|move|p1a: Smeargle|Sticky Web|p2a: Lapras
+|-sidestart|p2: Nitrochill|move: Sticky Web
+|
+|upkeep
+|turn|5
+|
+|t:|1743038833
+|move|p1a: Smeargle|Ceaseless Edge|p2a: Lapras
+|-damage|p2a: Lapras|343/368 par
+|-sidestart|p2: Nitrochill|Spikes
+|move|p2a: Lapras|Sparkling Aria|p1a: Smeargle
+|-damage|p1a: Smeargle|134/258
+|
+|upkeep
+|turn|6
+|
+|t:|1743038840
+|move|p1a: Smeargle|Ceaseless Edge|p2a: Lapras
+|-damage|p2a: Lapras|320/368 par
+|-sidestart|p2: Nitrochill|Spikes
+|move|p2a: Lapras|Sparkling Aria|p1a: Smeargle
+|-damage|p1a: Smeargle|10/258
+|
+|upkeep
+|turn|7
+|
+|t:|1743038850
+|move|p1a: Smeargle|Ceaseless Edge|p2a: Lapras
+|-damage|p2a: Lapras|294/368 par
+|-sidestart|p2: Nitrochill|Spikes
+|move|p2a: Lapras|Sparkling Aria|p1a: Smeargle
+|-damage|p1a: Smeargle|0 fnt
+|faint|p1a: Smeargle
+|
+|upkeep
+|
+|t:|1743038853
+|switch|p1a: Cobalion|Cobalion, L80|277/277
+|turn|8
+|
+|t:|1743038879
+|switch|p2a: Reshiram|Reshiram, L76|241/277 slp
+|-ability|p2a: Reshiram|Turboblaze
+|move|p1a: Cobalion|Swords Dance|p1a: Cobalion
+|-boost|p1a: Cobalion|atk|2
+|
+|upkeep
+|turn|9
+|
+|t:|1743038901
+|move|p1a: Cobalion|Close Combat|p2a: Reshiram
+|-damage|p2a: Reshiram|16/277 slp
+|-unboost|p1a: Cobalion|def|1
+|-unboost|p1a: Cobalion|spd|1
+|-curestatus|p2a: Reshiram|slp|[msg]
+|move|p2a: Reshiram|Blue Flare|p1a: Cobalion|[miss]
+|-miss|p2a: Reshiram|p1a: Cobalion
+|
+|upkeep
+|turn|10
+|
+|t:|1743038920
+|move|p1a: Cobalion|Close Combat|p2a: Reshiram
+|-damage|p2a: Reshiram|0 fnt
+|-unboost|p1a: Cobalion|def|1
+|-unboost|p1a: Cobalion|spd|1
+|faint|p2a: Reshiram
+|
+|upkeep
+|
+|t:|1743038944
+|switch|p2a: Gothitelle|Gothitelle, L90, M|272/272
+|-activate|p2a: Gothitelle|move: Sticky Web
+|-unboost|p2a: Gothitelle|spe|1
+|-damage|p2a: Gothitelle|204/272|[from] Spikes
+|turn|11
+|
+|t:|1743038961
+|move|p1a: Cobalion|Iron Head|p2a: Gothitelle
+|-damage|p2a: Gothitelle|62/272
+|move|p2a: Gothitelle|Psychic Noise|p1a: Cobalion
+|-damage|p1a: Cobalion|37/277
+|-start|p1a: Cobalion|move: Heal Block
+|
+|-heal|p2a: Gothitelle|79/272|[from] item: Leftovers
+|upkeep
+|turn|12
+|
+|t:|1743038973
+|move|p1a: Cobalion|Iron Head|p2a: Gothitelle
+|-damage|p2a: Gothitelle|0 fnt
+|faint|p2a: Gothitelle
+|
+|-end|p1a: Cobalion|move: Heal Block
+|upkeep
+|
+|t:|1743038986
+|switch|p2a: Kricketune|Kricketune, L99, M|312/312
+|turn|13
+|inactive|Battle timer is ON: inactive players will automatically lose when time's up. (requested by los chipirones)
+|
+|t:|1743039005
+|move|p1a: Cobalion|Taunt|p2a: Kricketune
+|-start|p2a: Kricketune|move: Taunt
+|cant|p2a: Kricketune|move: Taunt|Sticky Web
+|
+|-heal|p1a: Cobalion|54/277|[from] item: Leftovers
+|upkeep
+|turn|14
+|
+|t:|1743039016
+|move|p1a: Cobalion|Iron Head|p2a: Kricketune
+|-damage|p2a: Kricketune|129/312
+|cant|p2a: Kricketune|flinch
+|
+|-heal|p1a: Cobalion|71/277|[from] item: Leftovers
+|upkeep
+|turn|15
+|
+|t:|1743039040
+|move|p1a: Cobalion|Iron Head|p2a: Kricketune
+|-damage|p2a: Kricketune|0 fnt
+|faint|p2a: Kricketune
+|
+|-heal|p1a: Cobalion|88/277|[from] item: Leftovers
+|upkeep
+|inactive|Nitrochill has 120 seconds left.
+|
+|t:|1743039059
+|switch|p2a: Clawitzer|Clawitzer, L87, F|265/265
+|-activate|p2a: Clawitzer|move: Sticky Web
+|-unboost|p2a: Clawitzer|spe|1
+|-damage|p2a: Clawitzer|199/265|[from] Spikes
+|turn|16
+|inactive|Nitrochill has 120 seconds left.
+|
+|t:|1743039089
+|-terastallize|p1a: Cobalion|Fighting
+|move|p1a: Cobalion|Close Combat|p2a: Clawitzer
+|-damage|p2a: Clawitzer|0 fnt
+|-unboost|p1a: Cobalion|def|1
+|-unboost|p1a: Cobalion|spd|1
+|faint|p2a: Clawitzer
+|
+|-heal|p1a: Cobalion|105/277|[from] item: Leftovers
+|upkeep
+|inactive|Nitrochill has 90 seconds left.
+|
+|t:|1743039113
+|switch|p2a: Tyranitar|Tyranitar, L79, F|288/288
+|-activate|p2a: Tyranitar|move: Sticky Web
+|-unboost|p2a: Tyranitar|spe|1
+|-damage|p2a: Tyranitar|216/288|[from] Spikes
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|turn|17
+|inactive|Nitrochill has 90 seconds left.
+|
+|t:|1743039125
+|move|p1a: Cobalion|Iron Head|p2a: Tyranitar
+|-supereffective|p2a: Tyranitar
+|-damage|p2a: Tyranitar|0 fnt
+|faint|p2a: Tyranitar
+|
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Cobalion|88/277|[from] Sandstorm
+|-heal|p1a: Cobalion|105/277|[from] item: Leftovers
+|upkeep
+|
+|t:|1743039141
+|switch|p2a: Lapras|Lapras, L87, M|294/368 par
+|turn|18
+|
+|t:|1743039146
+|move|p1a: Cobalion|Close Combat|p2a: Lapras
+|-supereffective|p2a: Lapras
+|-damage|p2a: Lapras|0 fnt
+|-unboost|p1a: Cobalion|def|1
+|-unboost|p1a: Cobalion|spd|1
+|faint|p2a: Lapras
+|
+|win|los chipirones
+
+</script>
+<script type="text/plain" class="inputlog" id="replayinputlog-gen9unratedrandombattle-2328817636">
+>version a337f2b4b471ae92444759456fcb876c66515237
+>start {"formatid":"gen9unratedrandombattle","seed":"sodium,ebf1eaf75b80b67d6fdac46ded8d0dc1"}
+>player p1 {"name":"los chipirones","avatar":"worker","rating":0,"seed":"sodium,d778361130aa72fd7adb4a2deace079f"}
+>player p2 {"name":"Nitrochill","avatar":"170","rating":0,"seed":"sodium,818bed799fdf8b810883f6e1a3d5f012"}
+>p1 move thunderwave
+>p2 move freezedry
+>p1 move uturn
+>p2 switch 4
+>p1 switch 3
+>p1 move spore
+>p2 move blueflare
+>p1 move stickyweb
+>p2 switch 4
+>p1 move ceaselessedge
+>p2 move sparklingaria
+>p1 move ceaselessedge
+>p2 move sparklingaria
+>p1 move ceaselessedge
+>p2 move sparklingaria
+>p1 switch 6
+>p1 move swordsdance
+>p2 switch 4
+>p1 move closecombat
+>p2 move blueflare
+>p1 move closecombat
+>p2 move blueflare
+>p2 switch 6
+>p1 move ironhead
+>p2 move psychicnoise
+>p1 move ironhead
+>p2 move psychicnoise
+>p2 switch 3
+>p1 move taunt
+>p2 move stickyweb
+>p1 move ironhead
+>p2 move knockoff
+>p1 move ironhead
+>p2 move pounce
+>p2 switch 2
+>p1 move closecombat terastallize
+>p2 move waterpulse
+>p2 switch 5
+>p1 move ironhead
+>p2 move earthquake
+>p2 switch 4
+>p1 move closecombat
+>p2 move sparklingaria
+</script>
+<script type="application/json" class="data" id="replaydata-gen9unratedrandombattle-2328817636">
+{"id":"gen9unratedrandombattle-2328817636","format":"[Gen 9] Unrated Random Battle","players":["los chipirones","Nitrochill"],"uploadtime":1743039151,"views":3,"formatid":"gen9unratedrandombattle","rating":null,"private":0,"password":null}
+</script>
+
+<script defer src="js/replays.js?dd856472"></script>

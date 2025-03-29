@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<title>[Gen 9] Nuevo Meta Random: Ngammer vs. tfwesfsf - Replays - Pok&eacute;mon Showdown!</title>
+
+<meta name="description" content="Watch a replay of a Pok&eacute;mon battle between Ngammer and tfwesfsf! Format: [Gen 9] Nuevo Meta Random; Date: Aug 5, 2024" />
+<!--
+
+Hey, you! Looking in the source for the replay log?
+
+You can find them in JSON format, just add `.json` at the end of a replay URL.
+
+https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.json
+
+Or, if you only need the log itself, add `.log` instead:
+
+https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
+
+-->
+
+<link rel="stylesheet" href="//pokemonshowdown.com/style/global.css?0.04227826065277518" />
+<link rel="stylesheet" href="//play.pokemonshowdown.com/style/font-awesome.css?0.3912416940279677" />
+<link rel="stylesheet" href="//play.pokemonshowdown.com/style/battle.css?0.0213108563589397" />
+<link rel="stylesheet" href="//play.pokemonshowdown.com/style/utilichart.css?0.6815593015168242" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-26211653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-26211653-1');
+</script>
+<!-- End Google Analytics -->
+<!-- Venatus Ad Manager - Install in <HEAD> of page -->
+	<script src="https://hb.vntsm.com/v3/live/ad-manager.min.js" type="text/javascript" data-site-id="642aba63ec9a7b11c3c9c1be" data-mode="scan" async></script>
+<!-- / Venatus Ad Manager -->
+
+<style>
+	@media (max-width:820px) {
+		.battle {
+			margin: 0 auto;
+		}
+		.battle-log {
+			margin: 7px auto 0;
+			max-width: 640px;
+			height: 300px;
+			position: static;
+		}
+	}
+	.optgroup {
+		display: inline-block;
+		line-height: 22px;
+		font-size: 10pt;
+	}
+	.optgroup .button {
+		height: 25px;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.optgroup button.button {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	.linklist {
+		list-style: none;
+		margin: 0.5em 0;
+		padding: 0;
+	}
+	.linklist li {
+		padding: 2px 0;
+	}
+	.sidebar {
+		float: left;
+		width: 320px;
+	}
+	.bar-wrapper {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+	.bar-wrapper.has-sidebar {
+		max-width: 1430px;
+	}
+	.mainbar {
+		margin: 0;
+		padding-right: 1px;
+	}
+	.mainbar.has-sidebar {
+		margin-left: 330px;
+	}
+	@media (min-width: 1511px) {
+		.sidebar {
+			width: 400px;
+		}
+		.bar-wrapper.has-sidebar {
+			max-width: 1510px;
+		}
+		.mainbar.has-sidebar {
+			margin-left: 410px;
+		}
+	}
+	.section.first-section {
+		margin-top: 9px;
+	}
+	.blocklink small {
+		white-space: normal;
+	}
+	.button {
+		vertical-align: middle;
+	}
+	.replay-controls {
+		padding-top: 10px;
+	}
+	.replay-controls h1 {
+		font-size: 16pt;
+		font-weight: normal;
+		color: #CCC;
+	}
+	.pagelink {
+		text-align: center;
+	}
+	.pagelink a {
+		width: 150px;
+	}
+	.textbox, .button {
+		font-size: 11pt;
+		vertical-align: middle;
+	}
+	@media (max-width: 450px) {
+		.button {
+			font-size: 9pt;
+		}
+	}
+</style>
+
+<div>
+
+	<header>
+		<div class="nav-wrapper"><ul class="nav">
+			<li><a class="button nav-first" href="//pokemonshowdown.com/"><img src="//pokemonshowdown.com/images/pokemonshowdownbeta.png" srcset="//pokemonshowdown.com/images/pokemonshowdownbeta.png 1x, //pokemonshowdown.com/images/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
+			<li><a class="button" href="//pokemonshowdown.com/dex/">Pok&eacute;dex</a></li>
+			<li><a class="button cur" href="/">Replays</a></li>
+			<li><a class="button" href="//pokemonshowdown.com/ladder/">Ladder</a></li>
+			<li><a class="button nav-last" href="//pokemonshowdown.com/forums/">Forum</a></li>
+			<li><a class="button greenbutton nav-first nav-last" href="//192.168.0.20:3000/testclient?~~localhost:8000/">Play</a></li>
+		</ul></div>
+	</header>
+
+	<div class="main" id="main">
+
+		<noscript><section class="section">You need to enable JavaScript to use this page; sorry!</section></noscript>
+
+	</div>
+
+</div>
+
+<script defer nomodule src="//play.pokemonshowdown.com/js/lib/ps-polyfill.js"></script>
+<script defer src="//play.pokemonshowdown.com/js/lib/preact.min.js"></script>
+
+<script defer src="//play.pokemonshowdown.com/config/config.js?0997b8ff"></script>
+<script defer src="//play.pokemonshowdown.com/js/lib/jquery-1.11.0.min.js"></script>
+<script defer src="//play.pokemonshowdown.com/js/lib/html-sanitizer-minified.js"></script>
+<script defer src="//play.pokemonshowdown.com/js/battle-sound.js"></script>
+<script defer src="//play.pokemonshowdown.com/js/battledata.js?0.22116287105091592"></script>
+<script defer src="//play.pokemonshowdown.com/data/pokedex-mini.js?0.5803745518386088"></script>
+<script defer src="//play.pokemonshowdown.com/data/pokedex-mini-bw.js?0.46534250452115966"></script>
+<script defer src="//192.168.0.20:3000/testclient?~~localhost:8000/data/graphics.js?0.5258470052765143"></script>
+<script defer src="//play.pokemonshowdown.com/data/pokedex.js?0.9247062341395613"></script>
+<script defer src="//play.pokemonshowdown.com/data/moves.js?0.45360554672367837"></script>
+<script defer src="//play.pokemonshowdown.com/data/abilities.js?0.45904349402804856"></script>
+<script defer src="//play.pokemonshowdown.com/data/items.js?0.9863945232227194"></script>
+<script defer src="//play.pokemonshowdown.com/data/teambuilder-tables.js?0.37982510413704973"></script>
+<script defer src="//play.pokemonshowdown.com/js/battle-tooltips.js?0.5836038630790268"></script>
+<script defer src="//play.pokemonshowdown.com/js/battle.js?0.9365124832331018"></script>
+
+<script defer src="js/utils.js?0abca7ba"></script>
+<script defer src="js/replays-battle.js?208ecb6b"></script>
+
+<!-- don't scrape this data! just add .json or .log after the URL!
+Full API docs: https://github.com/smogon/pokemon-showdown-client/blob/master/WEB-API.md -->
+<script type="text/plain" class="log" id="replaylog-gen9nuevometarandom-377">
+
+|j|☆tfwesfsf
+|j|☆Ngammer
+|t:|1743017849
+|gametype|singles
+|player|p1|tfwesfsf|1|
+|player|p2|Ngammer|265|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|9
+|tier|[Gen 9] Nuevo Meta Random
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Species Clause: Limit one of each Pokémon
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Illusion Level Mod: Illusion disguises the Pokémon's true level
+|rule|Terastal Clause: You cannot Terastallize
+|rule|Item Clause: Limit 1 of each item
+|clearpoke
+|poke|p1|Fearill, L80, M|
+|poke|p1|Vaporeon, L84, M|
+|poke|p1|Kingler, L84, F|
+|poke|p1|Magmar, L86, M|
+|poke|p1|Jolteon, L82, M|
+|poke|p1|Dugtrio, L82, M|
+|poke|p2|Dragonite, L80, F|
+|poke|p2|Weezing-Galar, L84, M|
+|poke|p2|Victreebel, L88, F|
+|poke|p2|Chansey, L80, F|
+|poke|p2|Poliwrath, L86, M|
+|poke|p2|Meganium, L88, M|
+|teampreview
+|
+|t:|1743017861
+|start
+|switch|p1a: Fearill|Fearill, L80, M|100\/100
+|switch|p2a: Weezing|Weezing-Galar, L84, M|282\/282
+|turn|1
+|
+|t:|1743017865
+|move|p1a: Fearill|Beat Up|p2a: Weezing
+|-resisted|p2a: Weezing
+|-damage|p2a: Weezing|198\/282
+|move|p2a: Weezing|Incinerate|p1a: Fearill
+|-damage|p1a: Fearill|57\/100
+|-enditem|p1a: Fearill|Black Glasses|[from] move: Incinerate|[of] p2a: Weezing
+|
+|-heal|p2a: Weezing|215\/282|[from] item: Black Sludge
+|upkeep
+|turn|2
+|-message|tfwesfsf forfeited.
+|
+|win|Ngammer
+|l|☆tfwesfsf
+|player|p1|
+
+</script>
+<script type="application/json" class="data" id="replaydata-gen9nuevometarandom-377">
+{"id":"gen9nuevometarandom-377","format":"[Gen 9] Nuevo Meta Random","players":["Ngammer","tfwesfsf"],"uploadtime":1722831654,"views":113,"formatid":"gen9nuevometarandom","rating":null,"password":null}
+</script>
+
+<script defer src="js/replays.js?dd856472"></script>
+
