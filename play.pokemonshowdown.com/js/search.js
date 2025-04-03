@@ -230,7 +230,6 @@
 			var tierTable = {
 				uber: "Uber",
 				ou: "OU",
-				pendiente: "Pendiente",
 				uu: "UU",
 				ru: "RU",
 				nu: "NU",
