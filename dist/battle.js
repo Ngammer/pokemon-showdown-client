@@ -3069,7 +3069,7 @@ class Battle {
 								continue;
 							}
 						}
-						if (this.gen > 6) maxTimeLeft = 8;
+						if (this.gen > 6) maxTimeLeft = 10;
 					}
                 if (kwArgs.persistent)
                     minTimeLeft += 2;
