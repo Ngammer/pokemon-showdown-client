@@ -59,9 +59,16 @@ export class PSConnection {
 }
 
 PS.connection = new PSConnection();
+PS.prefs.doAutojoin();
 
 export const PSLoginServer = new class {
-	query(data: PostData): Promise<{ [k: string]: any } | null> {
+	rawQuery(act: string, data: PostData): Promise<string | null> {
+		// commenting out because for some reason this is working in Chrome????
+		// if (location.protocol === 'file:') {
+		// 	alert("Sorry, login server queries don't work in the testclient. To log in, see README.md to set up testclient-key.js");
+		// 	return Promise.resolve(null);
+		// }
+		data.act = act;
 		let url = '/~~' + PS.server.id + '/action.php';
 		if (location.pathname.endsWith('.html')) {
 			url = 'https://' + Config.routes.client + url;
@@ -69,7 +76,14 @@ export const PSLoginServer = new class {
 				data.sid = POKEMON_SHOWDOWN_TESTCLIENT_KEY.replace(/%2C/g, ',');
 			}
 		}
-		return Net(url).get({ method: data ? 'POST' : 'GET', body: data }).then(
+		return Net(url).get({ method: 'POST', body: data }).then(
+			res => res ?? null
+		).catch(
+			() => null
+		);
+	}
+	query(act: string, data: PostData): Promise<{ [k: string]: any } | null> {
+		return this.rawQuery(act, data).then(
 			res => res ? JSON.parse(res.slice(1)) : null
 		).catch(
 			() => null
@@ -162,8 +176,12 @@ class NetRequest {
 }
 
 export function Net(uri: string) {
+	if (uri.startsWith('/') && !uri.startsWith('//') && Net.defaultRoute) uri = Net.defaultRoute + uri;
+	if (uri.startsWith('//') && document.location.protocol === 'file:') uri = 'https:' + uri;
 	return new NetRequest(uri);
 }
+
+Net.defaultRoute = '';
 
 Net.encodeQuery = function (data: string | PostData) {
 	if (typeof data === 'string') return data;

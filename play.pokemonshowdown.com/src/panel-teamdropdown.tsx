@@ -590,6 +590,10 @@ export function TeamBox(props: { team: Team | null, noLink?: boolean, button?: b
  */
 
 class TeamDropdownPanel extends PSRoomPanel {
+	static readonly id = 'teamdropdown';
+	static readonly routes = ['teamdropdown'];
+	static readonly location = 'semimodal-popup';
+	static readonly noURL = true;
 	gen = '';
 	format: string | null = null;
 	getTeams() {
@@ -725,10 +729,10 @@ class TeamDropdownPanel extends PSRoomPanel {
 			isEmpty = false;
 		}
 
-		return <PSPanelWrapper room={room} width={width}>
+		return <PSPanelWrapper room={room} width={width}><div class="pad">
 			{teamList}
 			{isEmpty && <p><em>No teams found</em></p>}
-		</PSPanelWrapper>;
+		</div></PSPanelWrapper>;
 	}
 }
 
@@ -752,8 +756,13 @@ export interface FormatData {
 declare const BattleFormats: { [id: string]: FormatData };
 
 class FormatDropdownPanel extends PSRoomPanel {
+	static readonly id = 'formatdropdown';
+	static readonly routes = ['formatdropdown'];
+	static readonly location = 'semimodal-popup';
+	static readonly noURL = true;
 	gen = '';
 	format: string | null = null;
+	search = '';
 	click = (e: MouseEvent) => {
 		let curTarget = e.target as HTMLElement | null;
 		let target;
@@ -766,6 +775,10 @@ class FormatDropdownPanel extends PSRoomPanel {
 		if (!target) return;
 
 		this.chooseParentValue(target.value);
+	};
+	updateSearch = (ev: Event) => {
+		this.search = (ev.currentTarget as HTMLInputElement).value;
+		this.forceUpdate();
 	};
 	override render() {
 		const room = this.props.room;
@@ -784,10 +797,17 @@ class FormatDropdownPanel extends PSRoomPanel {
 				break;
 			}
 		}
+		const searchBar = <div style="margin-bottom: 0.5em">
+			<input
+				type="search" name="search" placeholder="Search formats" class="textbox autofocus"
+				onInput={this.updateSearch} onChange={this.updateSearch}
+			/>
+		</div>;
 		if (!formatsLoaded) {
-			return <PSPanelWrapper room={room}>
+			return <PSPanelWrapper room={room}><div class="pad">
+				{searchBar}
 				<p>Loading...</p>
-			</PSPanelWrapper>;
+			</div></PSPanelWrapper>;
 		}
 
 		/**
@@ -809,7 +829,11 @@ class FormatDropdownPanel extends PSRoomPanel {
 		let curColumnNum = 0;
 		let curColumn: (FormatData | { id: null, section: string })[] = [];
 		const columns = [curColumn];
+		const searchID = toID(this.search);
 		for (const format of formats) {
+			if (searchID && !toID(format.name).includes(searchID)) {
+				continue;
+			}
 			if (format.column !== curColumnNum) {
 				if (curColumn.length) {
 					curColumn = [];
@@ -826,9 +850,11 @@ class FormatDropdownPanel extends PSRoomPanel {
 			curColumn.push(format);
 		}
 
-		const width = columns.length * 225 + 10;
+		const width = columns.length * 225 + 30;
+		const noResults = curColumn.length === 0;
 
-		return <PSPanelWrapper room={room} width={width}>
+		return <PSPanelWrapper room={room} width={width}><div class="pad">
+			{searchBar}
 			{columns.map(column => <ul class="options" onClick={this.click}>
 				{column.map(format => format.id ? (
 					<li><button value={format.name} class="option">
@@ -840,15 +866,12 @@ class FormatDropdownPanel extends PSRoomPanel {
 					</h3></li>
 				))}
 			</ul>)}
+			{noResults && <p>
+				<em>No formats{!!searchID && ` matching "${searchID}"`} found</em>
+			</p>}
 			<div style="float: left"></div>
-		</PSPanelWrapper>;
+		</div></PSPanelWrapper>;
 	}
 }
 
-PS.roomTypes['teamdropdown'] = {
-	Component: TeamDropdownPanel,
-};
-
-PS.roomTypes['formatdropdown'] = {
-	Component: FormatDropdownPanel,
-};
+PS.addRoomType(TeamDropdownPanel, FormatDropdownPanel);

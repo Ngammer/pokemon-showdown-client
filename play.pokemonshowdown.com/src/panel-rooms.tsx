@@ -19,21 +19,24 @@ export class RoomsRoom extends PSRoom {
 }
 
 class RoomsPanel extends PSRoomPanel {
+	static readonly id = 'rooms';
+	static readonly routes = ['rooms'];
+	static readonly Model = RoomsRoom;
+	static readonly location = 'right';
+	static readonly icon = <i class="fa fa-plus rooms-plus"></i>;
+	static readonly title = "Chat Rooms";
 	hidden = false;
 	search = '';
 	lastKeyCode = 0;
 	override componentDidMount() {
 		super.componentDidMount();
-		this.subscriptions.push(PS.user.subscribe(() => {
-			if (PS.user.named) PS.send(`|/cmd rooms`);
+		this.subscriptions.push(PS.user.subscribe(update => {
+			if (!update && PS.user.named) PS.send(`|/cmd rooms`);
 		}));
 	}
-	hide = () => {
-		this.hidden = true;
-		PS.rightRoom = null;
-		PS.room = PS.leftRoom;
-		this.forceUpdate();
-		PS.update();
+	hide = (e: Event) => {
+		e.stopImmediatePropagation();
+		PS.hideRightRoom();
 	};
 	changeSearch = (e: Event) => {
 		const target = e.currentTarget as HTMLInputElement;
@@ -110,9 +113,6 @@ class RoomsPanel extends PSRoomPanel {
 
 		return { start, abbr, hidden };
 	}
-	override focus() {
-		this.base!.querySelector<HTMLInputElement>('input[type=search]')!.focus();
-	}
 	override render() {
 		if (this.hidden && PS.isVisible(this.props.room)) this.hidden = false;
 		if (this.hidden) {
@@ -129,8 +129,22 @@ class RoomsPanel extends PSRoomPanel {
 				this.renderRoomList("Possible hidden room", search.hidden),
 			];
 		} else {
+			const roomSections = {
+				official: [] as RoomInfo[], chat: [] as RoomInfo[], hidden: [] as RoomInfo[],
+			};
+			for (const room of rooms.chat || []) {
+				if (room.privacy === 'hidden') {
+					roomSections.hidden.push(room);
+				} else if (room.section === 'Official') {
+					roomSections.official.push(room);
+				} else {
+					roomSections.chat.push(room);
+				}
+			}
 			roomList = [
-				this.renderRoomList("Chat rooms", rooms.chat),
+				this.renderRoomList("Official chat rooms", roomSections.official),
+				this.renderRoomList("Chat rooms", roomSections.chat),
+				this.renderRoomList("Hidden rooms", roomSections.hidden),
 			];
 		}
 
@@ -156,7 +170,7 @@ class RoomsPanel extends PSRoomPanel {
 			</div>
 			<div>
 				<input
-					type="search" name="roomsearch" class="textbox" style="width: 100%; max-width: 480px"
+					type="search" name="roomsearch" class="textbox autofocus" style="width: 100%; max-width: 480px"
 					placeholder="Join or search for rooms"
 					onInput={this.changeSearch} onKeyDown={this.keyDownSearch}
 				/>
@@ -176,21 +190,16 @@ class RoomsPanel extends PSRoomPanel {
 					{roomInfo.userCount !== undefined && <small style="float:right">({roomInfo.userCount} users)</small>}
 					<strong><i class="fa fa-comment-o"></i> {roomInfo.title}<br /></strong>
 					<small>{roomInfo.desc || ''}</small>
-					{roomInfo.subRooms && <small><br />
-						<i class="fa fa-level-up fa-rotate-90"></i> Subrooms: <strong>
-							{roomInfo.subRooms.map((roomName, i) => [
-								<i class="fa fa-comment-o"></i>, " " + roomName + (i === roomInfo.subRooms!.length - 1 ? "" : ", "),
-							])}
-						</strong>
-					</small>}
 				</a>
+				{roomInfo.subRooms && <div class="subrooms">
+					<i class="fa fa-level-up fa-rotate-90"></i> Subrooms: {}
+					{roomInfo.subRooms.map((roomName, i) => [<a href={`/${toID(roomName)}`} class="blocklink">
+						<i class="fa fa-comment-o"></i> <strong>{roomName}</strong>
+					</a>, ' '])}
+				</div>}
 			</div>)}
 		</div>;
 	}
 }
 
-PS.roomTypes['rooms'] = {
-	Model: RoomsRoom,
-	Component: RoomsPanel,
-};
-PS.updateRoomTypes();
+PS.addRoomType(RoomsPanel);

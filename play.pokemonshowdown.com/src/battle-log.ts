@@ -102,7 +102,7 @@ export class BattleLog {
 		});
 		this.addNode(el);
 	}
-	add(args: Args, kwArgs?: KWArgs, preempt?: boolean) {
+	add(args: Args, kwArgs?: KWArgs, preempt?: boolean, showTimestamps?: 'minutes' | 'seconds') {
 		if (kwArgs?.silent) return;
 		const battle = this.scene?.battle;
 		if (battle?.seeking) {
@@ -129,7 +129,9 @@ export class BattleLog {
 		case 'chat': case 'c': case 'c:':
 			let name;
 			let message;
+			let timestamp = 0;
 			if (args[0] === 'c:') {
+				timestamp = parseInt(args[1]);
 				name = args[2];
 				message = args[3];
 			} else {
@@ -141,12 +143,27 @@ export class BattleLog {
 			if (battle?.ignoreOpponent) {
 				if ('\u2605\u2606'.includes(rank) && toUserid(name) !== app.user.get('userid')) return;
 			}
-			if (window.app?.ignore?.[toUserid(name)] && ' +\u2605\u2606'.includes(rank)) return;
-			let isHighlighted = window.app?.rooms?.[battle!.roomid].getHighlight(message);
-			[divClass, divHTML, noNotify] = this.parseChatMessage(message, name, '', isHighlighted);
+			const ignoreList = window.app?.ignore || window.PS?.prefs?.ignore;
+			if (ignoreList?.[toUserid(name)] && ' +^\u2605\u2606'.includes(rank)) return;
+			let timestampHtml = '';
+			if (showTimestamps) {
+				const date = timestamp && !isNaN(timestamp) ? new Date(timestamp * 1000) : new Date();
+				const components = [date.getHours(), date.getMinutes()];
+				if (showTimestamps === 'seconds') {
+					components.push(date.getSeconds());
+				}
+				timestampHtml = `<small class="gray">[${components.map(x => x < 10 ? `0${x}` : x).join(':')}] </small>`;
+			}
+			let isHighlighted = window.app?.rooms?.[battle!.roomid].getHighlight(message) || window.PS?.getHighlight(message);
+			[divClass, divHTML, noNotify] = this.parseChatMessage(message, name, timestampHtml, isHighlighted);
 			if (!noNotify && isHighlighted) {
-				let notifyTitle = "Mentioned by " + name + " in " + battle!.roomid;
-				app.rooms[battle!.roomid].notifyOnce(notifyTitle, "\"" + message + "\"", 'highlight');
+				let notifyTitle = "Mentioned by " + name + " in " + (battle?.roomid || '');
+				window.app?.rooms[battle?.roomid || '']?.notifyOnce(notifyTitle, "\"" + message + "\"", 'highlight');
+				window.PS?.rooms[battle?.roomid || '']?.notify({
+					title: notifyTitle,
+					body: "\"" + message + "\"",
+					id: 'highlight',
+				});
 			}
 			break;
 
@@ -222,7 +239,7 @@ export class BattleLog {
 			return;
 
 		case 'pm':
-			divHTML = '<strong>' + BattleLog.escapeHTML(args[1]) + ':</strong> <span class="message-pm"><i style="cursor:pointer" onclick="selectTab(\'lobby\');rooms.lobby.popupOpen(\'' + BattleLog.escapeHTML(args[2], true) + '\')">(Private to ' + BattleLog.escapeHTML(args[3]) + ')</i> ' + BattleLog.parseMessage(args[4]) + '</span>';
+			divHTML = `<strong data-href="user-${BattleLog.escapeHTML(args[1])}"> ${BattleLog.escapeHTML(args[1])}:</strong> <span class="message-pm"><i style="cursor:pointer" data-href="user-${BattleLog.escapeHTML(args[1], true)}">(Private to ${BattleLog.escapeHTML(args[2])})</i> ${BattleLog.parseMessage(args[3])} </span>`;
 			break;
 
 		case 'askreg':
@@ -840,7 +857,7 @@ export class BattleLog {
 			// 	for (let i = 0; i < 10; i++) {
 			// 		let name = people[Math.floor(Math.random() * people.length)];
 			// 		if (!button) button = buttons[Math.floor(Math.random() * buttons.length)];
-			// 		this.scene.log('<div class="chat"><strong style="' + BattleLog.hashColor(toUserid(name)) + '" class="username" data-name="' + BattleLog.escapeHTML(name) + '">' + BattleLog.escapeHTML(name) + ':</strong> <em>' + button + '</em></div>');
+			// 		this.scene.log('<div class="chat"><strong style="' + BattleLog.hashColor(toUserid(name)) + '" class="username">' + BattleLog.escapeHTML(name) + ':</strong> <em>' + button + '</em></div>');
 			// 		button = (name === 'Diatom' ? "thanks diatom" : null);
 			// 	}
 			} else if (moveid === 'stealthrock') {
@@ -1036,7 +1053,7 @@ export class BattleLog {
 		this.innerElem.appendChild(this.preemptElem.firstChild);
 	}
 
-	static escapeFormat(formatid: string): string {
+	static escapeFormat(formatid = ''): string {
 		let atIndex = formatid.indexOf('@@@');
 		if (atIndex >= 0) {
 			return this.escapeFormat(formatid.slice(0, atIndex)) +
@@ -1050,12 +1067,39 @@ export class BattleLog {
 		}
 		return this.escapeHTML(formatid);
 	}
+	static formatName(formatid = ''): string {
+		let atIndex = formatid.indexOf('@@@');
+		if (atIndex >= 0) {
+			return this.formatName(formatid.slice(0, atIndex)) +
+				' (Custom rules: ' + this.escapeHTML(formatid.slice(atIndex + 3)) + ')';
+		}
+		if (window.BattleFormats && BattleFormats[formatid]) {
+			return BattleFormats[formatid].name;
+		}
+		if (window.NonBattleGames && NonBattleGames[formatid]) {
+			return NonBattleGames[formatid];
+		}
+		return formatid;
+	}
 
-	static escapeHTML(str: string, jsEscapeToo?: boolean) {
+	static escapeHTML(str: string | number, jsEscapeToo?: boolean) {
+		if (typeof str === 'number') str = `${str}`;
 		if (typeof str !== 'string') return '';
 		str = str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 		if (jsEscapeToo) str = str.replace(/\\/g, '\\\\').replace(/'/g, '\\\'');
 		return str;
+	}
+	/**
+	 * Template string tag function for escaping HTML
+	 */
+	static html(strings: TemplateStringsArray | string[], ...args: any) {
+		let buf = strings[0];
+		let i = 0;
+		while (i < args.length) {
+			buf += this.escapeHTML(args[i]);
+			buf += strings[++i];
+		}
+		return buf;
 	}
 
 	static unescapeHTML(str: string) {
@@ -1150,7 +1194,7 @@ export class BattleLog {
 			name = name.substr(1);
 		}
 		const colorStyle = ` style="color:${BattleLog.usernameColor(toID(name))}"`;
-		const clickableName = `<small>${BattleLog.escapeHTML(group)}</small><span class="username" data-name="${BattleLog.escapeHTML(name)}">${BattleLog.escapeHTML(name)}</span>`;
+		const clickableName = `<small class="groupsymbol">${BattleLog.escapeHTML(group)}</small><span class="username">${BattleLog.escapeHTML(name)}</span>`;
 		let hlClass = isHighlighted ? ' highlighted' : '';
 		let isMine = (window.app?.user?.get('name') === name) || (window.PS?.user.name === name);
 		let mineClass = isMine ? ' mine' : '';
@@ -1186,8 +1230,8 @@ export class BattleLog {
 			let roomid = toRoomid(target);
 			return [
 				'chat',
-				`${timestamp}<em>${clickableName} invited you to join the room "${roomid}"</em>' +
-				'<div class="notice"><button name="joinRoom" value="${roomid}">Join ${roomid}</button></div>`,
+				`${timestamp}<em>${clickableName} invited you to join the room "${roomid}"</em>` +
+				`<div class="notice"><button class="button" name="joinRoom" value="${roomid}">Join ${roomid}</button></div>`,
 			];
 		case 'announce':
 			return [

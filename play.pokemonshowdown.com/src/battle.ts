@@ -1145,7 +1145,7 @@ export class Battle {
 		$frame?: JQuery,
 		$logFrame?: JQuery,
 		id?: ID,
-		log?: string[] | string,
+		log?: string[] | string | null,
 		paused?: boolean,
 		isReplay?: boolean,
 		debug?: boolean,

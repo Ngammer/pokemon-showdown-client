@@ -3,5 +3,6 @@
     "client": "192.168.0.20:3000",
     "dex": "192.168.0.20:3003",
     "replays": "192.168.0.20:3002",
-    "users": "pokemonshowdown.com/users"
+    "users": "pokemonshowdown.com/users",
+    "teams": "teams.pokemonshowdown.com"
 }

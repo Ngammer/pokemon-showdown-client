@@ -68,7 +68,7 @@ export const defaultRules = {
 	"@stylistic/max-len": ["warn", {
 		"code": 120, "tabWidth": 0,
 		// DO NOT EDIT DIRECTLY: see bottom of file for source
-		"ignorePattern": "^\\s*(?:\\/\\/ \\s*)?(?:(?:export )?(?:let |const |readonly )?[a-zA-Z0-9_$.]+(?: \\+?=>? )|[a-zA-Z0-9$]+: \\[?|(?:return |throw )?(?:new )?(?:[a-zA-Z0-9$.]+\\()?)?(?:Utils\\.html|(?:this\\.)?(?:room\\.)?tr|\\$\\()?['\"`/]",
+		"ignorePattern": "^\\s*(?:\\/\\/ \\s*)?(?:(?:export )?(?:let |const |readonly )?[a-zA-Z0-9_$.]+(?: \\+?=>? )|[a-zA-Z0-9$]+: \\[?|(?:return |throw )?(?:new )?(?:[a-zA-Z0-9$.]+\\()?)?(?:[A-Za-z0-9.]+|\\$\\()?['\"`/]",
 	}],
 	"prefer-const": ["warn", { "destructuring": "all" }],
 
@@ -316,7 +316,7 @@ export const defaultRulesES3 = {
 		ignoreRestSiblings: true,
 	}],
 	"no-restricted-syntax": ["error",
-		{ selector: "TaggedTemplateExpression", message: "Hard to compile down to ES3" },
+		{ selector: "TaggedTemplateExpression", message: "Not supported by ES3" },
 		{ selector: "CallExpression[callee.name='Symbol']", message: "Annoying to serialize, just use a string" },
 	],
 
@@ -344,7 +344,7 @@ export const defaultRulesES3TSChecked = {
 	...defaultRulesTSChecked,
 	"radix": "off",
 	"no-restricted-globals": ["error", "Proxy", "Reflect", "Symbol", "WeakSet", "WeakMap", "Set", "Map"],
-	"no-restricted-syntax": ["error", "TaggedTemplateExpression", "YieldExpression", "AwaitExpression", "BigIntLiteral"],
+	"no-restricted-syntax": ["error", "YieldExpression", "AwaitExpression", "BigIntLiteral"],
 };
 
 /**
@@ -422,9 +422,8 @@ SOURCE FOR IGNOREPATTERN (compile with https://regexfree.k55.io/ )
   )?
 
   (
-    Utils\.html
-  |
-    (this\.)?(room\.)?tr
+    # tagged template
+    [A-Za-z0-9\.]+
   |
     \$\(
   )?
