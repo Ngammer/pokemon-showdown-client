@@ -1,7 +1,9 @@
 var Config = Config || {};
 
-Config.bannedHosts = ['cool.jit.su', 'pokeball-nixonserver.rhcloud.com', /\.glitch\.me/];
-//Config.afd = true;
+/* version */ Config.version = "0";
+
+Config.bannedHosts = ['cool.jit.su', 'pokeball-nixonserver.rhcloud.com'];
+
 Config.whitelist = [
 	// general sites
 	'wikipedia.org',
@@ -15,6 +17,8 @@ Config.whitelist = [
 	'twitter.com',
 	'tumblr.com',
 	'deviantart.com',
+	'discord.com',
+	'discord.gg',
 	'youtube.com',
 	'youtu.be',
 	'zombo.com',
@@ -38,6 +42,8 @@ Config.whitelist = [
 	'ipqualityscore.com',
 
 	// pokemon sites
+	'https://infinitefusion.fandom.com/',
+	'pokeathlon.com',
 	'pokemonshowdown.com',
 	'psim.us',
 	'smogon.com',
@@ -101,6 +107,7 @@ Config.whitelist = [
 	'freeforums.org',
 	'forumactif.com',
 	'forumotion.com',
+	'bigbangpokemon.com',
 	'sites.google.com',
 
 	// rich text
@@ -127,7 +134,7 @@ Config.whitelist = [
 	// music
 	'plug.dj',
 	'openings.moe',
-	'animethemes.moe',
+    	'animethemes.moe',
 	'catbox.moe',
 
 	// images
@@ -143,17 +150,6 @@ Config.whitelist = [
 	'discordapp.com'
 ];
 
-Config.roomsFirstOpenScript = function (mainMenuOnly) {
-	/* eslint-disable */
-	if (mainMenuOnly) {
-		$('.leftmenu .activitymenu').first().after('<div id="mainmenu-mobile" style="text-align:center"></div>');
-	} else {
-		$('.roomlisttop').first().after('<div id="roomlist1-desktop"></div>');
-		$('.roomlist').first().after('<div id="roomlist2-desktop"></div>');
-	}
-	/* eslint-enable */
-};
-
 // `defaultserver` specifies the server to use when the domain name in the
 // address bar is `Config.routes.client`.
 Config.defaultserver = {
@@ -165,17 +161,95 @@ Config.defaultserver = {
 	registered: true
 };
 
-Config.customcolors = {
-	'zarel': 'aeo'
+Config.roomsFirstOpenScript = function () {
 };
+
+Config.customcolors = {
+	'zarel': 'aeo',
+	'stafkigtn': 'oihey167',
+	'symphoniigaming': 'frenchizeswoops',
+};
+
+Config.groups = {
+	'~': {
+		name: "Administrator (~)",
+		type: 'leadership',
+		order: 10001
+	},
+	'#': {
+		name: "Room Owner (#)",
+		type: 'leadership',
+		order: 10002
+	},
+	'&': {
+		name: "Administrator (&amp;)",
+		type: 'leadership',
+		order: 10003
+	},
+	'\u2605': {
+		name: "Host (\u2605)",
+		type: 'staff',
+		order: 10004
+	},
+	'@': {
+		name: "Moderator (@)",
+		type: 'staff',
+		order: 10005
+	},
+	'%': {
+		name: "Driver (%)",
+		type: 'staff',
+		order: 10006
+	},
+	'*': {
+		name: "Bot (*)",
+		type: 'normal',
+		order: 10008
+	},
+	'\u2606': {
+		name: "Player (\u2606)",
+		type: 'normal',
+		order: 10009
+	},
+	'+': {
+		name: "Voice (+)",
+		type: 'normal',
+		order: 10010
+	},
+	'»': {
+		name: 'Verified (»)',
+		type: 'normal',
+		order: 10011
+	},
+	' ': {
+		type: 'normal',
+		order: 10012
+	},
+	'!': {
+		name: "<span style='color:#777777'>Muted (!)</span>",
+		type: 'punishment',
+		order: 10013
+	},
+	'✖': {
+		name: "<span style='color:#777777'>Namelocked (✖)</span>",
+		type: 'punishment',
+		order: 10014
+	},
+	'\u203d': {
+		name: "<span style='color:#777777'>Locked (\u203d)</span>",
+		type: 'punishment',
+		order: 10015
+	}
+};
+
 /*** Begin automatically generated configuration ***/
-Config.version = "0.11.2 (f7b2a175)";
+Config.version = "0.11.2 (c5aef63b)";
 
 Config.routes = {
-	root: '192.168.0.20:3001',
-	client: '192.168.0.20:3000',
-	dex: '192.168.0.20:3003',
-	replays: '192.168.0.20:3002',
+	root: 'pokemonshowdown.com',
+	client: 'play.pokemonshowdown.com',
+	dex: 'dex.pokemonshowdown.com',
+	replays: 'replay.pokemonshowdown.com',
 	users: 'pokemonshowdown.com/users',
 };
 /*** End automatically generated configuration ***/
