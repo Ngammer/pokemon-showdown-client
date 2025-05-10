@@ -144,7 +144,7 @@ https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
 			<li><a class="button cur" href="/">Replays</a></li>
 			<li><a class="button" href="//pokemonshowdown.com/ladder/">Ladder</a></li>
 			<li><a class="button nav-last" href="//pokemonshowdown.com/forums/">Forum</a></li>
-			<li><a class="button greenbutton nav-first nav-last" href="//192.168.0.20:3000/testclient?~~localhost:8000/">Play</a></li>
+			<li><a class="button greenbutton nav-first nav-last" href="//192.168.0.20:3000/">Play</a></li>
 		</ul></div>
 	</header>
 
@@ -166,7 +166,7 @@ https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
 <script defer src="//play.pokemonshowdown.com/js/battledata.js?0.22116287105091592"></script>
 <script defer src="//play.pokemonshowdown.com/data/pokedex-mini.js?0.5803745518386088"></script>
 <script defer src="//play.pokemonshowdown.com/data/pokedex-mini-bw.js?0.46534250452115966"></script>
-<script defer src="//192.168.0.20:3000/testclient?~~localhost:8000/data/graphics.js?0.5258470052765143"></script>
+<script defer src="//192.168.0.20:3000/data/graphics.js?0.5258470052765143"></script>
 <script defer src="//play.pokemonshowdown.com/data/pokedex.js?0.9247062341395613"></script>
 <script defer src="//play.pokemonshowdown.com/data/moves.js?0.45360554672367837"></script>
 <script defer src="//play.pokemonshowdown.com/data/abilities.js?0.45904349402804856"></script>

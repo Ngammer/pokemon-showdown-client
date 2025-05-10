@@ -96,7 +96,7 @@
 			<li><a id="replay-link" class="button" href="//190.190.130.232:3002/">Replays</a></li>
 			<li><a class="button" href="/ladder/">Ladder</a></li>
 			<li><a class="button nav-last" href="/forums/">Forum</a></li>
-			<li><a id="play-link" class="button greenbutton nav-first nav-last" href="//190.190.130.232:3000/testclient?~~190.190.130.232:8000/">Play</a></li>
+			<li><a id="play-link" class="button greenbutton nav-first nav-last" href="//190.190.130.232:3000/">Play</a></li>
 		</ul></div>
 	</header>
 
@@ -120,7 +120,7 @@
 					Pok&eacute;mon Showdown is a Pok&eacute;mon battle simulator. Play Pok&eacute;mon battles online! Play with randomly generated teams, or build your own! Fully animated!
 				</p>
 				<p class="mainbutton" id="play-online">
-					<a id="play-link2" class="button greenbutton" href="//190.190.130.232:3000/testclient?~~190.190.130.232:8000/">Play online</a>
+					<a id="play-link2" class="button greenbutton" href="//190.190.130.232:3000/">Play online</a>
 				</p>
 				<p class="mainbutton" id="win-install" style="display:none;text-align:center;color:#777;margin:-10px 0 -0px 0">
 					or<br /><a href="https://pokemonshowdown.com/autodownload/win">Install <small>(Windows)</small></a>
@@ -301,8 +301,8 @@ if (BrowserDetect.OS === 'Mac') {
 	</ul>
 	<script>
 		if (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')){
-			document.getElementById("play-link").href = "//192.168.0.20:3000/testclient?~~localhost:8000/";
-			document.getElementById("play-link2").href = "//192.168.0.20:3000/testclient?~~localhost:8000/";
+			document.getElementById("play-link").href = "//192.168.0.20:3000/";
+			document.getElementById("play-link2").href = "//192.168.0.20:3000/";
 		document.getElementById("dex-link").href = "//192.168.0.20:3003/";
 		document.getElementById("replay-link").href = "//192.168.0.20:3002/";
 		document.getElementById("calc-link").href = "//192.168.0.20:3004/";

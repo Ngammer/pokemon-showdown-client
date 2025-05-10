@@ -25,12 +25,12 @@
 			<li><a id="replay-link" class="button" href="//190.190.130.232:3002/">Replays</a></li>
 			<li><a class="button" href="/ladder/">Ladder</a></li>
 			<li><a class="button nav-last" href="/forums/">Forum</a></li>
-			<li><a id="play-link" class="button greenbutton nav-first nav-last" href="//190.190.130.232:3000/testclient?~~190.190.130.232:8000/">Play</a></li>
+			<li><a id="play-link" class="button greenbutton nav-first nav-last" href="//190.190.130.232:3000/">Play</a></li>
 		</ul></div>
 	</header>
 	<script>
 		if (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')){
-			document.getElementById("play-link").href = "//192.168.0.20:3000/testclient?~~localhost:8000/";
+			document.getElementById("play-link").href = "//192.168.0.20:3000/";
 		document.getElementById("dex-link").href = "//192.168.0.20:3003/";
 		document.getElementById("replay-link").href = "//192.168.0.20:3002/";
 		document.getElementById("calc-link").href = "//192.168.0.20:3004/";
