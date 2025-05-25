@@ -750,8 +750,8 @@ class BattleTooltips {
             if (move.flags.punch && ability === 'ironfist') {
                 text += `<p class="movetag">&#x2713; Fist <small>(boosted by Iron Fist)</small></p>`;
             }
-				if (move.flags.punch && ability === 'nudillosdepiedra') {
-					text += `<p class="movetag">&#x2713; Fist <small>(boosted by Nudillos De Piedra)</small></p>`;
+				if (move.flags.punch && ability === 'stoneknuckles') {
+					text += `<p class="movetag">&#x2713; Fist <small>(boosted by Stone Knuckles)</small></p>`;
 			  }
             if (move.flags.pulse && ability === 'megalauncher') {
                 text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
@@ -1679,7 +1679,7 @@ class BattleTooltips {
             if (isSound && value.abilityModify(0, 'Liquid Voice')) {
                 moveType = 'Water';
             }
-				if (isSound && value.abilityModify(0, 'Canto Helado')) {
+				if (isSound && value.abilityModify(0, 'Icy Song')) {
 					moveType = 'Ice';
 				}
         }
@@ -1811,9 +1811,9 @@ class BattleTooltips {
 		  if(this.battle.gameType === 'doubles' && move.id === 'darkvoid'){
 			value.modify(0.5, "Doubles")
 		}
-		  if (value.tryAbility('Inteligencia Artificial')) {
+		  if (value.tryAbility('Artificial intelligence')) {
 			accuracyModifiers.push(3891);
-			value.abilityModify(0.95, "Inteligencia Artificial");
+			value.abilityModify(0.95, "Artificial intelligence");
 	  		}
         if (value.tryAbility('Compound Eyes')) {
             accuracyModifiers.push(5325);
@@ -2108,7 +2108,7 @@ class BattleTooltips {
             value.abilityModify(1.2, 'Iron Fist');
         }
 		  if (move.flags['punch']) {
-			value.abilityModify(2, 'Nudillos De Piedra');
+			value.abilityModify(2, 'Stone Knuckles');
 		}
         if (move.flags['pulse']) {
             value.abilityModify(1.5, "Mega Launcher");
@@ -2117,7 +2117,7 @@ class BattleTooltips {
             value.abilityModify(1.5, "Strong Jaw");
         }
 		  if (move.flags['bite']) {
-			value.abilityModify(1.2, "Vampirismo");
+			value.abilityModify(1.2, "Vampirism");
 		}
         if (value.value <= 60) {
             value.abilityModify(1.5, "Technician");
@@ -2138,10 +2138,10 @@ class BattleTooltips {
             value.abilityModify(1.3, "Tough Claws");
         }
 		  if (!move.flags['contact'] && move.category === 'Special') {
-			value.abilityModify(1.15, "Mente Fria");
+			value.abilityModify(1.15, "Cold mind");
         }
 		  if (move.category === 'Physical' || move.category === 'Special') {
-			value.abilityModify(1.4, "Inteligencia Artificial");
+			value.abilityModify(1.4, "Artificial intelligence");
 		  }
         if (move.flags['sound']) {
             value.abilityModify(1.3, "Punk Rock");
@@ -2180,10 +2180,10 @@ class BattleTooltips {
 			value.abilityModify(1.1, "Pastel Veil");
 			}
 			if (move.type === 'Dark') {
-			value.abilityModify(1.2, "Malicia");
+			value.abilityModify(1.2, "Malice");
 			}
 			if (move.type === 'Electric') {
-			value.abilityModify(1.2, "Vatios");
+			value.abilityModify(1.2, "Watts");
 			}
         for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
             if (pokemon.volatiles[`fallen${i}`]) {
@@ -2192,7 +2192,7 @@ class BattleTooltips {
         }
 		  for (let i = 1; i <= 10 && i <= pokemon.side.faintCounter + pokemon.side.foe.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
-				value.abilityModify(1 + 0.05 * i, "Come Almas");
+				value.abilityModify(1 + 0.05 * i, "Soul Eater");
 			}
 		}
         if (target) {
