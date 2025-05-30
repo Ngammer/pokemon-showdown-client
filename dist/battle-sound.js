@@ -119,8 +119,16 @@ exports.BattleSound = new class {
         if (this.soundCache[url])
             return this.soundCache[url];
         try {
+			let prefix = '';
+		if (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')) {
+			 // Local network or localhost
+			 prefix = '192.168.0.20:3000/';
+		} else {
+			 // External
+			 prefix = '190.190.130.232:3000/';
+		}
             const sound = document.createElement('audio');
-            sound.src = 'http://' + '192.168.0.20:3000' + '/' + url;
+            sound.src = 'http://' + prefix + '/' + url;
             sound.volume = this.effectVolume / 100;
             this.soundCache[url] = sound;
             return sound;
