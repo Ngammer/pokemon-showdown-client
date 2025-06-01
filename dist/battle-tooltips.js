@@ -2046,9 +2046,6 @@ class BattleTooltips {
             if (move.id === 'fling' && item.fling) {
                 value.itemModify(item.fling.basePower);
             }
-            if (move.id === 'naturalgift') {
-                value.itemModify(item.naturalGift.basePower);
-            }
         }
         // Moves which have base power changed according to weight
         if (['lowkick', 'grassknot', 'heavyslam', 'heatcrash'].includes(move.id) && this.battle.gen > 2) {
