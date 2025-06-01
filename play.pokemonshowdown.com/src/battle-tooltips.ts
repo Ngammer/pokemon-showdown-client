@@ -1509,8 +1509,8 @@ export class BattleTooltips {
 		let isRandomBattle = tier.includes('Random Battle') ||
 			(tier.includes('Random') && tier.includes('Battle') && gen >= 6) || isCGT;
 
-		let minNature = (isRandomBattle || gen < 3) ? 1 : 0.9;
-		let maxNature = (isRandomBattle || gen < 3) ? 1 : 1.1;
+		let minNature = 0.9;
+      let maxNature = 1.1;
 		let maxIv = (gen < 3) ? 30 : 31;
 
 		let min;
@@ -1521,7 +1521,7 @@ export class BattleTooltips {
 			if (tier.includes('No Restrictions')) max += 200;
 			else if (tier.includes('Random')) max += 20;
 		} else {
-			let maxIvEvOffset = maxIv + ((isRandomBattle && gen >= 3) ? 21 : 63);
+			let maxIvEvOffset = maxIv + 63;
 			max = tr(tr((2 * baseSpe + maxIvEvOffset) * level / 100 + 5) * maxNature);
 			min = isCGT ? max : tr(tr(2 * baseSpe * level / 100 + 5) * minNature);
 		}
