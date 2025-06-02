@@ -109,9 +109,9 @@ https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
 -->
 
 <link rel="stylesheet" href="//pokemonshowdown.com/style/global.css?" />
-<link rel="stylesheet" href="//play.pokemonshowdown.com/style/font-awesome.css?" />
-<link rel="stylesheet" href="//play.pokemonshowdown.com/style/battle.css?a7" />
-<link rel="stylesheet" href="//play.pokemonshowdown.com/style/utilichart.css?a7" />
+<link rel="stylesheet" href="//192.168.0.20:3000/style/font-awesome.css?" />
+<link rel="stylesheet" href="//192.168.0.20:3000/style/style/battle.css?a7" />
+<link rel="stylesheet" href="//192.168.0.20:3000/style/style/utilichart.css?a7" />
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-26211653-1"></script>
@@ -229,14 +229,25 @@ https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
 
 	<header>
 		<div class="nav-wrapper"><ul class="nav">
-			<li><a class="button nav-first" href="//pokemonshowdown.com/"><img src="//pokemonshowdown.com/images/pokemonshowdownbeta.png" srcset="//pokemonshowdown.com/images/pokemonshowdownbeta.png 1x, //pokemonshowdown.com/images/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
-			<li><a class="button" href="//pokemonshowdown.com/dex/">Pok&eacute;dex</a></li>
-			<li><a class="button cur" href="/">Replay</a></li>
-			<li><a class="button purplebutton" href="//smogon.com/dex/" target="_blank">Strategy</a></li>
-			<li><a class="button nav-last purplebutton" href="//smogon.com/forums/" target="_blank">Forum</a></li>
-			<li><a class="button greenbutton nav-first nav-last" href="//play.pokemonshowdown.com/">Play</a></li>
+			<li><a id="ps-link" class="button nav-first" href="//190.190.130.232:3001/"><img id="logo" src="//190.190.130.232:3001/images/pokemonshowdownbeta.png" srcset="//190.190.130.232:3001/images/pokemonshowdownbeta.png 1x, //190.190.130.232:3001/images/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
+			<li><a id="dex-link" class="button" href="//190.190.130.232:3003/">Pok&eacute;dex</a></li>
+			<li><a class="button cur" href="/">Replays</a></li>
+			<li><a class="button" href="//pokemonshowdown.com/ladder/">Ladder</a></li>
+			<li><a class="button nav-last" href="//pokemonshowdown.com/forums/">Forum</a></li>
+			<li><a id="play-link" class="button greenbutton nav-first nav-last" href="//190.190.130.232:3000/">Play</a></li>
 		</ul></div>
 	</header>
+	<script>
+		if (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')){
+			document.getElementById("logo").src = "//192.168.0.20:3001/images/pokemonshowdownbeta.png";
+			document.getElementById("logo").srcset = "//192.168.0.20:3001/images/pokemonshowdownbeta.png 1x, //192.168.0.20:3001/images/pokemonshowdownbeta@2x.png 2x";
+			document.getElementById("play-link").href = "//192.168.0.20:3000/";
+			document.getElementById("ps-link").href = "//192.168.0.20:3001/";
+		document.getElementById("dex-link").href = "//192.168.0.20:3003/";
+		document.getElementById("replay-link").href = "//192.168.0.20:3002/";
+		document.getElementById("calc-link").href = "//192.168.0.20:3004/";
+		}
+  </script>
 
 	<div class="main" id="main">
 

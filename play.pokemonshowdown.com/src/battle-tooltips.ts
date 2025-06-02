@@ -2297,6 +2297,10 @@ export class BattleTooltips {
 			if (!value.tryAbility("Guts")) value.modify(0.5, 'Burn');
 		}
 
+		if (this.battle.gen > 2 && serverPokemon.status === 'frz' && move.id !== 'facade' && move.category === 'Special') {
+			if (!value.tryAbility("Guts")) value.modify(0.5, 'Freeze');
+		}
+
 		if (
 			move.id === 'steelroller' &&
 			!this.battle.hasPseudoWeather('Electric Terrain') &&
