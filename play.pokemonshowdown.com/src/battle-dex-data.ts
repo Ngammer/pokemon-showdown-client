@@ -635,6 +635,7 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	electrodehisuitotem: 1596 + 2,
 	raticatealolatotem: 1596 + 3,
 	marowakalolatotem: 1596 + 4,
+	ledstar: 1596 + 5,
 };
 
 export const BattlePokemonIconIndexesLeft: { [id: string]: number } = {
