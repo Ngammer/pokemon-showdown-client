@@ -229,12 +229,12 @@ https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
 
 	<header>
 		<div class="nav-wrapper"><ul class="nav">
-			<li><a id="ps-link" class="button nav-first" href="//190.190.130.232:3001/"><img id="logo" src="//190.190.130.232:3001/images/pokemonshowdownbeta.png" srcset="//190.190.130.232:3001/images/pokemonshowdownbeta.png 1x, //190.190.130.232:3001/images/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
-			<li><a id="dex-link" class="button" href="//190.190.130.232:3003/">Pok&eacute;dex</a></li>
+			<li><a id="ps-link" class="button nav-first" href="//181.99.176.167:3001/"><img id="logo" src="//181.99.176.167:3001/images/pokemonshowdownbeta.png" srcset="//181.99.176.167:3001/images/pokemonshowdownbeta.png 1x, //181.99.176.167:3001/images/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
+			<li><a id="dex-link" class="button" href="//181.99.176.167:3003/">Pok&eacute;dex</a></li>
 			<li><a class="button cur" href="/">Replays</a></li>
 			<li><a class="button" href="//pokemonshowdown.com/ladder/">Ladder</a></li>
 			<li><a class="button nav-last" href="//pokemonshowdown.com/forums/">Forum</a></li>
-			<li><a id="play-link" class="button greenbutton nav-first nav-last" href="//190.190.130.232:3000/">Play</a></li>
+			<li><a id="play-link" class="button greenbutton nav-first nav-last" href="//181.99.176.167:3000/">Play</a></li>
 		</ul></div>
 	</header>
 	<script>
