@@ -642,7 +642,7 @@ export const Dex = new class implements ModdedDex {
 		let animationData = null;
 		let miscData = null;
 		let speciesid = species.id;
-		if (species.isTotem) speciesid = toID(name);
+		/* if (species.isTotem) speciesid = toID(name); */
 		if (baseDir === '' && window.BattlePokemonSprites) {
 			animationData = BattlePokemonSprites[speciesid];
 		}

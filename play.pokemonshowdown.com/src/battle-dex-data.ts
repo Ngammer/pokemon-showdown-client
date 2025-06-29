@@ -636,6 +636,8 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	raticatealolatotem: 1596 + 3,
 	marowakalolatotem: 1596 + 4,
 	ledstar: 1596 + 5,
+	furrip: 1596 + 6,
+	furrful: 1596 + 7,
 };
 
 export const BattlePokemonIconIndexesLeft: { [id: string]: number } = {
@@ -1566,7 +1568,7 @@ export class Species implements Effect {
 		this.requiredItems = data.requiredItems || (data.requiredItem ? [data.requiredItem] : []);
 		this.tier = data.tier || '';
 
-		this.isTotem = !!(this.forme && ['-totem', '-alolatotem', '-hisuitotem'].includes(this.formeid));
+		this.isTotem = !!(this.forme && ['-totem', '-alolatotem', '-hisuitotem', '-totemjoy', '-totemgrief', '-totemwrath'].includes(this.formeid));
 		this.isMega = !!(this.forme && ['-mega', '-megax', '-megay'].includes(this.formeid));
 		this.isPrimal = !!(this.forme && this.formeid === '-primal');
 		this.canGigantamax = !!data.canGigantamax;

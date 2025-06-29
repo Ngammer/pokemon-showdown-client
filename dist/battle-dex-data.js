@@ -1422,7 +1422,7 @@ class Species {
         const baseId = toID(this.baseSpecies);
         this.formeid = (baseId === this.id ? '' : '-' + toID(this.forme));
         this.spriteid = baseId + this.formeid;
-        if (this.spriteid.slice(-5) === 'totem' || this.spriteid.slice(-10) === 'alolatotem' || this.spriteid.slice(-10) === 'hisuitotem')
+        if (this.spriteid.slice(-5) === 'totem' || this.spriteid.slice(-10) === 'alolatotem' || this.spriteid.slice(-10) === 'hisuitotem' || this.spriteid.slice(-8) === 'totemjoy' || this.spriteid.slice(-10) === 'totemgrief' || this.spriteid.slice(-10) === 'totemwrath')
             this.spriteid = this.spriteid.slice(0, -5);
         if (this.spriteid === 'greninja-bond')
             this.spriteid = 'greninja';
