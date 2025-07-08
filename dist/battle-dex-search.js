@@ -1824,7 +1824,7 @@ class BattleMoveSearch extends BattleTypedSearch {
                         species = dex.species.get(pokemon.battleOnly);
                     }
                     const excludedForme = (s) => [
-                        'Alola', 'Alola-Totem', 'Galar', 'Galar-Zen', 'Hisui', 'Hisui-Totem', 'Paldea', 'Paldea-Combat', 'Paldea-Blaze', 'Paldea-Aqua', 'Totem-Joy', 'Totem-Wrath', 'Totem-Grief',
+                        'Alola', 'Alola-Totem', 'Galar', 'Galar-Zen', 'Hisui', 'Hisui-Totem', 'Paldea', 'Paldea-Combat', 'Paldea-Blaze', 'Paldea-Aqua', 'Totem-Serious', 'Totem-Wrath', 'Totem-Grief',
                     ].includes(s.forme);
                     if (baseSpecies.otherFormes && !['Wormadam', 'Urshifu'].includes(baseSpecies.baseSpecies)) {
                         if (!excludedForme(species))

@@ -1927,7 +1927,7 @@ export class BattleTooltips {
 		if (move.id === 'eruption' || move.id === 'waterspout' || move.id === 'dragonenergy' || move.id === 'hardpress' || move.id === 'crushgrip' || move.id === 'wringout') {
 			value.set(Math.floor(150 * pokemon.hp / pokemon.maxhp) || 1);
 		}
-		if (move.id === 'facade' && !['', 'slp', 'frz'].includes(pokemon.status)) {
+		if (move.id === 'facade' && !['', 'slp'].includes(pokemon.status)) {
 			value.modify(2, 'Facade + status');
 		}
 		if (move.id === 'flail' || move.id === 'reversal') {
