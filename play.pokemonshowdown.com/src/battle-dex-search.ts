@@ -647,6 +647,10 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType = 'natdex';
 			if (!format) format = 'ou' as ID;
 		}
+		if (format.includes('nuevometa')) {
+			format = (format.includes('nuevometa') ? format.slice(9) : format.slice(11)) as ID;
+			if (!format) format = 'ou' as ID;
+		}
 		if (format.includes('doubles') && this.dex.gen > 4 && !this.formatType) this.formatType = 'doubles';
 		if (this.formatType === 'letsgo') format = format.slice(6) as ID;
 		if (format.includes('metronome')) {
