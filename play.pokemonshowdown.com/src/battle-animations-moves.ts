@@ -14887,6 +14887,49 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'decel', 'fade');
 		},
 	},
+	grudge: {
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect('#AA0000', 250, 0.3);
+			scene.backgroundEffect('#000000', 250, 0.2, 400);
+			scene.showEffect('stare', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 1,
+				yscale: 0,
+				opacity: 1,
+			}, {
+				yscale: 1,
+				time: 700,
+			}, 'decel', 'fade');
+			
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 80,
+				z: defender.behind(-30),
+				time: 400,
+			}, 'ballistic');
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 5,
+				z: defender.z,
+				time: 100,
+			});
+			attacker.anim({
+				time: 600,
+			}, 'ballistic2Back');
+			defender.delay(450);
+			defender.anim({
+				y: defender.y - 30,
+				z: defender.behind(20),
+				yscale: 0.5,
+				time: 200,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
+	},
 	nightshade: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#550000', 250, 0.3);
@@ -36871,7 +36914,6 @@ BattleMoveAnims['miracleeye'] = { anim: BattleMoveAnims['mindreader'].anim };
 BattleMoveAnims['futuresight'] = { anim: BattleMoveAnims['doomdesire'].anim };
 
 BattleMoveAnims['glare'] = { anim: BattleMoveAnims['meanlook'].anim };
-BattleMoveAnims['grudge'] = { anim: BattleMoveAnims['meanlook'].anim };
 BattleMoveAnims['scaryface'] = { anim: BattleMoveAnims['meanlook'].anim };
 BattleMoveAnims['disable'] = { anim: BattleMoveAnims['meanlook'].anim };
 BattleMoveAnims['laserfocus'] = { anim: BattleMoveAnims['meanlook'].anim };
