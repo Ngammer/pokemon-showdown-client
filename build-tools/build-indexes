@@ -736,20 +736,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				if (isMetBattle) greatItems.push(id);
 				else goodItems.push(id);
 				break;
-			// generation specific
-			case 'mentalherb':
-				if (isMetBattle) goodItems.push(id);
-				else if (genNum > 4) greatItems.push(id);
-				else poorItems.push(id);
-				break;
-			case 'berryjuice':
-				if (genNum === 2) poorItems.push(id);
-				else goodItems.push(id);
-				break;
-			case 'mail':
-				if (genNum >= 6) unreleasedItems.push(id);
-				else goodItems.push(id);
-				break;
 			// Fossilization
 			case 'blackbelt':
 			case 'blackglasses':
@@ -864,10 +850,10 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		items.push(...types);
 		items.push(...berries);
 		items.push(...zCrystal);
-		items.push(...specificItems);
 		items.push(...balls);
 		items.push(...tRs);
 		items.push(...fossil);
+		items.push(...specificItems);
 		items.push(...badItems);
 		items.push(...unreleasedItems);
 	}
