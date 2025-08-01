@@ -659,7 +659,12 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const greatItems = [['header', "Popular items"]];
 		const goodItems = [['header', "Items"]];
 		const specificItems = [['header', "Pok&eacute;mon-specific items"]];
-		const poorItems = [['header', "Usually useless items"]];
+		const types = [['header', "Type specific boosts"]];
+		const berries = [['header', "Berries"]];
+		const balls = [['header', "Balls"]];
+		const zCrystal = [['header', "Z-Crystals"]];
+		const tRs = [['header', "TRs"]];
+		const fossil = [['header', "Fossilization items"]];
 		const badItems = [['header', "Useless items"]];
 		const unreleasedItems = [];
 		if (genNum === 6) unreleasedItems.push(['header', "Unreleased"]);
@@ -690,6 +695,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'choiceband':
 			case 'choicespecs':
 			case 'eviolite':
+			case 'ovalstone':
 				greatItems.push(id);
 				break;
 			// great everywhere but metronome
@@ -708,7 +714,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'loadeddice':
 			case 'heavydutyboots':
 			case 'expertbelt':
-			case 'salacberry':
 				if (isDoubles || isMetBattle) goodItems.push(id);
 				else greatItems.push(id);
 				break;
@@ -737,39 +742,34 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				else if (genNum > 4) greatItems.push(id);
 				else poorItems.push(id);
 				break;
-			case 'lumberry':
-				if (genNum === 2 || genNum > 6) goodItems.push(id);
-				else greatItems.push(id);
-				break;
-			case 'sitrusberry':
-				if (genNum > 3 && (genNum < 7 || isDoubles)) greatItems.push(id);
-				else if (genNum > 6) goodItems.push(id);
-				else poorItems.push(id);
-				break;
-			case 'aguavberry':
-			case 'figyberry':
-			case 'iapapaberry':
-			case 'magoberry':
-			case 'wikiberry':
-				if (genNum === 7) greatItems.push(id);
-				else if (genNum >= 8) goodItems.push(id);
-				else poorItems.push(id);
-				break;
 			case 'berryjuice':
 				if (genNum === 2) poorItems.push(id);
 				else goodItems.push(id);
 				break;
-			case 'dragonfang':
-				if (genNum === 2) badItems.push(id);
-				else goodItems.push(id);
-				break;
-			case 'dragonscale':
-				if (genNum === 2) goodItems.push(id);
-				else badItems.push(id);
-				break;
 			case 'mail':
 				if (genNum >= 6) unreleasedItems.push(id);
 				else goodItems.push(id);
+				break;
+			// Fossilization
+			case 'blackbelt':
+			case 'blackglasses':
+			case 'charcoal':
+			case 'dragonfang':
+			case 'fairyfeather':
+			case 'hardstone':
+			case 'magnet':
+			case 'metalcoat':
+			case 'miracleseed':
+			case 'mysticwater':
+			case 'nevermeltice':
+			case 'pinkbow':
+			case 'sharpbeak':
+			case 'silkscarf':
+			case 'silverpowder':
+			case 'softsand':
+			case 'spelltag':
+			case 'twistedspoon':
+				types.push(id);
 				break;
 			// Legendaries
 			case 'adamantorb':
@@ -783,118 +783,67 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'stick':
 			case 'thickclub':
 			case 'lightball':
-			case 'luckypunch':
-			case 'quickpowder':
-			case 'metalpowder':
-			case 'deepseascale':
-			case 'deepseatooth':
-				specificItems.push(id);
-				break;
-			// Fling-only
-			case 'rarebone':
-			case 'belueberry':
-			case 'blukberry':
-			case 'cornnberry':
-			case 'durinberry':
-			case 'hondewberry':
-			case 'magostberry':
-			case 'nanabberry':
-			case 'nomelberry':
-			case 'pamtreberry':
-			case 'pinapberry':
-			case 'pomegberry':
-			case 'qualotberry':
-			case 'rabutaberry':
-			case 'razzberry':
-			case 'spelonberry':
-			case 'tamatoberry':
-			case 'watmelberry':
-			case 'wepearberry':
-			case 'energypowder':
-			case 'electirizer':
-			case 'oldamber':
-			case 'dawnstone':
-			case 'dubiousdisc':
-			case 'duskstone':
-			case 'firestone':
-			case 'icestone':
-			case 'leafstone':
-			case 'magmarizer':
-			case 'moonstone':
-			case 'ovalstone':
-			case 'prismscale':
-			case 'protector':
 			case 'reapercloth':
-			case 'sachet':
-			case 'shinystone':
-			case 'sunstone':
-			case 'thunderstone':
-			case 'upgrade':
-			case 'waterstone':
-			case 'whippeddream':
-			case 'bottlecap':
-			case 'goldbottlecap':
+			case 'auspiciousarmor':
+			case 'maliciousarmor':
 			case 'galaricacuff':
 			case 'chippedpot':
 			case 'crackedpot':
 			case 'galaricawreath':
-			case 'auspiciousarmor':
-			case 'maliciousarmor':
 			case 'masterpieceteacup':
-			case 'metalalloy':
 			case 'unremarkableteacup':
-			case 'bignugget':
-				badItems.push(id);
+			case 'whippeddream':
+			case 'sachet':
+			case 'dubiousdisc':
+			case 'upgrade':
+			case 'magmarizer':
+			case 'electirizer':
+			case 'protector':
+			case 'metalalloy':
+			case 'prismscale':
+			case 'dragonscale':
+			case 'quickpowder':
+			case 'metalpowder':
+			case 'deepseascale':
+			case 'deepseatooth':
+			case 'dawnstone':
+			case 'duskstone':
+			case 'firestone':
+			case 'icestone':
+			case 'leafstone':
+			case 'moonstone':
+			case 'shinystone':
+			case 'sunstone':
+			case 'thunderstone':
+			case 'waterstone':
+				specificItems.push(id);
 				break;
-			// outclassed items
-			case 'aspearberry':
-			case 'bindingband':
-			case 'cheriberry':
-			case 'destinyknot':
-			case 'enigmaberry':
-			case 'floatstone':
-			case 'ironball':
-			case 'jabocaberry':
-			case 'oranberry':
-			case 'machobrace':
-			case 'pechaberry':
-			case 'persimberry':
-			case 'poweranklet':
-			case 'powerband':
-			case 'powerbelt':
-			case 'powerbracer':
-			case 'powerlens':
-			case 'powerweight':
-			case 'rawstberry':
-			case 'ringtarget':
-			case 'rowapberry':
-			case 'bigroot':
-			case 'focusband':
-			// gen 2
-			case 'psncureberry':
-			case 'przcureberry':
-			case 'burntberry':
-			case 'bitterberry':
-			case 'iceberry':
-			case 'berry':
-				poorItems.push(id);
+			// Fossilization
+			case 'oldamber':
+				fossil.push(id);
+				break;
+			// Fling-only
+			case 'rarebone':
+			case 'energypowder':
+				badItems.push(id);
 				break;
 			default:
 				if (
-					item.name.endsWith(" Ball") || item.name.endsWith(" Fossil") || item.name.startsWith("Fossilized ") ||
 					item.name.endsWith(" Sweet") || item.name.endsWith(" Apple")
 				) {
-					badItems.push(id);
+					specificItems.push(id);
+				} else if (item.name.endsWith(" Berry")) {
+					berries.push(id);
+				} else if (item.name.endsWith(" Fossil") || item.name.startsWith("Fossilized ")) {
+					fossil.push(id);
+				} else if (item.name.endsWith("ium Z") && !item.itemUser) {
+					zCrystal.push(id);
 				} else if (item.name.startsWith("TR")) {
-					badItems.push(id);
-				} else if (item.name.endsWith(" Gem") && item.name !== "Normal Gem") {
-					if (genNum >= 6) {
-						unreleasedItems.push(id);
-					} else if (item.name === "Flying Gem") {
-						greatItems.push(id);
-					} else {
-						goodItems.push(id);
-					}
+					tRs.push(id);
+				} else if (item.name.endsWith(" Ball")) {
+					balls.push(id);
+				} else if (item.name.endsWith(" Gem") || item.name.endsWith(" Plate")) {
+					types.push(id);
 				} else if (item.name.endsWith(" Drive")) {
 					specificItems.push(id);
 				} else if (item.name.endsWith(" Memory")) {
@@ -912,8 +861,13 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		}
 		items.push(...greatItems);
 		items.push(...goodItems);
+		items.push(...types);
+		items.push(...berries);
+		items.push(...zCrystal);
 		items.push(...specificItems);
-		items.push(...poorItems);
+		items.push(...balls);
+		items.push(...tRs);
+		items.push(...fossil);
 		items.push(...badItems);
 		items.push(...unreleasedItems);
 	}

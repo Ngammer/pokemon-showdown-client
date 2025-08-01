@@ -125,7 +125,7 @@ exports.BattleSound = new class {
 			 prefix = '192.168.0.20:3000/';
 		} else {
 			 // External
-			 prefix = '181.110.88.32:3000/';
+			 prefix = '181.30.221.221:3000/';
 		}
             const sound = document.createElement('audio');
             sound.src = 'http://' + prefix + '/' + url;

@@ -1349,6 +1349,7 @@ class BattleItemSearch extends BattleTypedSearch<'item'> {
 	override defaultFilter(results: SearchRow[]) {
 		if (this.species && !this.dex.species.get(this.species).nfe) {
 			results.splice(results.findIndex(row => row[1] === 'eviolite'), 1);
+			results.splice(results.findIndex(row => row[1] === 'ovalstone'), 1);
 			return results;
 		}
 		return results;
