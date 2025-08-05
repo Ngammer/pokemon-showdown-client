@@ -659,7 +659,11 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const greatItems = [['header', "Popular items"]];
 		const goodItems = [['header', "Items"]];
 		const specificItems = [['header', "Pok&eacute;mon-specific items"]];
+		const stats = [['header', "Stat-increasing items"]];
+		const offensive = [['header', "Offensive items"]];
+		const defensive = [['header', "Defensive items"]];
 		const types = [['header', "Type specific boosts"]];
+		const fields = [['header', "Field related items"]];
 		const berries = [['header', "Berries"]];
 		const balls = [['header', "Balls"]];
 		const zCrystal = [['header', "Z-Crystals"]];
@@ -691,51 +695,114 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				if (banlist.isBanned('item:' + item.id)) continue;
 			}
 			switch (id) {
-			// mainstays
-			case 'choiceband':
-			case 'choicespecs':
-			case 'eviolite':
-			case 'ovalstone':
-				greatItems.push(id);
-				break;
-			// great everywhere but metronome
-			case 'leftovers':
-			case 'lifeorb':
-			case 'choicescarf':
-			case 'assaultvest':
-			case 'focussash':
-			case 'powerherb':
-			case 'mentalherb':
-			case 'rockyhelmet':
-				if (!isMetBattle) greatItems.push(id);
-				else goodItems.push(id);
-				break;
-			// just singles
-			case 'airballoon':
-			case 'loadeddice':
-			case 'heavydutyboots':
-			case 'expertbelt':
-				if (isDoubles || isMetBattle) goodItems.push(id);
-				else greatItems.push(id);
-				break;
 			// just doubles
-			case 'safetygoggles':
 			case 'ejectbutton':
 			case 'ejectpack':
-				if (isDoubles) greatItems.push(id);
-				else goodItems.push(id);
+				goodItems.push(id);
 				break;
-			// doubles + metronome
-			case 'covertcloak':
-			case 'clearamulet':
+			// stats
+			case 'assaultvest':
+			case 'absorbbulb':
+			case 'cellbattery':
+			case 'choiceband':
+			case 'choicescarf':
+			case 'choicespecs':
+			case 'metronome':
+			case 'muscleband':
+			case 'quickclaw':
+			case 'snowball':
+			case 'widelens':
+			case 'wiseglasses':
+			case 'zoomlens':
+			case 'focusband':
+			case 'poweranklet':
+			case 'powerband':
+			case 'powerbelt':
+			case 'powerbracer':
+			case 'powerlens':
+			case 'powerweight':
+			case 'eviolite':
+			case 'ovalstone':
+			case 'berserkgene':
 			case 'weaknesspolicy':
-				if (isDoubles || isMetBattle) greatItems.push(id);
-				else goodItems.push(id);
-				break;
-			// metronome only
+			case 'blunderpolicy':
 			case 'mirrorherb':
-				if (isMetBattle) greatItems.push(id);
-				else goodItems.push(id);
+			case 'razorclaw':
+				stats.push(id);
+				break;
+			// Offensive
+			case 'loadeddice':
+			case 'bindingband':
+			case 'gripclaw':
+			case 'kingsrock':
+			case 'laggingtail':
+			case 'expertbelt':
+			case 'lifeorb':
+			case 'powerherb':
+			case 'bignugget':
+			case 'bottlecap':
+			case 'brightpowder':
+			case 'floatstone':
+			case 'goldbottlecap':
+			case 'luckypunch':
+			case 'luminousmoss':
+			case 'machobrace':
+			case 'mail':
+			case 'protectivepads':
+			case 'punchingglove':
+			case 'razorfang':
+			case 'ringtarget':
+			case 'scopelens':
+			case 'seaincense':
+			case 'stickybarb':
+			case 'throatspray':
+			case 'ironball':
+				offensive.push(id);
+				break;
+			// Defensive
+			case 'airballoon':
+			case 'berry':
+			case 'focussash':
+			case 'heavydutyboots':
+			case 'leftovers':
+			case 'mentalherb':
+			case 'rockyhelmet':
+			case 'abilityshield':
+			case 'berryjuice':
+			case 'bigroot':
+			case 'blacksludge':
+			case 'clearamulet':
+			case 'adrenalineorb':
+			case 'covertcloak':
+			case 'destinyknot':
+			case 'fullincense':
+			case 'laxincense':
+			case 'redcard':
+			case 'safetygoggles':
+			case 'shedshell':
+			case 'shellbell':
+			case 'whiteherb':
+				defensive.push(id);
+				break;
+			// Field
+			case 'damprock':
+			case 'dimencionador':
+			case 'electricseed':
+			case 'grassyseed':
+			case 'heatrock':
+			case 'icyrock':
+			case 'lightclay':
+			case 'mistyseed':
+			case 'oddincense':
+			case 'psychicseed':
+			case 'rockincense':
+			case 'roomservice':
+			case 'roseincense':
+			case 'smoothrock':
+			case 'terrainextender':
+			case 'utilityumbrella':
+			case 'waveincense':
+				fields.push(id);
 				break;
 			// Fossilization
 			case 'blackbelt':
@@ -750,6 +817,8 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'mysticwater':
 			case 'nevermeltice':
 			case 'pinkbow':
+			case 'poisonbarb':
+			case 'polkadotbow':
 			case 'sharpbeak':
 			case 'silkscarf':
 			case 'silverpowder':
@@ -803,6 +872,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'sunstone':
 			case 'thunderstone':
 			case 'waterstone':
+			case 'boosterenergy':
 				specificItems.push(id);
 				break;
 			// Fossilization
@@ -827,7 +897,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 					zCrystal.push(id);
 				} else if (item.name.startsWith("TR")) {
 					tRs.push(id);
-				} else if (item.name.endsWith(" Ball")) {
+				} else if (item.name.endsWith(" Ball") && !item.name.startsWith("Iron ")) {
 					balls.push(id);
 				} else if (item.name.endsWith(" Gem") || item.name.endsWith(" Plate")) {
 					types.push(id);
@@ -846,7 +916,10 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				}
 			}
 		}
-		items.push(...greatItems);
+		items.push(...stats);
+		items.push(...offensive);
+		items.push(...defensive);
+		items.push(...fields);
 		items.push(...goodItems);
 		items.push(...types);
 		items.push(...berries);
