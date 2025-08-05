@@ -90,6 +90,7 @@ export const defaultRules = {
 	"no-extend-native": "error",
 	"no-extra-bind": "warn",
 	"no-extra-label": "warn",
+	"no-constant-condition": "warn",
 	"no-eval": "error",
 	"no-implied-eval": "error",
 	"no-inner-declarations": ["error", "functions"],
@@ -99,7 +100,7 @@ export const defaultRules = {
 	"no-return-assign": "error",
 	"no-self-compare": "error",
 	"no-sequences": "error",
-	"no-shadow": "error",
+	"no-shadow": "warn",
 	"no-template-curly-in-string": "error",
 	"no-throw-literal": "warn",
 	"no-unmodified-loop-condition": "error",
@@ -174,6 +175,7 @@ export const defaultRules = {
 	"@stylistic/jsx-one-expression-per-line": "off",
 	"@stylistic/jsx-max-props-per-line": "off",
 	"@stylistic/jsx-function-call-newline": "off",
+	"@stylistic/jsx-child-element-spacing": "error",
 	"no-restricted-syntax": ["error",
 		{ selector: "CallExpression[callee.name='Symbol']", message: "Annoying to serialize, just use a string" },
 	],
@@ -330,7 +332,8 @@ export const defaultRulesES3 = {
 	"no-invalid-this": "error",
 	"no-new-wrappers": "error",
 	// Map/Set can be polyfilled but it's nontrivial and it's easier just to use bare objects
-	"no-restricted-globals": ["error", "Proxy", "Reflect", "Symbol", "WeakSet", "WeakMap", "Set", "Map"],
+	// fetch can be polyfilled, but our standard is to use $.get or Net as appropriate.
+	"no-restricted-globals": ["error", "Proxy", "Reflect", "Symbol", "WeakSet", "WeakMap", "Set", "Map", "fetch"],
 	"unicode-bom": "error",
 };
 
@@ -343,7 +346,9 @@ export const defaultRulesES3 = {
 export const defaultRulesES3TSChecked = {
 	...defaultRulesTSChecked,
 	"radix": "off",
-	"no-restricted-globals": ["error", "Proxy", "Reflect", "Symbol", "WeakSet", "WeakMap", "Set", "Map"],
+	// Map/Set can be polyfilled but it's nontrivial and it's easier just to use bare objects
+	// fetch can be polyfilled, but our standard is to use $.get or Net as appropriate.
+	"no-restricted-globals": ["error", "Proxy", "Reflect", "Symbol", "WeakSet", "WeakMap", "Set", "Map", "fetch"],
 	"no-restricted-syntax": ["error", "YieldExpression", "AwaitExpression", "BigIntLiteral"],
 };
 

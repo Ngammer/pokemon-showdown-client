@@ -107,20 +107,25 @@ compiledFiles += compiler.compileToDir(`replay.pokemonshowdown.com/src`, `replay
 
 compiledFiles += compiler.compileToDir(`teams.pokemonshowdown.com/src`, `teams.pokemonshowdown.com/js`, compileOpts);
 
-compiledFiles += compiler.compileToFile(
-	[
-		'play.pokemonshowdown.com/src/battle-dex.ts',
-		'play.pokemonshowdown.com/src/battle-dex-data.ts',
-		'play.pokemonshowdown.com/src/battle-log.ts',
-		'play.pokemonshowdown.com/src/battle-log-misc.js',
-		'caches/pokemon-showdown/server/chat-formatter.ts',
-		'play.pokemonshowdown.com/data/text.js',
-		'play.pokemonshowdown.com/data/text-afd.js',
-		'play.pokemonshowdown.com/src/battle-text-parser.ts',
-	],
-	'play.pokemonshowdown.com/js/battledata.js',
-	compileOpts
-);
+try {
+	fs.statSync('play.pokemonshowdown.com/data/text.js');
+	// text.js exists, we can compile battledata
+	compiledFiles += compiler.compileToFile(
+		[
+			'play.pokemonshowdown.com/src/battle-dex.ts',
+			'play.pokemonshowdown.com/src/battle-teams.ts',
+			'play.pokemonshowdown.com/src/battle-dex-data.ts',
+			'play.pokemonshowdown.com/src/battle-log.ts',
+			'play.pokemonshowdown.com/src/battle-log-misc.js',
+			'caches/pokemon-showdown/server/chat-formatter.ts',
+			'play.pokemonshowdown.com/data/text.js',
+			'play.pokemonshowdown.com/data/text-afd.js',
+			'play.pokemonshowdown.com/src/battle-text-parser.ts',
+		],
+		'play.pokemonshowdown.com/js/battledata.js',
+		compileOpts
+	);
+} catch {}
 
 if (!compileOpts.ignore) {
 	compiledFiles += compiler.compileToFile(
@@ -132,7 +137,7 @@ if (!compileOpts.ignore) {
 
 const diff = process.hrtime(compileStartTime);
 console.log(
-	`(${compiledFiles} ${compiledFiles !== 1 ? "files" : "file"} in ${diff[0] + Math.round(diff[1] / 1e6) / 1e3}s) DONE`
+	`(${compiledFiles} ${compiledFiles !== 1 ? "files" : "file"} in ${(diff[0] + diff[1] / 1e9).toFixed(3)}s) DONE`
 );
 
 /*********************************************************
@@ -141,7 +146,7 @@ console.log(
 
 process.stdout.write("Updating cachebuster and URLs... ");
 
-const URL_REGEX = /(src|href)="(.*?)(\?[a-z0-9]*?)?"/g;
+const URL_REGEX = /(src=|href=|linkStyle\()"(.*?)(\?[a-z0-9]*?)?"/g;
 
 function addCachebuster(_, attr, url, urlQuery) {
 	url = url.replace('/replay.pokemonshowdown.com/', '/' + routes.replays + '/');
@@ -159,7 +164,7 @@ function addCachebuster(_, attr, url, urlQuery) {
 				hash = crypto.createHash('md5').update(fstr).digest('hex').substr(0, 8);
 			} catch {}
 
-			return attr + '="' + url + '?' + hash + '"';
+			return attr + '"' + url + '?' + hash + '"';
 		} else {
 			// TODO: generalize better
 			let hash;
@@ -171,10 +176,10 @@ function addCachebuster(_, attr, url, urlQuery) {
 				} catch {}
 			}
 
-			return attr + '="' + url + '?' + (hash || 'v1') + '"';
+			return attr + '"' + url + '?' + (hash || 'v1') + '"';
 		}
 	} else {
-		return attr + '="' + url + '"';
+		return attr + '"' + url + '"';
 	}
 }
 

@@ -15,8 +15,11 @@
 
 import type { Battle } from './battle';
 import type { BattleScene } from './battle-animations';
-import { Dex, Teams, toID, toRoomid, toUserid, type ID } from './battle-dex';
+import { Dex, toID, toRoomid, toUserid, type ID } from './battle-dex';
+import { Teams } from './battle-teams';
 import { BattleTextParser, type Args, type KWArgs } from './battle-text-parser';
+import { Net } from './client-connection'; // optional
+import { Config } from './client-main';
 
 // Caja
 declare const html4: any;
@@ -52,6 +55,7 @@ export class BattleLog {
 	 * * 1 = player 2: "Red sent out Pikachu!" "Eevee used Tackle!"
 	 */
 	perspective: -1 | 0 | 1 = -1;
+	getHighlight: ((line: Args) => boolean) | null = null;
 	constructor(elem: HTMLDivElement, scene?: BattleScene | null, innerElem?: HTMLDivElement) {
 		this.elem = elem;
 
@@ -75,7 +79,23 @@ export class BattleLog {
 
 		this.className = elem.className;
 		elem.onscroll = this.onScroll;
+		elem.onclick = this.onClick;
 	}
+	onClick = (ev: Event) => {
+		let target = ev.target as HTMLElement | null;
+		while (target && target !== this.elem) {
+			if (target.tagName === 'SUMMARY') {
+				if (window.getSelection?.()?.type === 'Range') {
+					// by default, selecting text will also expand/collapse details, which
+					// is annoying. this prevents that.
+					ev.preventDefault();
+				} else {
+					setTimeout(this.updateScroll, 0);
+				}
+			}
+			target = target.parentElement;
+		}
+	};
 	onScroll = () => {
 		const distanceFromBottom = this.elem.scrollHeight - this.elem.scrollTop - this.elem.clientHeight;
 		this.atBottom = (distanceFromBottom < 30);
@@ -94,7 +114,7 @@ export class BattleLog {
 		this.skippedLines = true;
 		const el = document.createElement('div');
 		el.className = 'chat';
-		el.innerHTML = '<button class="button earlier-button"><i class="fa fa-caret-up"></i><br />Earlier messages</button>';
+		el.innerHTML = '<button class="button earlier-button"><i class="fa fa-caret-up" aria-hidden="true"></i><br />Earlier messages</button>';
 		const button = el.getElementsByTagName('button')[0];
 		button?.addEventListener?.('click', e => {
 			e.preventDefault();
@@ -123,7 +143,6 @@ export class BattleLog {
 		let divClass = 'chat';
 		let divHTML = '';
 		let noNotify: boolean | undefined;
-		if (!['join', 'j', 'leave', 'l'].includes(args[0])) this.joinLeave = null;
 		if (!['name', 'n'].includes(args[0])) this.lastRename = null;
 		switch (args[0]) {
 		case 'chat': case 'c': case 'c:':
@@ -141,7 +160,12 @@ export class BattleLog {
 			let rank = name.charAt(0);
 			if (battle?.ignoreSpects && ' +'.includes(rank)) return;
 			if (battle?.ignoreOpponent) {
-				if ('\u2605\u2606'.includes(rank) && toUserid(name) !== app.user.get('userid')) return;
+				if (
+					'\u2605\u2606'.includes(rank) &&
+					toUserid(name) !== (window.app?.user?.get('userid') || window.PS?.user?.userid)
+				) {
+					return;
+				}
 			}
 			const ignoreList = window.app?.ignore || window.PS?.prefs?.ignore;
 			if (ignoreList?.[toUserid(name)] && ' +^\u2605\u2606'.includes(rank)) return;
@@ -154,16 +178,11 @@ export class BattleLog {
 				}
 				timestampHtml = `<small class="gray">[${components.map(x => x < 10 ? `0${x}` : x).join(':')}] </small>`;
 			}
-			let isHighlighted = window.app?.rooms?.[battle!.roomid].getHighlight(message) || window.PS?.getHighlight(message);
+			const isHighlighted = window.app?.rooms?.[battle!.roomid].getHighlight(message) || this.getHighlight?.(args);
 			[divClass, divHTML, noNotify] = this.parseChatMessage(message, name, timestampHtml, isHighlighted);
 			if (!noNotify && isHighlighted) {
-				let notifyTitle = "Mentioned by " + name + " in " + (battle?.roomid || '');
+				const notifyTitle = "Mentioned by " + name + " in " + (battle?.roomid || '');
 				window.app?.rooms[battle?.roomid || '']?.notifyOnce(notifyTitle, "\"" + message + "\"", 'highlight');
-				window.PS?.rooms[battle?.roomid || '']?.notify({
-					title: notifyTitle,
-					body: "\"" + message + "\"",
-					id: 'highlight',
-				});
 			}
 			break;
 
@@ -248,6 +267,7 @@ export class BattleLog {
 
 		case 'unlink': {
 			// |unlink| is deprecated in favor of |hidelines|
+			if (window.PS?.prefs?.nounlink || window.Dex?.prefs?.nounlink) return;
 			const user = toID(args[2]) || toID(args[1]);
 			this.unlinkChatFrom(user);
 			if (args[2]) {
@@ -258,6 +278,7 @@ export class BattleLog {
 		}
 
 		case 'hidelines': {
+			if (window.PS?.prefs?.nounlink || window.Dex?.prefs?.nounlink) return;
 			const user = toID(args[2]);
 			this.unlinkChatFrom(user);
 			if (args[1] !== 'unlink') {
@@ -277,7 +298,7 @@ export class BattleLog {
 			const body = args[2];
 			const roomid = this.scene?.battle.roomid;
 			if (!roomid) break;
-			app.rooms[roomid].notifyOnce(title, body, 'highlight');
+			window.app?.rooms[roomid].notifyOnce(title, body, 'highlight');
 			break;
 
 		case 'showteam': {
@@ -286,7 +307,7 @@ export class BattleLog {
 			if (!team.length) return;
 			const side = battle.getSide(args[1]);
 			const exportedTeam = team.map(set => {
-				let buf = Teams.export([set], battle.gen).replace(/\n/g, '<br />');
+				let buf = Teams.export([set], battle.dex).replace(/\n/g, '<br />');
 				if (set.name && set.name !== set.species) {
 					buf = buf.replace(set.name, BattleLog.sanitizeHTML(
 						`<span class="picon" style="${Dex.getPokemonIcon(set.species)}"></span><br />${set.name}`));
@@ -299,7 +320,7 @@ export class BattleLog {
 				}
 				return buf;
 			}).join('');
-			divHTML = `<div class="infobox"><details><summary>Open Team Sheet for ${side.name}</summary>${exportedTeam}</details></div>`;
+			divHTML = `<div class="infobox"><details class="details"><summary>Open team sheet for ${side.name}</summary>${exportedTeam}</details></div>`;
 			break;
 		}
 
@@ -310,9 +331,13 @@ export class BattleLog {
 
 		default:
 			this.addBattleMessage(args, kwArgs);
+			this.joinLeave = null;
 			return;
 		}
-		if (divHTML) this.addDiv(divClass, divHTML, preempt);
+		if (divHTML) {
+			this.addDiv(divClass, divHTML, preempt);
+			this.joinLeave = null;
+		}
 	}
 	addBattleMessage(args: Args, kwArgs?: KWArgs) {
 		switch (args[0]) {
@@ -929,11 +954,11 @@ export class BattleLog {
 			this.elem.scrollTop = this.elem.scrollHeight;
 		}
 	}
-	updateScroll() {
+	updateScroll = () => {
 		if (this.atBottom) {
 			this.elem.scrollTop = this.elem.scrollHeight;
 		}
-	}
+	};
 	addDiv(className: string, innerHTML: string, preempt?: boolean) {
 		const el = document.createElement('div');
 		el.className = className;
@@ -1053,33 +1078,45 @@ export class BattleLog {
 		this.innerElem.appendChild(this.preemptElem.firstChild);
 	}
 
-	static escapeFormat(formatid = ''): string {
+	static escapeFormat(formatid = '', fixGen6?: boolean): string {
 		let atIndex = formatid.indexOf('@@@');
 		if (atIndex >= 0) {
-			return this.escapeFormat(formatid.slice(0, atIndex)) +
+			return this.escapeHTML(this.formatName(formatid.slice(0, atIndex), fixGen6)) +
 				'<br />Custom rules: ' + this.escapeHTML(formatid.slice(atIndex + 3));
 		}
-		if (window.BattleFormats && BattleFormats[formatid]) {
-			return this.escapeHTML(BattleFormats[formatid].name);
-		}
-		if (window.NonBattleGames && NonBattleGames[formatid]) {
-			return this.escapeHTML(NonBattleGames[formatid]);
-		}
-		return this.escapeHTML(formatid);
+		return this.escapeHTML(this.formatName(formatid, fixGen6));
 	}
-	static formatName(formatid = ''): string {
+	/**
+	 * Do not store this output anywhere; it removes the generation number
+	 * for the current gen.
+	 */
+	static formatName(formatid = '', fixGen6?: boolean): string {
+		if (!formatid) return '';
+
 		let atIndex = formatid.indexOf('@@@');
 		if (atIndex >= 0) {
-			return this.formatName(formatid.slice(0, atIndex)) +
+			return this.formatName(formatid.slice(0, atIndex), fixGen6) +
 				' (Custom rules: ' + this.escapeHTML(formatid.slice(atIndex + 3)) + ')';
 		}
+		if (fixGen6 && !formatid.startsWith('gen')) {
+			formatid = `gen6${formatid}`;
+		}
+		let name = formatid;
 		if (window.BattleFormats && BattleFormats[formatid]) {
-			return BattleFormats[formatid].name;
+			name = BattleFormats[formatid].name;
 		}
 		if (window.NonBattleGames && NonBattleGames[formatid]) {
-			return NonBattleGames[formatid];
+			name = NonBattleGames[formatid];
 		}
-		return formatid;
+		if (name.startsWith('gen')) {
+			name = name.replace(/^gen([0-9])/, '[Gen $1] ');
+		}
+		if (name.startsWith(`[Gen ${Dex.gen}] `)) {
+			name = name.slice(`[Gen ${Dex.gen}] `.length);
+		} else if (name.startsWith(`[Gen ${Dex.gen} `)) {
+			name = '[' + name.slice(`[Gen ${Dex.gen} `.length);
+		}
+		return name || `[Gen ${Dex.gen}]`;
 	}
 
 	static escapeHTML(str: string | number, jsEscapeToo?: boolean) {
@@ -1107,9 +1144,7 @@ export class BattleLog {
 		return str.replace(/&quot;/g, '"').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&');
 	}
 
-	static colorCache: { [userid: string]: string } = {
-		hecate: "black; text-shadow: 0 0 6px white",
-	};
+	static colorCache: { [userid: string]: string } = {};
 
 	/** @deprecated */
 	static hashColor(name: ID) {
@@ -1177,7 +1212,7 @@ export class BattleLog {
 	static prefs(name: string) {
 		// @ts-expect-error optional, for old client
 		if (window.Storage?.prefs) return Storage.prefs(name);
-		// @ts-expect-error optional, for Preact client
+		// @ts-expect-error optional, for client rewrite
 		if (window.PS) return PS.prefs[name];
 		// may be neither, for e.g. Replays
 		return undefined;
@@ -1195,9 +1230,9 @@ export class BattleLog {
 		}
 		const colorStyle = ` style="color:${BattleLog.usernameColor(toID(name))}"`;
 		const clickableName = `<small class="groupsymbol">${BattleLog.escapeHTML(group)}</small><span class="username">${BattleLog.escapeHTML(name)}</span>`;
-		let hlClass = isHighlighted ? ' highlighted' : '';
-		let isMine = (window.app?.user?.get('name') === name) || (window.PS?.user.name === name);
-		let mineClass = isMine ? ' mine' : '';
+		const isMine = (window.app?.user?.get('name') === name) || (window.PS?.user.name === name);
+		const hlClass = isHighlighted ? ' highlighted' : '';
+		const mineClass = isMine ? ' mine' : '';
 
 		let cmd = '';
 		let target = '';
@@ -1270,7 +1305,7 @@ export class BattleLog {
 			this.changeUhtml(parts[0], htmlSrc, cmd === 'uhtml');
 			return ['', ''];
 		case 'raw':
-			return ['chat', BattleLog.sanitizeHTML(target)];
+			return ['chat', BattleLog.sanitizeHTML(target), true];
 		case 'nonotify':
 			return ['chat', BattleLog.sanitizeHTML(target), true];
 		default:
@@ -1301,7 +1336,7 @@ export class BattleLog {
 			str = str.replace(/<a[^>]*>/g, '<u>').replace(/<\/a>/g, '</u>');
 		}
 		if (options.hidespoiler) {
-			str = str.replace(/<span class="spoiler">/g, '<span class="spoiler spoiler-shown">');
+			str = str.replace(/<span class="spoiler">/g, '<span class="spoiler-shown">');
 		}
 		if (options.hidegreentext) {
 			str = str.replace(/<span class="greentext">/g, '<span>');
@@ -1311,7 +1346,7 @@ export class BattleLog {
 	}
 
 	static interstice = (() => {
-		const whitelist: string[] = Config.whitelist;
+		const whitelist = Config.whitelist || [];
 		const patterns = whitelist.map(entry => new RegExp(
 			`^(https?:)?//([A-Za-z0-9-]*\\.)?${entry.replace(/\./g, '\\.')}(/.*)?`, 'i'
 		));
@@ -1775,4 +1810,11 @@ export class BattleLog {
 		}
 		return 'data:text/plain;base64,' + encodeURIComponent(btoa(unescape(encodeURIComponent(replayFile))));
 	}
+}
+
+if (window.Net) {
+	Net(`/config/colors.json`).get().then(response => {
+		const data = JSON.parse(response);
+		Object.assign(Config.customcolors, data);
+	}).catch(() => {});
 }

@@ -278,10 +278,12 @@ span.header-username:hover {
 	color: #333333;
 }
 .minimizebutton:hover,
+summary:hover .expandbutton,
 .pm-window h3:hover .minimizebutton {
 	color: #333333;
 }
 .dark .minimizebutton:hover,
+.dark summary:hover .expandbutton,
 .dark .pm-window h3:hover .minimizebutton {
 	color: #CCCCCC;
 }
@@ -663,7 +665,7 @@ p.or:after {
 	background: rgba(248,248,248,.8);
 	color: #777777;
 	margin: 0;
-	padding: 2px 2px 2px 5px;
+	padding: 2px 4px 2px 5px;
 	font-size: 11pt;
 	border: 1px solid #AAAAAA;
 	border-top-left-radius: 5px;
@@ -694,9 +696,9 @@ p.or:after {
 .pm-window h3 .closebutton,
 .pm-window h3 .minimizebutton {
 	float: right;
-	margin: -2px -3px;
+	margin: -2px -5px 0 0;
 	width: 22px;
-	height: 22px;
+	height: 21px;
 }
 .pm-window h3 small {
 	color: #888888;
@@ -1006,6 +1008,9 @@ p.or:after {
 .roomlist {
 	max-width: 480px;
 	text-align: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 .roomlist .subrooms {
 	font-size: 8pt;
@@ -1102,17 +1107,6 @@ p.or:after {
 .chat-log .inner,
 .pm-log .inner {
 	padding: 4px 8px 6px 8px;
-}
-a.ilink {
-	text-decoration: none;
-	color: #224488;
-}
-a.ilink:hover {
-	text-decoration: underline;
-	color: #6688CC;
-}
-a.ilink.yours {
-	color: #55388B;
 }
 
 .chatbox {
@@ -1344,7 +1338,6 @@ a.ilink.yours {
 .tournament-bracket-tree-node text, .tournament-bracket-tree-node {
 	font-size: 8.5pt;
 	text-anchor: middle;
-	dominant-baseline: central;
 	font-weight: bold;
 }
 .tournament-bracket-tree-node a {
@@ -2131,6 +2124,7 @@ a.ilink.yours {
 	width: 16px;
 	color: #777777;
 }
+.folderpane .text,
 .folderpane h3 {
 	margin: 0;
 	padding: 13px 0 0 0;
@@ -2139,6 +2133,10 @@ a.ilink.yours {
 	background: #d7e3ec;
 	color: black;
 	border-right: 1px solid #888888;
+}
+.folderpane .text {
+	height: 23px;
+	padding: 7px 0 0 7px;
 }
 .folder .selectFolder {
 	display: block;
@@ -2185,6 +2183,7 @@ a.ilink.yours {
 	padding-left: 6px;
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
+	text-decoration: none;
 }
 
 /* believe me, there was no other way to do this */
@@ -2252,7 +2251,8 @@ a.ilink.yours {
 	color: transparent;
 }
 .teamlist .team.pc-box {
-	height: 139px;
+	min-height: 139px;
+	height: auto;
 }
 
 .teamedit {
@@ -3197,10 +3197,6 @@ a.ilink.yours {
 .dark .revealed {
 	background: rgba(0,255,200,0.18);
 }
-.dark a.ilink {
-	color: #4488EE;
-	border-color: #526c87;
-}
 .dark .chat.mine {
 	background: rgba(255,255,255,0.08);
 }
@@ -3215,6 +3211,7 @@ a.ilink.yours {
 .dark .folderlistafter:before,
 .dark .folderlistbefore:before,
 .dark .folderpane h3,
+.dark .folderpane .text,
 .dark .folder .selectFolder,
 .dark .folderhack1,
 .dark .folderhack2 {

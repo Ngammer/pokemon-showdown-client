@@ -7,7 +7,7 @@
  * @license MIT
  */
 
-import { PS, PSRoom } from "./client-main";
+import { Config, PS, PSRoom } from "./client-main";
 import { Net } from "./client-connection";
 import { PSPanelWrapper, PSRoomPanel } from "./panels";
 import { BattleLog } from "./battle-log";
@@ -97,7 +97,7 @@ class LadderFormatPanel extends PSRoomPanel<LadderFormatRoom> {
 	static readonly id = 'ladderformat';
 	static readonly routes = ['ladder-*'];
 	static readonly Model = LadderFormatRoom;
-	static readonly icon = <i class="fa fa-list-ol"></i>;
+	static readonly icon = <i class="fa fa-list-ol" aria-hidden></i>;
 
 	override componentDidMount() {
 		const { room } = this.props;
@@ -156,7 +156,7 @@ class LadderFormatPanel extends PSRoomPanel<LadderFormatRoom> {
 		const room = this.props.room;
 
 		if (room.loading || !BattleFormats) {
-			return <p><i class="fa fa-refresh fa-spin"></i> <em>Loading...</em></p>;
+			return <p><i class="fa fa-refresh fa-spin" aria-hidden></i> <em>Loading...</em></p>;
 		} else if (room.error !== undefined) {
 			return <p>Error: {room.error}</p>;
 		} else if (!room.ladderData) {
@@ -179,7 +179,7 @@ class LadderFormatPanel extends PSRoomPanel<LadderFormatRoom> {
 			</tr>
 			{room.ladderData.toplist.map((row, i) => <tr>
 				<td style={{ textAlign: 'right' }}>
-					{i < 3 && <i class="fa fa-trophy" style={{ color: ['#d6c939', '#adb2bb', '#ca8530'][i] }}></i>} {i + 1}
+					{i < 3 && <i class="fa fa-trophy" aria-hidden style={{ color: ['#d6c939', '#adb2bb', '#ca8530'][i] }}></i>} {i + 1}
 				</td>
 				<td><span
 					class="username no-interact" style={{
@@ -204,14 +204,14 @@ class LadderFormatPanel extends PSRoomPanel<LadderFormatRoom> {
 			<div class="ladder pad">
 				<p>
 					<button class="button" data-href="ladder" data-target="replace">
-						<i class="fa fa-chevron-left"></i> Format List
+						<i class="fa fa-chevron-left" aria-hidden></i> Format List
 					</button>
 				</p>
 				<p>
 					<button class="button" data-href="ladder" data-target="replace">
-						<i class="fa fa-refresh"></i> Refresh
+						<i class="fa fa-refresh" aria-hidden></i> Refresh
 					</button> <a class="button" href="/view-seasonladder-gen9randombattle">
-						<i class="fa fa-trophy"></i> Seasonal rankings
+						<i class="fa fa-trophy" aria-hidden></i> Seasonal rankings
 					</a>
 					{this.renderSearch()}
 				</p>
@@ -225,13 +225,11 @@ class LadderFormatPanel extends PSRoomPanel<LadderFormatRoom> {
 class LadderListPanel extends PSRoomPanel {
 	static readonly id = 'ladder';
 	static readonly routes = ['ladder'];
-	static readonly icon = <i class="fa fa-list-ol"></i>;
+	static readonly icon = <i class="fa fa-list-ol" aria-hidden></i>;
 	static readonly title = 'Ladder';
 
 	override componentDidMount() {
-		this.subscribeTo(PS.teams, () => {
-			this.forceUpdate();
-		});
+		this.subscribeTo(PS.teams);
 	}
 	renderList() {
 		if (!window.BattleFormats) {
@@ -264,7 +262,7 @@ class LadderListPanel extends PSRoomPanel {
 				</p>
 				<p>
 					<button data-href="view-ladderhelp" class="button">
-						<i class="fa fa-info-circle"></i> How the ladder works
+						<i class="fa fa-info-circle" aria-hidden></i> How the ladder works
 					</button>
 				</p>
 				{this.renderList()}

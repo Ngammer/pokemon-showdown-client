@@ -60,7 +60,8 @@
 
 			buf += '<div class="menugroup"><p><button class="button mainmenu4 onlineonly disabled" name="joinRoom" value="battles">Watch a battle</button></p>';
 			buf += '<p><button class="button mainmenu5 onlineonly disabled" name="finduser">Find a user</button></p>';
-			buf += '<p><button class="button mainmenu6 onlineonly disabled" name="send" value="/friends">Friends</button></p></div>';
+			buf += '<p><button class="button mainmenu6 onlineonly disabled" name="send" value="/friends">Friends</button></p>';
+			buf += '<p><button class="button mainmenu7" name="joinRoom" value="resources">Info & Resources</button></p></div>';
 
 			this.$('.mainmenu').html(buf);
 
@@ -662,6 +663,7 @@
 
 		clickDatasearchResults: function (e) {
 			if ($(e.target)[0].href) return;
+			if (window.getSelection && !window.getSelection().isCollapsed) return;
 			var target = $(e.currentTarget).closest('[class=datasearch]')[0];
 			var button = target.querySelector('button');
 			var results = target.querySelectorAll('[class=datasearch-body]');
@@ -1339,11 +1341,6 @@
 					bufs[curBuf] += BattleLog.escapeHTML(curSection) + '</strong></summary>';
 				}
 				var formatName = BattleLog.escapeFormat(format.id);
-				if (formatName.charAt(0) !== '[') formatName = '[Gen 6] ' + formatName;
-				formatName = formatName.replace('[Gen 9] ', '');
-				formatName = formatName.replace('[Gen 9 ', '[');
-				formatName = formatName.replace('[Gen 8 ', '[');
-				formatName = formatName.replace('[Gen 7 ', '[');
 				bufs[curBuf] += (
 					'<li><button name="selectFormat" value="' + i +
 					'" class="option' + (curFormat === i ? ' cur' : '') + '">' + formatName +

@@ -8,9 +8,13 @@
  */
 
 import { PS, PSRoom, type RoomOptions } from "./client-main";
-import { PSPanelWrapper, PSRoomPanel, SanitizedHTML } from "./panels";
+import { PSPanelWrapper, PSRoomPanel } from "./panels";
 import { BattleLog } from "./battle-log";
 import type { Args } from "./battle-text-parser";
+
+export function SanitizedHTML(props: { children: string }) {
+	return <div dangerouslySetInnerHTML={{ __html: BattleLog.sanitizeHTML(props.children) }} />;
+}
 
 class PageRoom extends PSRoom {
 	override readonly classType: string = 'html';
@@ -33,7 +37,7 @@ class PageRoom extends PSRoom {
 	}
 	override connect() {
 		if (!this.connected && !PagePanel.clientRooms.hasOwnProperty(this.id.split('-')[1])) {
-			PS.send(`|/join ${this.id}`);
+			PS.send(`/join ${this.id}`);
 			this.connected = true;
 			this.connectWhenLoggedIn = false;
 		}
@@ -44,7 +48,7 @@ function PageLadderHelp() {
 	return <div class="ladder pad">
 		<p>
 			<button class="button" data-href="/ladder" data-target="replace">
-				<i class="fa fa-chevron-left"></i> Format List
+				<i class="fa fa-chevron-left" aria-hidden></i> Format List
 			</button>
 		</p>
 		<h3>How the ladder works</h3>

@@ -10,41 +10,25 @@
  */
 
 import preact from "../js/lib/preact";
-import { PS, type PSRoom, type RoomID } from "./client-main";
-import { PSMain } from "./panels";
+import { Config, PS, type PSRoom, type RoomID } from "./client-main";
+import { NARROW_MODE_HEADER_WIDTH, PSView, VERTICAL_HEADER_WIDTH } from "./panels";
 import type { Battle } from "./battle";
-import { BattleLog } from "./battle-log";
+import { BattleLog } from "./battle-log"; // optional
 
-window.addEventListener('drop', e => {
-	console.log('drop ' + e.dataTransfer!.dropEffect);
-	const target = e.target as HTMLElement;
-	if ((target as HTMLInputElement).type?.startsWith("text")) {
-		PS.dragging = null;
-		return; // Ignore text fields
-	}
-
-	// The default team drop action for Firefox is to open the team as a
-	// URL, which needs to be prevented.
-	// The default file drop action for most browsers is to open the file
-	// in the tab, which is generally undesirable anyway.
-	e.preventDefault();
-	PS.dragging = null;
-	PS.updateAutojoin();
-});
-window.addEventListener('dragend', e => {
-	e.preventDefault();
-	PS.dragging = null;
-});
 window.addEventListener('dragover', e => {
 	// this prevents the bounce-back animation
 	e.preventDefault();
 });
 
-export class PSHeader extends preact.Component<{ style: object }> {
-	handleDragEnter = (e: DragEvent) => {
-		console.log('dragenter ' + e.dataTransfer!.dropEffect);
+export class PSHeader extends preact.Component {
+	static toggleMute = (e: Event) => {
+		PS.prefs.set('mute', !PS.prefs.mute);
+		PS.update();
+	};
+	static handleDragEnter = (e: DragEvent) => {
+		// console.log('dragenter ' + e.dataTransfer!.dropEffect);
 		e.preventDefault();
-		if (!PS.dragging) return; // TODO: handle dragging other things onto roomtabs
+		if (PS.dragging?.type !== 'room') return;
 		/** the element being passed over */
 		const target = e.currentTarget as HTMLAnchorElement;
 
@@ -72,7 +56,7 @@ export class PSHeader extends preact.Component<{ style: object }> {
 		// Chrome/Safari/Opera
 		// if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
 	};
-	handleDragStart = (e: DragEvent) => {
+	static handleDragStart = (e: DragEvent) => {
 		const roomid = PS.router.extractRoomID((e.currentTarget as HTMLAnchorElement).href);
 		if (!roomid) return; // should never happen
 
@@ -80,7 +64,7 @@ export class PSHeader extends preact.Component<{ style: object }> {
 	};
 	static roomInfo(room: PSRoom) {
 		const RoomType = PS.roomTypes[room.type];
-		let icon = RoomType?.icon || <i class="fa fa-file-text-o"></i>;
+		let icon = RoomType?.icon || <i class="fa fa-file-text-o" aria-hidden></i>;
 		let title = room.title;
 		switch (room.type) {
 		case 'battle':
@@ -90,7 +74,7 @@ export class PSHeader extends preact.Component<{ style: object }> {
 			if (idChunks.length <= 1) {
 				if (idChunks[0] === 'uploadedreplay') formatName = 'Uploaded Replay';
 			} else {
-				formatName = BattleLog.formatName(idChunks[0]);
+				formatName = window.BattleLog ? BattleLog.formatName(idChunks[0]) : idChunks[0];
 			}
 			if (!title) {
 				let battle = (room as any).battle as Battle | undefined;
@@ -120,43 +104,104 @@ export class PSHeader extends preact.Component<{ style: object }> {
 		}
 		return { icon, title };
 	}
-	renderRoomTab(id: RoomID) {
+	static renderRoomTab(id: RoomID, noAria?: boolean) {
 		const room = PS.rooms[id];
 		if (!room) return null;
 		const closable = (id === '' || id === 'rooms' ? '' : ' closable');
 		const cur = PS.isVisible(room) ? ' cur' : '';
-		const notifying = room.notifications.length ? ' notifying' : room.isSubtleNotifying ? ' subtle-notifying' : '';
+		let notifying = room.isSubtleNotifying ? ' subtle-notifying' : '';
+		let hoverTitle = '';
+		let notifications = room.notifications;
+		if (id === '') {
+			for (const roomid of PS.miniRoomList) {
+				const miniNotifications = PS.rooms[roomid]?.notifications;
+				if (miniNotifications?.length) notifications = [...notifications, ...miniNotifications];
+			}
+		}
+		if (notifications.length) {
+			notifying = ' notifying';
+			for (const notif of notifications) {
+				if (!notif.body) continue;
+				hoverTitle += `${notif.title}\n${notif.body}\n`;
+			}
+		}
 		let className = `roomtab button${notifying}${closable}${cur}`;
 
-		let { icon, title } = PSHeader.roomInfo(room);
-		if (room.type === 'rooms' && PS.leftPanelWidth !== null) title = '';
+		let { icon, title: roomTitle } = PSHeader.roomInfo(room);
+		if (room.type === 'rooms' && PS.leftPanelWidth !== null) roomTitle = '';
 		if (room.type === 'battle') className += ' roomtab-battle';
 
 		let closeButton = null;
 		if (closable) {
 			closeButton = <button class="closebutton" name="closeRoom" value={id} aria-label="Close">
-				<i class="fa fa-times-circle"></i>
+				<i class="fa fa-times-circle" aria-hidden></i>
 			</button>;
 		}
-		const ariaLabel = id === 'rooms' ? { "aria-label": "Join chat" } : {};
-		return <li>
+		const aria: Record<string, string> = noAria ? {} : {
+			"role": "tab", "id": `roomtab-${id}`, "aria-selected": cur ? "true" : "false",
+		};
+		if (id === 'rooms') aria['aria-label'] = "Join chat";
+		return <li class={id === '' ? 'home-li' : ''} key={id}>
 			<a
-				class={className} href={`/${id}`} draggable={true}
+				class={className} href={`/${id}`} draggable={true} title={hoverTitle || undefined}
 				onDragEnter={this.handleDragEnter} onDragStart={this.handleDragStart}
-				{...ariaLabel}
+				{...aria}
 			>
-				{icon} <span>{title}</span>
+				{icon} {roomTitle}
 			</a>
 			{closeButton}
 		</li>;
 	}
+	handleResize = () => {
+		if (!this.base) return;
+
+		if (PS.leftPanelWidth === null) {
+			const width = document.documentElement.clientWidth;
+			const oldNarrowMode = PSView.narrowMode;
+			PSView.narrowMode = width <= 700;
+			PSView.verticalHeaderWidth = PSView.narrowMode ? NARROW_MODE_HEADER_WIDTH : VERTICAL_HEADER_WIDTH;
+			document.documentElement.style.width = PSView.narrowMode ? `${width + NARROW_MODE_HEADER_WIDTH}px` : 'auto';
+			if (oldNarrowMode !== PSView.narrowMode) {
+				if (PSView.narrowMode) {
+					if (!PSView.textboxFocused) {
+						document.documentElement.classList?.add('scroll-snap-enabled');
+					}
+				} else {
+					document.documentElement.classList?.remove('scroll-snap-enabled');
+				}
+				PS.update();
+			}
+			return;
+		}
+		if (PSView.narrowMode) {
+			document.documentElement.classList?.remove('scroll-snap-enabled');
+			PSView.narrowMode = false;
+		}
+
+		const userbarLeft = this.base.querySelector('div.userbar')?.getBoundingClientRect()?.left;
+		const plusTabRight = this.base.querySelector('a.roomtab[aria-label="Join chat"]')?.getBoundingClientRect()?.right;
+		const overflow = this.base.querySelector<HTMLElement>('.overflow');
+
+		if (!overflow || !userbarLeft || !plusTabRight) return;
+
+		if (plusTabRight > userbarLeft - 3) {
+			overflow.style.display = 'block';
+		} else {
+			overflow.style.display = 'none';
+		}
+	};
 	override componentDidMount() {
 		PS.user.subscribe(() => {
 			this.forceUpdate();
 		});
+		window.addEventListener('resize', this.handleResize);
+		this.handleResize();
+	}
+	override componentDidUpdate() {
+		this.handleResize();
 	}
 	renderUser() {
-		if (!PS.connected) {
+		if (!PS.connection?.connected) {
 			return <button class="button" disabled><em>Offline</em></button>;
 		}
 		if (PS.user.initializing) {
@@ -165,13 +210,16 @@ export class PSHeader extends preact.Component<{ style: object }> {
 		if (!PS.user.named) {
 			return <a class="button" href="login">Choose name</a>;
 		}
-		const userColor = window.BattleLog && { color: BattleLog.usernameColor(PS.user.userid) };
+		const userColor = window.BattleLog && `color:${BattleLog.usernameColor(PS.user.userid)}`;
 		return <span class="username" style={userColor}>
 			<span class="usernametext">{PS.user.name}</span>
 		</span>;
 	}
 	renderVertical() {
-		return <div id="header" class="header-vertical" style={this.props.style} onClick={PSMain.scrollToHeader}>
+		return <div
+			id="header" class="header-vertical" role="navigation"
+			style={`width:${PSView.verticalHeaderWidth - 7}px`} onClick={PSView.scrollToHeader}
+		>
 			<div class="maintabbarbottom"></div>
 			<div class="scrollable-part">
 				<img
@@ -180,29 +228,27 @@ export class PSHeader extends preact.Component<{ style: object }> {
 					alt="Pokémon Showdown! (beta)"
 					width="50" height="50"
 				/>
-				<div class="tablist">
+				<div class="tablist" role="tablist">
 					<ul>
-						{this.renderRoomTab(PS.leftRoomList[0])}
+						{PSHeader.renderRoomTab(PS.leftRoomList[0])}
 					</ul>
 					<ul>
-						{PS.miniRoomList.map(roomid => this.renderRoomTab(roomid))}
-					</ul>
-					<ul>
-						{PS.leftRoomList.slice(1).map(roomid => this.renderRoomTab(roomid))}
+						{PS.leftRoomList.slice(1).map(roomid => PSHeader.renderRoomTab(roomid))}
 					</ul>
 					<ul class="siderooms">
-						{PS.rightRoomList.map(roomid => this.renderRoomTab(roomid))}
+						{PS.rightRoomList.map(roomid => PSHeader.renderRoomTab(roomid))}
 					</ul>
 				</div>
 			</div>
+			{null /* overflow */}
 			<div class="userbar">
 				{this.renderUser()} {}
 				<div style="float:right">
-					<button class="icon button" data-href="volume" title="Sound" aria-label="Sound">
+					<button class="icon button" data-href="volume" title="Sound" aria-label="Sound" onDblClick={PSHeader.toggleMute}>
 						<i class={PS.prefs.mute ? 'fa fa-volume-off' : 'fa fa-volume-up'}></i>
 					</button> {}
 					<button class="icon button" data-href="options" title="Options" aria-label="Options">
-						<i class="fa fa-cog"></i>
+						<i class="fa fa-cog" aria-hidden></i>
 					</button>
 				</div>
 			</div>
@@ -210,40 +256,39 @@ export class PSHeader extends preact.Component<{ style: object }> {
 	}
 	override render() {
 		if (PS.leftPanelWidth === null) {
-			if (!PSMain.textboxFocused) {
-				document.documentElement.classList?.add('scroll-snap-enabled');
-			}
 			return this.renderVertical();
-		} else {
-			document.documentElement.classList?.remove('scroll-snap-enabled');
 		}
-
-		return <div id="header" class="header" style={this.props.style}>
+		return <div id="header" class="header" role="navigation">
 			<div class="maintabbarbottom"></div>
-			<img
-				class="logo"
-				src={`https://${Config.routes.client}/favicon-256.png`}
-				alt="Pokémon Showdown! (beta)"
-				width="50" height="50"
-			/>
-			<div class="tabbar maintabbar"><div class="inner">
-				<ul>
-					{this.renderRoomTab(PS.leftRoomList[0])}
+			<div class="tabbar maintabbar"><div class="inner-1" role={PS.leftPanelWidth ? 'none' : 'tablist'}><div class="inner-2">
+				<ul class="maintabbar-left" style={{ width: `${PS.leftPanelWidth}px` }} role={PS.leftPanelWidth ? 'tablist' : 'none'}>
+					<li>
+						<img
+							class="logo"
+							src={`https://${Config.routes.client}/favicon-256.png`}
+							alt="Pokémon Showdown! (beta)"
+							width="48" height="48"
+						/>
+					</li>
+					{PSHeader.renderRoomTab(PS.leftRoomList[0])}
+					{PS.leftRoomList.slice(1).map(roomid => PSHeader.renderRoomTab(roomid))}
 				</ul>
-				<ul>
-					{PS.leftRoomList.slice(1).map(roomid => this.renderRoomTab(roomid))}
+				<ul class="maintabbar-right" role={PS.leftPanelWidth ? 'tablist' : 'none'}>
+					{PS.rightRoomList.map(roomid => PSHeader.renderRoomTab(roomid))}
 				</ul>
-				<ul class="siderooms" style={{ float: 'none', marginLeft: Math.max(PS.leftPanelWidth - 52, 0) }}>
-					{PS.rightRoomList.map(roomid => this.renderRoomTab(roomid))}
-				</ul>
-			</div></div>
+			</div></div></div>
+			<div class="overflow">
+				<button name="tablist" class="button" data-href="roomtablist" aria-label="All tabs" type="button">
+					<i class="fa fa-caret-down" aria-hidden></i>
+				</button>
+			</div>
 			<div class="userbar">
 				{this.renderUser()} {}
-				<button class="icon button" data-href="volume" title="Sound" aria-label="Sound">
+				<button class="icon button" data-href="volume" title="Sound" aria-label="Sound" onDblClick={PSHeader.toggleMute}>
 					<i class={PS.prefs.mute ? 'fa fa-volume-off' : 'fa fa-volume-up'}></i>
 				</button> {}
 				<button class="icon button" data-href="options" title="Options" aria-label="Options">
-					<i class="fa fa-cog"></i>
+					<i class="fa fa-cog" aria-hidden></i>
 				</button>
 			</div>
 		</div>;
@@ -263,32 +308,37 @@ export class PSMiniHeader extends preact.Component {
 	override render() {
 		if (PS.leftPanelWidth !== null) return null;
 
-		const minWidth = Math.min(500, Math.max(320, document.body.offsetWidth - 9));
+		let notificationsCount = 0;
+		for (const roomid of PS.leftRoomList) {
+			const miniNotifications = PS.rooms[roomid]?.notifications;
+			if (miniNotifications?.length) notificationsCount++;
+		}
 		const { icon, title } = PSHeader.roomInfo(PS.panel);
-		const userColor = window.BattleLog && { color: BattleLog.usernameColor(PS.user.userid) };
-		const showMenuButton = document.documentElement.offsetWidth >= document.documentElement.scrollWidth;
+		const userColor = window.BattleLog && `color:${BattleLog.usernameColor(PS.user.userid)}`;
+		const showMenuButton = PSView.narrowMode;
 		const notifying = (
-			showMenuButton && !window.scrollX && Object.values(PS.rooms).some(room => room!.notifications.length)
+			!showMenuButton && !window.scrollX && Object.values(PS.rooms).some(room => room!.notifications.length)
 		) ? ' notifying' : '';
-		const menuButton = showMenuButton ? (
+		const menuButton = !showMenuButton ? (
 			null
 		) : window.scrollX ? (
-			<button onClick={PSMain.scrollToHeader} class={`mini-header-left ${notifying}`} aria-label="Menu">
-				<i class="fa fa-arrow-left"></i>
+			<button onClick={PSView.scrollToHeader} class={`mini-header-left ${notifying}`} aria-label="Menu">
+				{!!notificationsCount && <div class="notification-badge">{notificationsCount}</div>}
+				<i class="fa fa-bars" aria-hidden></i>
 			</button>
 		) : (
-			<button onClick={PSMain.scrollToRoom} class="mini-header-left" aria-label="Menu">
-				<i class="fa fa-arrow-right"></i>
+			<button onClick={PSView.scrollToRoom} class="mini-header-left" aria-label="Menu">
+				<i class="fa fa-arrow-right" aria-hidden></i>
 			</button>
 		);
-		return <div class="mini-header" style={{ minWidth: `${minWidth}px` }}>
+		return <div class="mini-header" style={`left:${PSView.verticalHeaderWidth + (PSView.narrowMode ? 0 : -1)}px;`}>
 			{menuButton}
 			{icon} {title}
 			<button data-href="options" class="mini-header-right" aria-label="Options">
-				{PS.user.named ? <strong style={userColor}>{PS.user.name}</strong> : <i class="fa fa-cog"></i>}
+				{PS.user.named ? <strong style={userColor}>{PS.user.name}</strong> : <i class="fa fa-cog" aria-hidden></i>}
 			</button>
 		</div>;
 	}
 }
 
-preact.render(<PSMain />, document.body, document.getElementById('ps-frame')!);
+preact.render(<PSView />, document.body, document.getElementById('ps-frame')!);
