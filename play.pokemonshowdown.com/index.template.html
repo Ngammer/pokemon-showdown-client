@@ -14,7 +14,30 @@
       +#########+///////,
                 ///////,
 
-		<script>
+Viewing source? We're open source! Check us out on GitHub!
+https://github.com/smogon/pokemon-showdown
+https://github.com/smogon/pokemon-showdown-client (you are here)
+
+Also visit us in the Dev chatroom:
+https://psim.us/dev
+
+-->
+
+		<meta charset="UTF-8" />
+<meta id="viewport" name="viewport" content="width=device-width" />
+<title>Showdown!</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<link rel="shortcut icon" href="//181.30.221.221:3000/favicon.ico" id="dynamic-favicon" />
+<link rel="icon" sizes="256x256" href="//181.30.221.221:3000/favicon-256.png" />
+<link rel="stylesheet" href="//181.30.221.221:3000/style/battle.css?" />
+<link rel="stylesheet" href="//181.30.221.221:3000/style/client.css?" />
+<link rel="stylesheet" href="//181.30.221.221:3000/style/sim-types.css?" />
+<link rel="stylesheet" href="//181.30.221.221:3000/style/utilichart.css?" />
+<link rel="stylesheet" href="//181.30.221.221:3000/style/font-awesome.css?" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="manifest" href="/manifest.json" />
+<script src="http://181.30.221.221:3000/config/config.js"></script>
+<script>
 			Config.testclient = true;
 			(function() {
 				if (location.search !== '') {
@@ -51,7 +74,7 @@
 	</head>
 	<body>
 		<div id="header" class="header">
-			<img class="logo" src="pokemonshowdownbeta.png" alt="Pok&eacute;mon Showdown! (beta)" width="146" height="44" /><div class="maintabbarbottom"></div>
+			<img class="logo" src="//181.30.221.221:3000/pokemonshowdownbeta.png" srcset="//181.30.221.221:3000/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown! (beta)" width="146" height="44" /><div class="maintabbarbottom"></div>
 		</div>
 		<div class="ps-room scrollable" id="mainmenu"><div class="mainmenuwrapper">
 			<div class="leftmenu">
@@ -69,55 +92,47 @@
 					</div>
 				</div>
 				<div class="mainmenu">
-					<div id="loading-message" class="mainmessage">Initializing... <noscript>FAILED<br /><br />Pok&eacute;mon Showdown requires JavaScript.</noscript></div>
-				</div>
+			<div id="loading-message" class="mainmessage">Initializing... <noscript>FAILED<br /><br />Pok&eacute;mon Showdown requires JavaScript.</noscript></div>
+		</div>
 			</div>
 			<div class="rightmenu">
 			</div>
 			<div class="mainmenufooter">
-				<small><a id="ps-link" href="//181.30.221.221:3001/" target="_blank"><strong>Pok&eacute;mon Showdown</strong></a> | <a id="smogon-link" href="http://smogon.com/" target="_blank"><strong>Smogon</strong></a><br><a id="dex-link" href="//181.30.221.221:3003/" target="_blank">Pokédex</a> | <a id="replay-link" href="//181.30.221.221:3002/" target="_blank">Replays</a> | <a id="rules-link" href="//pokemonshowdown.com/rules" target="_blank">Rules</a></small> | <small><a href="//pokemonshowdown.com/forums/" target="_blank">Forum</a></small>
-			</div>
-			<script>
-				if (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')){
-					document.getElementById("ps-link").href = "//192.168.0.20:3001/";
-            document.getElementById("dex-link").href = "//192.168.0.20:3003/";
-            document.getElementById("replay-link").href = "//192.168.0.20:3002/";
-				}
-		  </script>
+		<div class="bgcredit"></div>
+		<small><a href="//192.168.0.20:3003/" target="_blank">Pok&eacute;dex</a> | <a href="//192.168.0.20:3002/" target="_blank">Replays</a> | <a href="//pokemonshowdown.com/rules" target="_blank">Rules</a> | <a href="//192.168.0.20:3001/credits" target="_blank">Credits</a> | <a href="http://smogon.com/forums/" target="_blank">Forum</a> | <a href="//pokemonshowdown.com/privacy" target="_blank">Privacy policy</a></small>
+	</div>
 		</div></div>
-		<script>
-			document.getElementById('loading-message').innerHTML += ' DONE<br />Loading libraries...';
-		</script>
-		<script nomodule src="/js/lib/ps-polyfill.js"></script>
-		<script src="js/lib/jquery-2.2.4.min.js"></script>
-		<script src="js/lib/jquery-cookie.js"></script>
-		<script src="js/lib/autoresize.jquery.min.js"></script>
-		<script src="js/battle-sound.js"></script>
-		<script src="../config/testclient-key.js"></script>
-		<script src="js/lib/html-css-sanitizer-minified.js"></script>
-		<script src="js/lib/lodash.core.js"></script>
-		<script src="js/lib/backbone.js"></script>
-		<script src="js/lib/d3.v3.min.js"></script>
+<script>
+	var LM = document.getElementById('loading-message');
+	LM.innerHTML += ' DONE<br />Loading libraries...';
+</script>
+<script nomodule src="//181.30.221.221:3000/js/lib/ps-polyfill.js"></script>
+<script src="//181.30.221.221:3000/config/config.js?"></script>
+<script src="//181.30.221.221:3000/js/lib/jquery-2.2.4.min.js"></script>
+<script src="//181.30.221.221:3000/js/lib/jquery-cookie.js"></script>
+<script src="//181.30.221.221:3000/js/lib/autoresize.jquery.min.js?"></script>
+<script src="//181.30.221.221:3000/js/battle-sound.js?"></script>
+<script src="../config/testclient-key.js"></script>
+<script src="//181.30.221.221:3000/js/lib/html-css-sanitizer-minified.js?"></script>
+<script src="//181.30.221.221:3000/js/lib/lodash.core.js?"></script>
+<script src="//181.30.221.221:3000/js/lib/backbone.js?"></script>
+<script src="//181.30.221.221:3000/js/lib/d3.v3.min.js"></script>
+
+<script>
+	LM.innerHTML += ' DONE<br />Loading data...';
+</script>
+
+<script src="//181.30.221.221:3000/js/battledata.js?"></script>
+<script src="//181.30.221.221:3000/js/storage.js?"></script>
+<script src="//181.30.221.221:3000/data/pokedex-mini.js?"></script>
+<script src="//181.30.221.221:3000/data/typechart.js?"></script>
+<script src="//181.30.221.221:3000/js/battle.js?"></script>
+<script src="//181.30.221.221:3000/js/lib/sockjs-1.4.0-nwjsfix.min.js"></script>
+<script src="//181.30.221.221:3000/js/lib/color-thief.min.js"></script>
 
 		<script>
-			document.getElementById('loading-message').innerHTML += ' DONE<br />Loading data...';
-			window.exports = window;
-		</script>
-
-		<!-- fallback for if you've never done a full build -->
-		<script src="js/server/chat-formatter.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="js/battledata.js" onerror="alert('You must build the client with `node build` before using testclient.html')"></script>
-		<script src="data/text.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="data/pokedex-mini.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="data/pokedex-mini-bw.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="data/typechart.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="js/battle.js"></script>
-		<script src="js/lib/sockjs-1.4.0-nwjsfix.min.js"></script>
-		<script src="js/lib/color-thief.min.js"></script>
-
-		<script>
-			document.getElementById('loading-message').innerHTML += ' DONE<br />Loading client...';
-		</script>
+	LM.innerHTML += ' DONE<br />Loading client...';
+</script>
 
 <script src="//181.30.221.221:3000/data/commands.js?"></script>
 <script src="//181.30.221.221:3000/js/client.js?"></script>
@@ -132,23 +147,27 @@
 <script src="//181.30.221.221:3000/js/client-rooms.js?"></script>
 <script src="//181.30.221.221:3000/data/graphics.js?"></script>
 
-		<script src="data/pokedex.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="data/moves.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="data/items.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="data/abilities.js" onerror="loadRemoteData(this.src)"></script>
+<script>
+	// framebust - see https://owasp.org/www-pdf-archive/OWASP_AppSec_Research_2010_Busting_Frame_Busting_by_Rydstedt.pdf
+	// should be robust against reflective XSS filters and navigation interception
+	var app;
+	if (self === top) {
+		app = new App();
+	} else {
+		LM.innerHTML += ' IN FRAME<br />Please visit Showdown directly.';
+		top.location = self.location;
+	}
+</script>
 
-		<script src="data/search-index.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="data/teambuilder-tables.js" onerror="loadRemoteData(this.src)"></script>
-		<script src="js/battle-dex-search.js"></script>
-		<script src="js/search.js"></script>
+<script src="//181.30.221.221:3000/data/pokedex.js?"></script>
+<script src="//181.30.221.221:3000/data/moves.js?"></script>
+<script src="//181.30.221.221:3000/data/items.js?"></script>
+<script src="//181.30.221.221:3000/data/abilities.js?"></script>
 
-		<script src="data/aliases.js" async="async" onerror="loadRemoteData(this.src)"></script>
+<script src="//181.30.221.221:3000/data/search-index.js?"></script>
+<script src="//181.30.221.221:3000/data/teambuilder-tables.js?"></script>
+<script src="//181.30.221.221:3000/js/battle-dex-search.js?"></script>
+<script src="//181.30.221.221:3000/js/search.js?"></script>
 
-		<script>
-			window.onload = () => {
-				window.app = new App();
-			}
-		</script>
-
-	</body>
-</html>
+<script src="//181.30.221.221:3000/data/aliases.js?" async></script>
+<script src="//181.30.221.221:3000/js/clean-cookies.php" async></script>
