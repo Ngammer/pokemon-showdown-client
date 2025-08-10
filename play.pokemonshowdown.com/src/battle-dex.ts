@@ -232,14 +232,14 @@ export const Dex = new class implements ModdedDex {
 	resourcePrefix = (() => {
 		let prefix = '';
 		if (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')) {
-			 // Local network or localhost
-			 prefix = 'http://192.168.0.20:3000/';
+			// Local network or localhost
+			prefix = 'http://192.168.0.20:3000/';
 		} else {
-			 // External
-			 prefix = 'http://181.30.221.221:3000/';
+			// External
+			prefix = 'http://181.30.221.221:3000/';
 		}
 		return prefix;
-  })();
+	})();
 
 	fxPrefix = (() => {
 		const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';
@@ -636,7 +636,7 @@ export const Dex = new class implements ModdedDex {
 		//
 		let graphicsGen = mechanicsGen;
 		if (Dex.prefs('nopastgens')) graphicsGen = 6;
-		if (/*Dex.prefs('bwgfx') &&*/ graphicsGen >= 6) graphicsGen = 5;
+		if (/* Dex.prefs('bwgfx') && */ graphicsGen >= 6) graphicsGen = 5;
 		spriteData.gen = Math.max(graphicsGen, Math.min(species.gen, 5));
 		const baseDir = ['', 'gen1', 'gen2', 'gen3', 'gen4', 'gen5', '', '', '', ''][spriteData.gen];
 
@@ -863,7 +863,7 @@ export const Dex = new class implements ModdedDex {
 		if (pokemon.shiny) spriteData.shiny = true;
 		if (dex.modid === 'gen7letsgo') gen = 8;
 		if (Dex.prefs('nopastgens')) gen = 9;
-		if (/*Dex.prefs('bwgfx') &&*/ gen > 5) gen = 5;
+		if (/* Dex.prefs('bwgfx') && */ gen > 5) gen = 5;
 		let homeExists = (!species.isNonstandard || !['CAP', 'Custom'].includes(species.isNonstandard) ||
 			species.id === "xerneasneutral") && ![
 			"floetteeternal", "pichuspikyeared", "pikachubelle", "pikachucosplay", "pikachulibre", "pikachuphd", "pikachupopstar", "pikachurockstar",
