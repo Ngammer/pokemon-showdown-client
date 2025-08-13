@@ -28,27 +28,27 @@ function requireScript(url) {
 	document.head.appendChild(scriptEl);
 }
 
-linkStyle('http://181.30.221.221:3000/style/font-awesome.css?');
-linkStyle('http://181.30.221.221:3000/style/battle.css?a7');
-linkStyle('http://181.30.221.221:3000/style/replay.css?a7');
-linkStyle('http://181.30.221.221:3000/style/utilichart.css?a7');
+linkStyle('http://201.252.16.146:3000/style/font-awesome.css?');
+linkStyle('http://201.252.16.146:3000/style/battle.css?a7');
+linkStyle('http://201.252.16.146:3000/style/replay.css?a7');
+linkStyle('http://201.252.16.146:3000/style/utilichart.css?a7');
 
-requireScript('http://181.30.221.221:3000/js/lib/ps-polyfill.js');
-requireScript('http://181.30.221.221:3000/config/config.js?a7');
-requireScript('http://181.30.221.221:3000/js/lib/jquery-1.11.0.min.js');
-requireScript('http://181.30.221.221:3000/js/lib/html-sanitizer-minified.js');
-requireScript('http://181.30.221.221:3000/js/battle-sound.js');
-requireScript('http://181.30.221.221:3000/js/battledata.js?a7');
-requireScript('http://181.30.221.221:3000/data/pokedex-mini.js?a7');
-requireScript('http://181.30.221.221:3000/data/pokedex-mini-bw.js?a7');
-requireScript('http://181.30.221.221:3000/data/graphics.js?a7');
-requireScript('http://181.30.221.221:3000/data/pokedex.js?a7');
-requireScript('http://181.30.221.221:3000/data/moves.js?a7');
-requireScript('http://181.30.221.221:3000/data/abilities.js?a7');
-requireScript('http://181.30.221.221:3000/data/items.js?a7');
-requireScript('http://181.30.221.221:3000/data/teambuilder-tables.js?a7');
-requireScript('http://181.30.221.221:3000/js/battle-tooltips.js?a7');
-requireScript('http://181.30.221.221:3000/js/battle.js?a7');
+requireScript('http://201.252.16.146:3000/js/lib/ps-polyfill.js');
+requireScript('http://201.252.16.146:3000/config/config.js?a7');
+requireScript('http://201.252.16.146:3000/js/lib/jquery-1.11.0.min.js');
+requireScript('http://201.252.16.146:3000/js/lib/html-sanitizer-minified.js');
+requireScript('http://201.252.16.146:3000/js/battle-sound.js');
+requireScript('http://201.252.16.146:3000/js/battledata.js?a7');
+requireScript('http://201.252.16.146:3000/data/pokedex-mini.js?a7');
+requireScript('http://201.252.16.146:3000/data/pokedex-mini-bw.js?a7');
+requireScript('http://201.252.16.146:3000/data/graphics.js?a7');
+requireScript('http://201.252.16.146:3000/data/pokedex.js?a7');
+requireScript('http://201.252.16.146:3000/data/moves.js?a7');
+requireScript('http://201.252.16.146:3000/data/abilities.js?a7');
+requireScript('http://201.252.16.146:3000/data/items.js?a7');
+requireScript('http://201.252.16.146:3000/data/teambuilder-tables.js?a7');
+requireScript('http://201.252.16.146:3000/js/battle-tooltips.js?a7');
+requireScript('http://201.252.16.146:3000/js/battle.js?a7');
 
 var Replays = {
 	battle: null,

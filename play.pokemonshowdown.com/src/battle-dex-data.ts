@@ -640,6 +640,7 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	ledstar: 1596 + 5,
 	furrip: 1596 + 6,
 	furrful: 1596 + 7,
+	furrum: 1596 + 8,
 };
 
 export const BattlePokemonIconIndexesLeft: { [id: string]: number } = {
