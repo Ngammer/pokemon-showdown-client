@@ -789,19 +789,19 @@ export class BattleTooltips {
 				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
 			}
 			if (move.flags.head) {
-				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+				text += `<p class="movetag">&#x2713; Head <small>(boosted by Hardhead)</small></p>`;
 			}
 			if (move.flags.wing) {
-				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+				text += `<p class="movetag">&#x2713; Wing <small>()</small></p>`;
 			}
 			if (move.flags.kick) {
-				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+				text += `<p class="movetag">&#x2713; Kick <small>(boosted by Brutal Kick)</small></p>`;
 			}
 			if (move.flags.light) {
-				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+				text += `<p class="movetag">&#x2713; Light <small>(doesn't affect Enveloping Darkness pokemon)</small></p>`;
 			}
 			if (move.flags.beam) {
-				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+				text += `<p class="movetag">&#x2713; Beam <small>()</small></p>`;
 			}
 			// RBY healing move glitch
 			if (this.battle.gen === 1 && !toID(this.battle.tier).includes('stadium') &&
