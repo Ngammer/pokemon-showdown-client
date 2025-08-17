@@ -1661,7 +1661,8 @@ export class BattleTooltips {
 				break;
 			}
 		}
-		if ((move.id === 'terrainpulse' || move.id === 'secretpower' || move.id === 'naturepower') && pokemon.isGrounded(serverPokemon)) {
+		if ((move.id === 'terrainpulse' || move.id === 'secretpower' ||
+			move.id === 'naturepower') && pokemon.isGrounded(serverPokemon)) {
 			if (this.battle.hasPseudoWeather('Electric Terrain')) {
 				moveType = 'Electric';
 			} else if (this.battle.hasPseudoWeather('Grassy Terrain')) {
@@ -1892,6 +1893,11 @@ export class BattleTooltips {
 			value.itemModify(1.25, "Power Lens");
 		}
 
+		if (pokemon.volatiles['skullfossil']) {
+			accuracyModifiers.push(3686);
+			value.itemModify(0.9, "Skull Fossil");
+		}
+
 		// SSB
 		if (this.battle.tier.includes('Super Staff Bros')) {
 			if (move.id === 'alting' && pokemon.shiny) {
@@ -1993,7 +1999,8 @@ export class BattleTooltips {
 		if (move.id === 'brine' && target && target.hp * 2 <= target.maxhp) {
 			value.modify(2, 'Brine + target below half HP');
 		}
-		if (move.id === 'eruption' || move.id === 'waterspout' || move.id === 'dragonenergy' || move.id === 'hardpress' || move.id === 'crushgrip' || move.id === 'wringout') {
+		if (move.id === 'eruption' || move.id === 'waterspout' || move.id === 'dragonenergy' ||
+			move.id === 'hardpress' || move.id === 'crushgrip' || move.id === 'wringout') {
 			value.set(Math.floor(150 * pokemon.hp / pokemon.maxhp) || 1);
 		}
 		if (move.id === 'facade' && !['', 'slp'].includes(pokemon.status)) {
@@ -2073,14 +2080,16 @@ export class BattleTooltips {
 		if (move.id === 'psyblade' && this.battle.hasPseudoWeather('Electric Terrain')) {
 			value.modify(1.5, 'Electric Terrain');
 		}
-		if (move.id === 'ancientpower' && (pokemon.name === 'Aerodactyl' || pokemon.name === 'Kabutops' || pokemon.name === 'Cradily' ||
+		if (move.id === 'ancientpower' && (pokemon.name === 'Aerodactyl' || pokemon.name === 'Kabutops' ||
+			pokemon.name === 'Cradily' ||
 			pokemon.name === 'Armaldo' || pokemon.name === 'Rampardos' || pokemon.name === 'Omastar' ||
 			pokemon.name === 'Bastiodon' || pokemon.name === 'Carracosta' || pokemon.name === 'Archeops' ||
 			pokemon.name === 'Tyrantrum' || pokemon.name === 'Aurorus' || pokemon.name === 'Dracozolt' ||
 			pokemon.name === 'Dracovish' || pokemon.name === 'Arctozolt' || pokemon.name === 'Arctovish')) {
 			value.modify(1.5, 'Fossil');
 		}
-		if ((move.id === 'terrainpulse' || move.id === 'secretpower' || move.id === 'naturepower') && pokemon.isGrounded(serverPokemon)) {
+		if ((move.id === 'terrainpulse' || move.id === 'secretpower' || move.id === 'naturepower') &&
+			pokemon.isGrounded(serverPokemon)) {
 			if (
 				this.battle.hasPseudoWeather('Electric Terrain') ||
 				this.battle.hasPseudoWeather('Grassy Terrain') ||
@@ -2524,7 +2533,7 @@ export class BattleTooltips {
 
 		// Type-enhancing items
 		if (BattleTooltips.itemTypes[item.name] === moveType) {
-			value.itemModify(this.battle.gen < 4 ? 1.1 : 1.2);
+			value.itemModify(1.25);
 			return value;
 		}
 
@@ -2556,7 +2565,7 @@ export class BattleTooltips {
 		// Gems
 		if (BattleTooltips.noGemMoves.includes(moveName)) return value;
 		if (itemName === moveType + ' Gem') {
-			value.itemModify(this.battle.gen < 6 ? 1.5 : 1.3);
+			value.itemModify(1.5);
 			return value;
 		}
 
@@ -2573,7 +2582,7 @@ export class BattleTooltips {
 		}
 		if (itemName === 'Sea Incense' && moveType === 'Water'
 		) {
-			value.itemModify(1.1);
+			value.itemModify(2);
 		}
 
 		return value;
@@ -2854,7 +2863,8 @@ export class BattleStatGuesser {
 			physicalBulk *= 1.1;
 			specialBulk *= 1.1;
 		}
-		if (hasMove['gigadrain'] || hasMove['drainpunch'] || hasMove['hornleech'] || hasMove['bouncybubble'] || hasMove['dreameater']) {
+		if (hasMove['gigadrain'] || hasMove['drainpunch'] || hasMove['hornleech'] ||
+			hasMove['bouncybubble'] || hasMove['dreameater']) {
 			physicalBulk *= 1.15;
 			specialBulk *= 1.15;
 		}

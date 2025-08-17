@@ -713,7 +713,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'razorfang':
 			case 'ringtarget':
 			case 'scopelens':
-			case 'seaincense':
 			case 'stickybarb':
 			case 'throatspray':
 			case 'ironball':
@@ -780,6 +779,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'poisonbarb':
 			case 'polkadotbow':
 			case 'sharpbeak':
+			case 'seaincense':
 			case 'silkscarf':
 			case 'silverpowder':
 			case 'softsand':

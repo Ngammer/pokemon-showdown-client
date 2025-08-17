@@ -467,7 +467,7 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 			for (let i in this.volatiles) {
 				delete this.volatiles[i];
 			}
-			this.boosts = {spe: 1};
+			this.boosts = { spe: 1 };
 		}
 		delete this.volatiles['transform'];
 		delete this.volatiles['formechange'];
