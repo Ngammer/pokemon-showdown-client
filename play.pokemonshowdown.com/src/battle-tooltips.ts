@@ -786,7 +786,22 @@ export class BattleTooltips {
 				text += `<p class="movetag">&#x2713; Wind <small>(activates Wind Power and Wind Rider)</small></p>`;
 			}
 			if (move.flags.tail) {
-				text += `<p class="movetag">&#x2713; Tail <small>(activates Wind Power and Wind Rider)</small></p>`;
+				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+			}
+			if (move.flags.head) {
+				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+			}
+			if (move.flags.wing) {
+				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+			}
+			if (move.flags.kick) {
+				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+			}
+			if (move.flags.light) {
+				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
+			}
+			if (move.flags.beam) {
+				text += `<p class="movetag">&#x2713; Tail <small>()</small></p>`;
 			}
 			// RBY healing move glitch
 			if (this.battle.gen === 1 && !toID(this.battle.tier).includes('stadium') &&
