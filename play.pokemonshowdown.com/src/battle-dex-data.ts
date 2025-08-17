@@ -641,6 +641,7 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	furrip: 1596 + 6,
 	furrful: 1596 + 7,
 	furrum: 1596 + 8,
+	granbullfeudal: 1596 + 9,
 };
 
 export const BattlePokemonIconIndexesLeft: { [id: string]: number } = {
