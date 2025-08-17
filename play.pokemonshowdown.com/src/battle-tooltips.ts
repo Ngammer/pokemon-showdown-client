@@ -1249,6 +1249,11 @@ export class BattleTooltips {
 			stats.def = Math.floor(stats.def * 1.5);
 			stats.spd = Math.floor(stats.spd * 1.5);
 		}
+		if ((item === 'berrysweet' || item === 'cloversweet' || item === 'flowersweet' || item === 'lovesweet' ||
+			item === 'ribbonsweet' || item === 'starsweet' || item === 'strawberrysweet') &&
+			this.battle.dex.species.get(serverPokemon.speciesForme).baseSpecies === 'Alcremie') {
+			stats.spd = Math.floor(stats.spd * 1.5);
+		}
 		if (item === 'ovalstone' && this.battle.dex.species.get(serverPokemon.speciesForme).nfe) {
 			stats.def = Math.floor(stats.atk * 1.5);
 			stats.spd = Math.floor(stats.spa * 1.5);
@@ -2528,6 +2533,11 @@ export class BattleTooltips {
 		// Plates
 		if (item.onPlate === moveType && !item.zMove) {
 			value.itemModify(1.2);
+			return value;
+		}
+
+		if (item.onMemory === moveType && !item.zMove) {
+			value.itemModify(1.25);
 			return value;
 		}
 
