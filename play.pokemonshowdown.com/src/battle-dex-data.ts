@@ -1224,6 +1224,18 @@ export interface MoveFlags {
 	sound?: 1 | 0;
 	/** Activates the effects of the Wind Power and Wind Rider Abilities. */
 	wind?: 1 | 0;
+	/** Activates the effects of the Wind Power and Wind Rider Abilities. */
+	tail?: 1 | 0;
+	/** Activates the effects of the Wind Power and Wind Rider Abilities. */
+	head?: 1 | 0;
+	/** Activates the effects of the Wind Power and Wind Rider Abilities. */
+	wing?: 1 | 0;
+	/** Activates the effects of the Wind Power and Wind Rider Abilities. */
+	kick?: 1 | 0;
+	/** Activates the effects of the Wind Power and Wind Rider Abilities. */
+	light?: 1 | 0;
+	/** Activates the effects of the Wind Power and Wind Rider Abilities. */
+	beam?: 1 | 0;
 }
 
 export type MoveTarget = 'normal' | 'any' | 'adjacentAlly' | 'adjacentFoe' | 'adjacentAllyOrSelf' | // single-target

@@ -785,6 +785,9 @@ export class BattleTooltips {
 			if (move.flags.wind) {
 				text += `<p class="movetag">&#x2713; Wind <small>(activates Wind Power and Wind Rider)</small></p>`;
 			}
+			if (move.flags.tail) {
+				text += `<p class="movetag">&#x2713; Tail <small>(activates Wind Power and Wind Rider)</small></p>`;
+			}
 			// RBY healing move glitch
 			if (this.battle.gen === 1 && !toID(this.battle.tier).includes('stadium') &&
 				['recover', 'softboiled', 'rest'].includes(move.id)) {
@@ -2444,13 +2447,6 @@ export class BattleTooltips {
 		return value;
 	}
 
-	static incenseTypes: { [itemName: string]: Dex.TypeName } = {
-		'Odd Incense': 'Psychic',
-		'Rock Incense': 'Rock',
-		'Rose Incense': 'Grass',
-		'Sea Incense': 'Water',
-		'Wave Incense': 'Water',
-	};
 	static itemTypes: { [itemName: string]: Dex.TypeName } = {
 		'Black Belt': 'Fighting',
 		'Black Glasses': 'Dark',
@@ -2511,12 +2507,6 @@ export class BattleTooltips {
 			return value;
 		}
 
-		// Incenses
-		if (BattleTooltips.incenseTypes[item.name] === moveType) {
-			value.itemModify(1.2);
-			return value;
-		}
-
 		// Type-enhancing items
 		if (BattleTooltips.itemTypes[item.name] === moveType) {
 			value.itemModify(this.battle.gen < 4 ? 1.1 : 1.2);
@@ -2555,7 +2545,19 @@ export class BattleTooltips {
 			return value;
 		}
 
-		if (itemName === 'Punching Glove' && move.flags['punch']) {
+		if (itemName === 'Punching Glove' && move.flags['punch'] ||
+			itemName === 'Iron Bll' && move.flags['bullet'] ||
+			itemName === 'Lagging Tail' && move.flags['tail'] ||
+			itemName === 'Razor Fang' && move.flags['bite']
+		) {
+			value.itemModify(1.25);
+		}
+		if (itemName === 'Protective Pads' && move.flags['punch']
+		) {
+			value.itemModify(1.1);
+		}
+		if (itemName === 'Sea Incense' && moveType === 'Water'
+		) {
 			value.itemModify(1.1);
 		}
 
