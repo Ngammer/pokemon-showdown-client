@@ -1132,6 +1132,11 @@ export class BattleTooltips {
 			stats.spa *= 2;
 		}
 
+		if (item === 'stick' && speciesName === 'Farfetch\u2019d-Galar') {
+			stats.atk *= 2;
+			stats.def *= 2;
+		}
+
 		if (item === 'thickclub') {
 			if (speciesName === 'Marowak' || speciesName === 'Cubone') {
 				stats.atk *= 2;
@@ -1249,14 +1254,26 @@ export class BattleTooltips {
 			stats.def = Math.floor(stats.def * 1.5);
 			stats.spd = Math.floor(stats.spd * 1.5);
 		}
+		if (item === 'protector' && this.battle.dex.species.get(serverPokemon.speciesForme).baseSpecies === 'Rhyperior') {
+			stats.def = Math.floor(stats.def * 1.5);
+			stats.spd = Math.floor(stats.spd * 1.5);
+		}
+		if (item === 'leek' && this.battle.dex.species.get(serverPokemon.speciesForme).baseSpecies === 'Sirfetch\u2019d') {
+			stats.def = Math.floor(stats.def * 1.5);
+			stats.atk = Math.floor(stats.atk * 1.5);
+		}
 		if ((item === 'berrysweet' || item === 'cloversweet' || item === 'flowersweet' || item === 'lovesweet' ||
 			item === 'ribbonsweet' || item === 'starsweet' || item === 'strawberrysweet') &&
 			this.battle.dex.species.get(serverPokemon.speciesForme).baseSpecies === 'Alcremie') {
 			stats.spd = Math.floor(stats.spd * 1.5);
 		}
 		if (item === 'ovalstone' && this.battle.dex.species.get(serverPokemon.speciesForme).nfe) {
-			stats.def = Math.floor(stats.atk * 1.5);
-			stats.spd = Math.floor(stats.spa * 1.5);
+			stats.atk = Math.floor(stats.atk * 1.5);
+			stats.spa = Math.floor(stats.spa * 1.5);
+		}
+		if (item === 'dragonscale' && species === 'Seadra') {
+			stats.atk = Math.floor(stats.atk * 1.75);
+			stats.spa = Math.floor(stats.spa * 1.75);
 		}
 		if (ability === 'grasspelt' && this.battle.hasPseudoWeather('Grassy Terrain')) {
 			stats.def = Math.floor(stats.def * 1.5);
@@ -1275,12 +1292,8 @@ export class BattleTooltips {
 		if (item === 'powerbracer') {
 			stats.spa = Math.floor(stats.spa * 1.25);
 		}
-		if (item === 'deepseatooth' && species === 'Clamperl') {
-			stats.spa *= 2;
-		}
-		if (item === 'souldew' && this.battle.gen <= 6 && (species === 'Latios' || species === 'Latias')) {
-			stats.spa = Math.floor(stats.spa * 1.5);
-			stats.spd = Math.floor(stats.spd * 1.5);
+		if (item === 'deepseatooth' && species === 'Huntail') {
+			stats.atk *= 2;
 		}
 		if (clientPokemon && (ability === 'plus' || ability === 'minus')) {
 			let allyActive = clientPokemon.side.active;
@@ -1305,8 +1318,8 @@ export class BattleTooltips {
 		if (item === 'powerband') {
 			stats.spd = Math.floor(stats.def * 1.25);
 		}
-		if (item === 'deepseascale' && species === 'Clamperl') {
-			stats.spd *= 2;
+		if (item === 'deepseascale' && species === 'Gorebyss') {
+			stats.spa *= 2;
 		}
 		if (item === 'choicescarf' && !clientPokemon?.volatiles['dynamax']) {
 			speedModifiers.push(1.5);
@@ -2497,15 +2510,12 @@ export class BattleTooltips {
 		'Twisted Spoon': 'Psychic',
 	};
 	static orbUsers: { [speciesForme: string]: string[] } = {
-		'Latias': ['Soul Dew'],
-		'Latios': ['Soul Dew'],
 		'Dialga': ['Adamant Crystal', 'Adamant Orb'],
 		'Palkia': ['Lustrous Globe', 'Lustrous Orb'],
 		'Giratina': ['Griseous Core', 'Griseous Orb'],
 		'Venomicon': ['Vile Vial'],
 	};
 	static orbTypes: { [itemName: string]: Dex.TypeName[] } = {
-		'Soul Dew': ['Psychic', 'Dragon'],
 		'Adamant Crystal': ['Steel', 'Dragon'],
 		'Adamant Orb': ['Steel', 'Dragon'],
 		'Lustrous Globe': ['Water', 'Dragon'],
@@ -2536,8 +2546,43 @@ export class BattleTooltips {
 			return value;
 		}
 
-		if (item.onMemory === moveType && !item.zMove) {
-			value.itemModify(1.25);
+		if (item.onPlate === moveType && !item.zMove) {
+			value.itemModify(1.2);
+			return value;
+		}
+
+		if (item.name === 'Dusk Stone' && moveType === 'Ghost' && !item.zMove) {
+			value.itemModify(1.5);
+			return value;
+		}
+
+		if (item.name === 'Shiny Stone' && moveType === 'Fairy' && !item.zMove) {
+			value.itemModify(1.5);
+			return value;
+		}
+
+		if (item.name === 'Fire Stone' && moveType === 'Fire' && !item.zMove) {
+			value.itemModify(1.5);
+			return value;
+		}
+
+		if (item.name === 'Water Stone' && moveType === 'Water' && !item.zMove) {
+			value.itemModify(1.5);
+			return value;
+		}
+
+		if (item.name === 'Thunder Stone' && moveType === 'Electric' && !item.zMove) {
+			value.itemModify(1.5);
+			return value;
+		}
+
+		if (item.name === 'Ice Stone' && moveType === 'Ice' && !item.zMove) {
+			value.itemModify(1.5);
+			return value;
+		}
+
+		if (item.name === 'Leaf Stone' && moveType === 'Grass' && !item.zMove) {
+			value.itemModify(1.5);
 			return value;
 		}
 
@@ -2554,10 +2599,18 @@ export class BattleTooltips {
 		}
 
 		// Pokemon-specific items
-		if (item.name === 'Soul Dew' && this.battle.gen < 7) return value;
 		if (BattleTooltips.orbUsers[speciesName]?.includes(item.name) &&
 			BattleTooltips.orbTypes[item.name]?.includes(moveType)) {
 			value.itemModify(1.2);
+			return value;
+		}
+		if (speciesName === 'Archaludon' && item.name === 'Metal Alloy' && (moveType === 'Steel' || moveType === 'Electric')) {
+			value.itemModify(1.5);
+			return value;
+		}
+		if ((speciesName === 'Latios' || speciesName === 'Latias') && item.name === 'Soul Dew' &&
+			(moveType === 'Dragon' || moveType === 'Psychic')) {
+			value.itemModify(1.5);
 			return value;
 		}
 		if (speciesName === 'Ogerpon') {
