@@ -15270,7 +15270,7 @@ export const BattleMoveAnims: AnimTable = {
 				yscale: 1,
 				time: 700,
 			}, 'decel', 'fade');
-			
+
 			attacker.anim({
 				x: defender.x,
 				y: defender.y + 80,
@@ -37852,30 +37852,30 @@ BattleMoveAnims['trailblaze'] = { anim: BattleMoveAnims['powerwhip'].anim };
 BattleMoveAnims['tripledive'] = { anim: BattleMoveAnims['dive'].anim };
 BattleMoveAnims['hydrosteam'] = { anim: BattleMoveAnims['steameruption'].anim };
 BattleMoveAnims['psyblade'] = { anim: BattleMoveAnims['psychocut'].anim };
-BattleMoveAnims['beakdrill'] = {anim: BattleMoveAnims['drillpeck'].anim};
-BattleMoveAnims['nineflames'] = {anim: BattleMoveAnims['populationbomb'].anim};
-BattleMoveAnims['nineshard'] = {anim: BattleMoveAnims['iciclecrash'].anim};
-BattleMoveAnims['parasiticclamp'] = {anim: BattleMoveAnims['xscissor'].anim};
-BattleMoveAnims['monolith'] = {anim: BattleMoveAnims['gigaimpact'].anim};
-BattleMoveAnims['tripeck'] = {anim: BattleMoveAnims['doublekick'].anim};
-BattleMoveAnims['bubblefang'] = {anim: BattleMoveAnims['fishiousrend'].anim};
-BattleMoveAnims['dragonbite'] = {anim: BattleMoveAnims['crunch'].anim};
-BattleMoveAnims['stickybomb'] = {anim: BattleMoveAnims['stickyweb'].anim};
-BattleMoveAnims['bubbleancientrite'] = {anim: BattleMoveAnims['aquaring'].anim};
-BattleMoveAnims['lazyancientrite'] = {anim: BattleMoveAnims['simplebeam'].anim};
-BattleMoveAnims['mistycalancientrite'] = {anim: BattleMoveAnims['dragondance'].anim};
-BattleMoveAnims['braveancientrite'] = {anim: BattleMoveAnims['bulkup'].anim};
-BattleMoveAnims['honeyancientrite'] = {anim: BattleMoveAnims['defendorder'].anim};
-BattleMoveAnims['acrobaticancientrite'] = {anim: BattleMoveAnims['tailwind'].anim};
-BattleMoveAnims['delusionancientrite'] = {anim: BattleMoveAnims['lockon'].anim};
-BattleMoveAnims['meditationancientrite'] = {anim: BattleMoveAnims['calmmind'].anim};
-BattleMoveAnims['transcendentalancientrite'] = {anim: BattleMoveAnims['extremeevoboost'].anim};
-BattleMoveAnims['hiddenblock'] = {anim: BattleMoveAnims['barrier'].anim};
-BattleMoveAnims['hiddenincrease'] = {anim: BattleMoveAnims['painsplit'].anim};
-BattleMoveAnims['cyclonesphere'] = {anim: BattleMoveAnims['aeroblast'].anim};
-BattleMoveAnims['antclay'] = {anim: BattleMoveAnims['gigaimpact'].anim};
-BattleMoveAnims['discreettangle'] = {anim: BattleMoveAnims['withdraw'].anim};
-BattleMoveAnims['hiddenreintegration'] = {anim: BattleMoveAnims['refresh'].anim};
-BattleMoveAnims['unstableshell'] = {anim: BattleMoveAnims['explosion'].anim};
-BattleMoveAnims['refinedinkbomb'] = {anim: BattleMoveAnims['octazooka'].anim};
+BattleMoveAnims['beakdrill'] = { anim: BattleMoveAnims['drillpeck'].anim };
+BattleMoveAnims['nineflames'] = { anim: BattleMoveAnims['populationbomb'].anim };
+BattleMoveAnims['nineshard'] = { anim: BattleMoveAnims['iciclecrash'].anim };
+BattleMoveAnims['parasiticclamp'] = { anim: BattleMoveAnims['xscissor'].anim };
+BattleMoveAnims['monolith'] = { anim: BattleMoveAnims['gigaimpact'].anim };
+BattleMoveAnims['tripeck'] = { anim: BattleMoveAnims['doublekick'].anim };
+BattleMoveAnims['bubblefang'] = { anim: BattleMoveAnims['fishiousrend'].anim };
+BattleMoveAnims['dragonbite'] = { anim: BattleMoveAnims['crunch'].anim };
+BattleMoveAnims['stickybomb'] = { anim: BattleMoveAnims['stickyweb'].anim };
+BattleMoveAnims['bubbleancientrite'] = { anim: BattleMoveAnims['aquaring'].anim };
+BattleMoveAnims['lazyancientrite'] = { anim: BattleMoveAnims['simplebeam'].anim };
+BattleMoveAnims['mistycalancientrite'] = { anim: BattleMoveAnims['dragondance'].anim };
+BattleMoveAnims['braveancientrite'] = { anim: BattleMoveAnims['bulkup'].anim };
+BattleMoveAnims['honeyancientrite'] = { anim: BattleMoveAnims['defendorder'].anim };
+BattleMoveAnims['acrobaticancientrite'] = { anim: BattleMoveAnims['tailwind'].anim };
+BattleMoveAnims['delusionancientrite'] = { anim: BattleMoveAnims['lockon'].anim };
+BattleMoveAnims['meditationancientrite'] = { anim: BattleMoveAnims['calmmind'].anim };
+BattleMoveAnims['transcendentalancientrite'] = { anim: BattleMoveAnims['extremeevoboost'].anim };
+BattleMoveAnims['hiddenblock'] = { anim: BattleMoveAnims['barrier'].anim };
+BattleMoveAnims['hiddenincrease'] = { anim: BattleMoveAnims['painsplit'].anim };
+BattleMoveAnims['cyclonesphere'] = { anim: BattleMoveAnims['aeroblast'].anim };
+BattleMoveAnims['antclay'] = { anim: BattleMoveAnims['gigaimpact'].anim };
+BattleMoveAnims['discreettangle'] = { anim: BattleMoveAnims['withdraw'].anim };
+BattleMoveAnims['hiddenreintegration'] = { anim: BattleMoveAnims['refresh'].anim };
+BattleMoveAnims['unstableshell'] = { anim: BattleMoveAnims['explosion'].anim };
+BattleMoveAnims['refinedinkbomb'] = { anim: BattleMoveAnims['octazooka'].anim };
 BattleMoveAnims['polarflare'] = { anim: BattleMoveAnims['torchsong'].anim };

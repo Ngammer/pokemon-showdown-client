@@ -642,6 +642,12 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	furrful: 1596 + 7,
 	furrum: 1596 + 8,
 	granbullfeudal: 1596 + 9,
+	slowkingfeudal: 1596 + 10,
+	wungsparce: 1596 + 11,
+	wungsparcefeudal: 1596 + 12,
+	xatutotemserious: 1596 + 13,
+	xatutotemgrief: 1596 + 13,
+	xatutotemwrath: 1596 + 13,
 };
 
 export const BattlePokemonIconIndexesLeft: { [id: string]: number } = {
@@ -1587,13 +1593,15 @@ export class Species implements Effect {
 		this.requiredItems = data.requiredItems || (data.requiredItem ? [data.requiredItem] : []);
 		this.tier = data.tier || '';
 
-		this.isTotem = !!(this.forme && ['-totem', '-alolatotem', '-hisuitotem', '-totemjoy', '-totemgrief', '-totemwrath'].includes(this.formeid));
+		this.isTotem = !!(this.forme && ['-totem', '-alolatotem', '-hisuitotem',
+			'-totemjoy', '-totemgrief', '-totemwrath'].includes(this.formeid));
 		this.isMega = !!(this.forme && ['-mega', '-megax', '-megay'].includes(this.formeid));
 		this.isPrimal = !!(this.forme && this.formeid === '-primal');
 		this.canGigantamax = !!data.canGigantamax;
 		this.cannotDynamax = !!data.cannotDynamax;
 		this.requiredTeraType = data.requiredTeraType || '';
-		this.battleOnly = data.battleOnly || (this.isMega ? this.baseSpecies : undefined) || (this.isTotem ? this.baseSpecies : undefined);
+		this.battleOnly = data.battleOnly || (this.isMega ? this.baseSpecies : undefined) ||
+			(this.isTotem ? this.baseSpecies : undefined);
 		this.isNonstandard = data.isNonstandard || null;
 		this.unreleasedHidden = data.unreleasedHidden || false;
 		this.changesFrom = data.changesFrom ||
