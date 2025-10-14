@@ -236,7 +236,7 @@ export const Dex = new class implements ModdedDex {
 			prefix = 'http://192.168.0.20:3000/';
 		} else {
 			// External
-			prefix = 'http://201.252.16.146:3000/';
+			prefix = 'http://181.99.173.240:3000/';
 		}
 		return prefix;
 	})();
