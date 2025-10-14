@@ -8,7 +8,6 @@
 
 import preact from "../js/lib/preact";
 import { type Team, Config } from "./client-main";
-import { PSTeambuilder } from "./panel-teamdropdown";
 import { Dex, type ModdedDex, toID, type ID, PSUtils } from "./battle-dex";
 import { Teams } from './battle-teams';
 import { DexSearch, type SearchRow, type SearchType } from "./battle-dex-search";
@@ -71,6 +70,7 @@ class TeamEditorState extends PSModel {
 	defaultLevel = 100;
 	readonly = false;
 	fetching = false;
+	private userSetsCache: Record<ID, { [species: string]: { [setName: string]: Dex.PokemonSet } }> = {};
 	constructor(team: Team) {
 		super();
 		this.team = team;
@@ -484,7 +484,7 @@ class TeamEditorState extends PSModel {
 		if (this.format.includes('1v1')) return { minAtk, minSpe };
 
 		// only available through an event with 31 Atk IVs
-		if (set.ability === 'Battle Bond' || ['Koraidon', 'Miraidon'].includes(set.species)) {
+		if (set.ability === 'Battle Bond' || ['Koraidon', 'Miraidon', 'Gimmighoul-Roaming'].includes(set.species)) {
 			minAtk = false;
 			return { minAtk, minSpe };
 		}
@@ -602,7 +602,7 @@ class TeamEditorState extends PSModel {
 		return Teams.export(this.sets, this.dex, !compat);
 	}
 	import(value: string) {
-		this.sets = PSTeambuilder.importTeam(value);
+		this.sets = Teams.import(value);
 		this.save();
 	}
 	getTypeWeakness(type: Dex.TypeName, attackType: Dex.TypeName): 0 | 0.5 | 1 | 2 {
@@ -766,6 +766,36 @@ class TeamEditorState extends PSModel {
 		};
 		return Object.keys(all);
 	}
+	/** returns null if no boxes exist, empty array if no sets for this species */
+	getUserSets(set: Dex.PokemonSet): { [setName: string]: Dex.PokemonSet } | null {
+		if (!this.userSetsCache[this.format]) {
+			const userSets: { [species: string]: { [setName: string]: Dex.PokemonSet } } = {};
+
+			for (const team of window.PS?.teams.list || []) {
+				if (team.format !== this.format || !team.isBox) continue;
+
+				const setList = Teams.unpack(team.packedTeam);
+				const duplicateNameIndices: Record<string, number> = {};
+
+				for (const boxSet of setList) {
+					let name = boxSet.name || boxSet.species;
+					if (duplicateNameIndices[name]) {
+						name += ` ${duplicateNameIndices[name]}`;
+					}
+					duplicateNameIndices[name] = (duplicateNameIndices[name] || 0) + 1;
+
+					userSets[boxSet.species] ??= {};
+					userSets[boxSet.species][name] = boxSet;
+				}
+			}
+
+			this.userSetsCache[this.format] = userSets;
+		}
+
+		const cachedSets = this.userSetsCache[this.format];
+		if (Object.keys(cachedSets).length === 0) return null;
+		return cachedSets[set.species] || {};
+	}
 }
 
 export class TeamEditor extends preact.Component<{
@@ -780,17 +810,6 @@ export class TeamEditor extends preact.Component<{
 		this.wizard = wizard;
 		this.forceUpdate();
 	};
-	static renderTypeIcon(type: string | null, b?: boolean) { // b is just for utilichart.js
-		if (!type) return null;
-
-		type = Dex.types.get(type).name;
-		if (!type) type = '???';
-		let sanitizedType = type.replace(/\?/g, '%3f');
-		return <img
-			src={`${Dex.resourcePrefix}sprites/types/${sanitizedType}.png`} alt={type}
-			height="14" width="32" class={`pixelated${b ? ' b' : ''}`} style="vertical-align:middle"
-		/>;
-	}
 	static probablyMobile() {
 		return document.body.offsetWidth < 500;
 	}
@@ -1568,11 +1587,11 @@ class TeamTextbox extends preact.Component<{
 			</span>
 			{editor.gen === 9 ? (
 				<span class="detailcell">
-					<label>Tera</label>{TeamEditor.renderTypeIcon(set.teraType || species.requiredTeraType || species.types[0])}
+					<label>Tera</label><PSIcon type={set.teraType || species.requiredTeraType || species.types[0]} />
 				</span>
 			) : editor.hpTypeMatters(set) ? (
 				<span class="detailcell">
-					<label>H. Power</label>{TeamEditor.renderTypeIcon(editor.getHPType(set))}
+					<label>H. Power</label><PSIcon type={editor.getHPType(set)} />
 				</span>
 			) : (
 				<span class="detailcell">
@@ -1645,17 +1664,11 @@ class TeamTextbox extends preact.Component<{
 						const num = Dex.getPokemonIconNum(species.id);
 						if (!num) return null;
 
-						const top = Math.floor(num / 12) * 30;
-						const left = (num % 12) * 40;
-						const iconStyle = `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png) no-repeat scroll -${left}px -${top}px`;
-
-						const itemStyle = set.item && Dex.getItemIcon(editor.dex.items.get(set.item));
-
 						if (editor.narrow) {
 							return <div style={`top:${prevOffset + 1}px;left:5px;position:absolute;text-align:center;pointer-events:none`}>
-								<div><span class="picon" style={iconStyle}></span></div>
-								{species.types.map(type => <div>{TeamEditor.renderTypeIcon(type)}</div>)}
-								<div><span class="itemicon" style={itemStyle}></span></div>
+								<div><PSIcon pokemon={species.id} /></div>
+								{species.types.map(type => <div><PSIcon type={type} /></div>)}
+								<div><PSIcon item={set.item || null} /></div>
 							</div>;
 						}
 						return [<div
@@ -1665,7 +1678,7 @@ class TeamTextbox extends preact.Component<{
 								Dex.getTeambuilderSprite(set, editor.dex)
 							}
 						>
-							<div>{species.types.map(type => TeamEditor.renderTypeIcon(type))}<span class="itemicon" style={itemStyle}></span></div>
+							<div>{species.types.map(type => <PSIcon type={type} />)}<PSIcon item={set.item || null} /></div>
 						</div>, <div style={`top:${prevOffset + statsDetailsOffset}px;right:9px;position:absolute`}>
 							{this.renderStats(set, i)}
 						</div>, <div style={`top:${prevOffset + statsDetailsOffset}px;right:145px;position:absolute`}>
@@ -1878,7 +1891,7 @@ class TeamWizard extends preact.Component<{
 						<button class={`button button-middle${cur('details')}`} onClick={this.setFocus} value={`details|${i}`}>
 							<span class="detailcell">
 								<strong class="label">Types</strong> {}
-								{species.types.map(type => <div>{TeamEditor.renderTypeIcon(type)}</div>)}
+								{species.types.map(type => <div><PSIcon type={type} /></div>)}
 							</span>
 							<span class="detailcell">
 								<strong class="label">Level</strong> {}
@@ -1898,11 +1911,11 @@ class TeamWizard extends preact.Component<{
 							</span>}
 							{editor.gen === 9 && <span class="detailcell">
 								<strong class="label">Tera</strong> {}
-								{TeamEditor.renderTypeIcon(set.teraType || species.requiredTeraType || species.types[0])}
+								<PSIcon type={set.teraType || species.requiredTeraType || species.types[0]} />
 							</span>}
 							{editor.hpTypeMatters(set) && <span class="detailcell">
 								<strong class="label">H.P.</strong> {}
-								{TeamEditor.renderTypeIcon(editor.getHPType(set))}
+								<PSIcon type={editor.getHPType(set)} />
 							</span>}
 						</button>
 					</div></td>
@@ -1935,7 +1948,7 @@ class TeamWizard extends preact.Component<{
 					<td class="set-item"><div class="border-collapse">
 						<button class={`button button-middle${cur('item')}`} onClick={this.setFocus} value={`item|${i}`}>
 							{(editor.gen >= 2 || set.item) && <>
-								{set.item && <span class="itemicon" style={'float:right;' + Dex.getItemIcon(set.item)}></span>}
+								{set.item && <PSIcon item={set.item} />}
 								<strong class="label">Item</strong> {}
 								{set.item || <em>(no item)</em>}
 							</>}
@@ -2055,6 +2068,28 @@ class TeamWizard extends preact.Component<{
 		if (!setTemplate) return;
 
 		const applied: Partial<Dex.PokemonSet> = JSON.parse(JSON.stringify(setTemplate));
+		Object.assign(set, applied);
+
+		editor.save();
+		this.props.onUpdate?.();
+		this.forceUpdate();
+	};
+	handleLoadUserSet = (ev: Event) => {
+		const setName = (ev.target as HTMLButtonElement).value;
+		this.loadUserSet(setName);
+	};
+	loadUserSet = (setName: string) => {
+		const { editor } = this.props;
+		const setIndex = editor.innerFocus!.setIndex;
+		const set = editor.sets[setIndex];
+		if (!set?.species) return;
+
+		const userSets = editor.getUserSets(set);
+		const setTemplate = userSets?.[setName];
+		if (!setTemplate) return;
+
+		const applied: Partial<Dex.PokemonSet> = JSON.parse(JSON.stringify(setTemplate));
+		delete applied.name;
 		Object.assign(set, applied);
 
 		editor.save();
@@ -2196,6 +2231,7 @@ class TeamWizard extends preact.Component<{
 		const set = this.props.editor.sets[setIndex] as Dex.PokemonSet | undefined;
 		const cur = (i: number) => setIndex === i ? ' cur' : '';
 		const sampleSets = type === 'ability' ? editor.getSampleSets(set!) : [];
+		const userSets = type === 'ability' ? editor.getUserSets(set!) : null;
 		return <div class="team-focus-editor">
 			<ul class="tabbar">
 				<li class="home-li"><button class="button" onClick={this.setFocus}>
@@ -2204,7 +2240,7 @@ class TeamWizard extends preact.Component<{
 				{editor.sets.map((curSet, i) => <li><button
 					class={`button picontab${cur(i)}`} onClick={this.setFocus} value={`${type}|${i}`}
 				>
-					<span class="picon" style={Dex.getPokemonIcon(curSet)}></span><br />
+					<PSIcon pokemon={curSet} /><br />
 					{editor.getNickname(curSet)}
 				</button></li>)}
 				{editor.canAdd() && <li><button
@@ -2245,6 +2281,22 @@ class TeamWizard extends preact.Component<{
 									</div>
 								) : (
 									<div>Loading...</div>
+								)}
+							</div>
+						)}
+						{userSets !== null && (
+							<div class="sample-sets">
+								<h3>Box sets</h3>
+								{Object.keys(userSets).length > 0 ? (
+									<div>
+										{Object.keys(userSets).map(setName => <>
+											<button class="button" value={setName} onClick={this.handleLoadUserSet}>
+												{setName}
+											</button> {}
+										</>)}
+									</div>
+								) : (
+									<div>No {set!.species} sets found in boxes</div>
 								)}
 							</div>
 						)}
@@ -2628,16 +2680,7 @@ class StatForm extends preact.Component<{
 	};
 	updateNatureFromPlusMinus = () => {
 		const { set } = this.props;
-		if (!this.plus || !this.minus) {
-			delete set.nature;
-		} else {
-			for (const i in BattleNatures) {
-				if (BattleNatures[i as Dex.NatureName].plus === this.plus && BattleNatures[i as Dex.NatureName].minus === this.minus) {
-					set.nature = i as Dex.NatureName;
-					break;
-				}
-			}
-		}
+		set.nature = Teams.getNatureFromPlusMinus(this.plus, this.minus) || undefined;
 	};
 	/** Converts DV/IV in a textbox to the value in set. */
 	dvToIv(dvOrIvString?: string): number | null {
@@ -3036,15 +3079,12 @@ class DetailsForm extends preact.Component<{
 							const forms = species.cosmeticFormes?.length ? [baseId, ...species.cosmeticFormes.map(toID)] : [baseId];
 							return forms.map(id => {
 								const sp = editor.dex.species.get(id);
-								const iconStyle = Dex.getPokemonIcon({ species: sp.name } as Dex.PokemonSet);
 								const isCur = toID(set.species) === id;
 								return <button
-									value={id}
-									class={`button piconbtn${isCur ? ' cur' : ''}`}
-									style={{ padding: '2px' }}
-									onClick={this.selectSprite}
+									value={id} class={`button piconbtn${isCur ? ' cur' : ''}`}
+									style={{ padding: '2px' }} onClick={this.selectSprite}
 								>
-									<span class="picon" style={iconStyle}></span>
+									<PSIcon pokemon={{ species: sp.name } as Dex.PokemonSet} />
 									<br />{sp.forme || sp.baseForme || sp.baseSpecies}
 								</button>;
 							});

@@ -314,6 +314,7 @@ export class ChatRoom extends PSRoom {
 		'reject'(target) {
 			this.challenged = null;
 			this.update(null);
+			this.sendDirect(`/reject ${target}`);
 		},
 		'clear'() {
 			this.log?.reset();
@@ -1138,6 +1139,16 @@ class ChatPanel extends PSRoomPanel<ChatRoom> {
 		return false;
 	};
 	makeChallenge = (e: Event, format: string, team?: Team) => {
+		const elem = e.target as HTMLElement;
+		const now = Date.now();
+		const lastChallenged = PS.mainmenu.lastChallenged || 0;
+		if (now - lastChallenged < 5_000) {
+			PS.alert(`Please wait 5 seconds before challenging again.`, {
+				parentElem: elem,
+			});
+			return;
+		}
+
 		PS.requestNotifications();
 		const room = this.props.room;
 		const packedTeam = team ? team.packedTeam : '';
@@ -1150,6 +1161,7 @@ class ChatPanel extends PSRoomPanel<ChatRoom> {
 			formatName: format,
 			teamFormat: format,
 		};
+		PS.mainmenu.lastChallenged = now;
 		room.update(null);
 	};
 	acceptChallenge = (e: Event, format: string, team?: Team) => {
@@ -1196,7 +1208,10 @@ class ChatPanel extends PSRoomPanel<ChatRoom> {
 		</div> : null;
 
 		return <PSPanelWrapper room={room} focusClick fullSize>
-			<ChatLog class="chat-log" room={this.props.room} left={tinyLayout ? 0 : 146} top={room.tour?.info.isActive ? 30 : 0}>
+			<ChatLog
+				class={`chat-log${tinyLayout ? '' : ' hasuserlist'}`} room={this.props.room}
+				left={tinyLayout ? 0 : 146} top={room.tour?.info.isActive ? 30 : 0}
+			>
 				{challengeTo}{challengeFrom}{PS.isOffline && <p class="buttonbar">
 					<button class="button" data-cmd="/reconnect">
 						<i class="fa fa-plug" aria-hidden></i> <strong>Reconnect</strong>
