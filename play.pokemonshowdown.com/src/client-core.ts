@@ -163,7 +163,7 @@ export const PSBackground = new class extends PSStreamModel<string | null> {
 			if (location.host === 'smogtours.psim.us') {
 				bgid = 'shaymin';
 			} else {
-				const bgs = ['horizon', 'ocean', 'waterfall', 'shaymin', 'charizards'];
+				const bgs = ['horizon', 'ocean', 'waterfall', 'shaymin', 'charizards', 'nuevometa'];
 				bgid = bgs[Math.floor(Math.random() * 5)];
 				// if someone clicked the random button, try to roll a different bg than before
 				if (bgid === this.curId) bgid = bgs[Math.floor(Math.random() * 5)];
@@ -257,6 +257,21 @@ export const PSBackground = new class extends PSStreamModel<string | null> {
 				url: 'https://lit.link/en/seiryuuden',
 				title: 'Charizards',
 				artist: 'Jessica Valencia',
+			};
+			break;
+		case 'nuevometa':
+			menuColors = [
+				"37.159090909090914,74.57627118644066%",
+				"10.874999999999998,70.79646017699115%",
+				"179.51612903225808,52.10084033613446%",
+				"20.833333333333336,36.73469387755102%",
+				"192.3076923076923,80.41237113402063%",
+				"210,29.629629629629633%",
+			];
+			attrib = {
+				url: 'https://lit.link/en/seiryuuden',
+				title: 'Nuevo Meta',
+				artist: 'Juansssss',
 			};
 			break;
 		case 'digimon':

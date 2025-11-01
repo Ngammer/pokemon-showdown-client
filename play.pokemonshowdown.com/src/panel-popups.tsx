@@ -1366,6 +1366,10 @@ class BackgroundListPanel extends PSRoomPanel {
 					<span class="bg" style="background-position: 0 -360px"></span>{}
 					Shaymin
 				</button>
+				<button onClick={this.setBg} value="nuevometa" class={option('nuevometa')}>
+					<span class="bg" style="background: #344b6c"></span>{}
+					Nuevo Meta
+				</button>
 				<button onClick={this.setBg} value="solidblue" class={option('solidblue')}>
 					<span class="bg" style="background: #344b6c"></span>{}
 					Solid blue
