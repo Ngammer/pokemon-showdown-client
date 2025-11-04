@@ -392,7 +392,6 @@ export class DexSearch {
 			// hardcode cases of duplicate non-consecutive aliases
 			if ((id === 'megax' || id === 'megay') && 'mega'.startsWith(query)) continue;
 
-
 			let matchStart = 0;
 			let matchEnd = 0;
 			if (passType === 'alias') {
@@ -575,7 +574,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 
 	protected formatType: 'doubles' | 'bdsp' | 'bdspdoubles' | 'rs' | 'bw1' | 'letsgo' | 'metronome' | 'natdex' | 'nfe' |
 		'ssdlc1' | 'ssdlc1doubles' | 'predlc' | 'predlcdoubles' | 'predlcnatdex' | 'svdlc1' | 'svdlc1doubles' |
-		'svdlc1natdex' | 'stadium' | 'lc' | 'legendsza' | null = null;
+		'svdlc1natdex' | 'stadium' | 'lc' | 'legendsza' | 'nuevometa' | null = null;
 	isDoubles = false;
 
 	/**
@@ -859,6 +858,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 		let genChar = `${gen}`;
 		if (
 			this.format.startsWith('vgc') ||
+			this.format.startsWith('nuevometa') ||
 			this.format.startsWith('bss') ||
 			this.format.startsWith('battlespot') ||
 			this.format.startsWith('battlestadium') ||
@@ -918,6 +918,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType === 'svdlc1doubles' ? 'gen9dlc1doubles' :
 			this.formatType === 'svdlc1natdex' ? 'gen9dlc1natdex' :
 			this.formatType === 'natdex' ? `gen${gen}natdex` :
+			this.formatType === 'nuevometa' ? `gen${gen}nuevometa` :
 			this.formatType === 'stadium' ? `gen${gen}stadium${gen > 1 ? gen : ''}` :
 			this.formatType === 'legendsza' ? `gen9legendsou` :
 			`gen${gen}`;
@@ -1047,6 +1048,8 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 			table = table['gen3rs'];
 		} else if (this.formatType === 'natdex') {
 			table = table[`gen${dex.gen}natdex`];
+		} else if (this.formatType === 'nuevometa') {
+			table = table[`gen${dex.gen}`];
 		} else if (this.formatType === 'metronome') {
 			table = table[`gen${dex.gen}metronome`];
 		} else if (this.formatType === 'nfe') {
@@ -1373,6 +1376,8 @@ class BattleItemSearch extends BattleTypedSearch<'item'> {
 			table = table['gen3rs'];
 		} else if (this.formatType === 'natdex') {
 			table = table[`gen${this.dex.gen}natdex`];
+		} else if (this.formatType === 'nuevometa') {
+			table = table[`gen${this.dex.gen}`];
 		} else if (this.formatType?.endsWith('doubles')) { // no natdex/bdsp doubles support
 			table = table[`gen${this.dex.gen}doubles`];
 		} else if (this.formatType === 'metronome') {
@@ -1525,14 +1530,14 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 		}
 
 		///////////////////////////
-		  // habilidades de megas/cambio de forma
+		// habilidades de megas/cambio de forma
 		if (itemid === 'pidgeotite') abilityid = 'noguard' as ID;
 		if (itemid === 'blastoisinite') abilityid = 'megalauncher' as ID;
 		if (itemid === 'aerodactylite') abilityid = 'toughclaws' as ID;
 		if (itemid === 'glalitite') abilityid = 'refrigerate' as ID;
 
 		/////////////////////////////
-			// excepciones situacionales
+		// excepciones situacionales
 		switch (id) {
 		case 'fakeout': case 'flamecharge': case 'nuzzle': case 'poweruppunch': case 'trailblaze':
 			return abilityid !== 'sheerforce';
@@ -1704,7 +1709,7 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 			return abilityid === 'noguard' || (dex.gen < 4 && !moves.includes('thunderwave'));
 		}
 		///////////////////
-		  // dobles
+		// dobles
 
 		if (this.isDoubles && BattleMoveSearch.GOOD_DOUBLES_MOVES.includes(id)) {
 			return true;
@@ -1717,8 +1722,8 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 		if ((move.status === 'slp' || id === 'yawn') && dex.gen === 9 && !this.formatType) {
 			return false;
 		}
-		  ////////////////
-		  if (move.category === 'Status') {
+		////////////////
+		if (move.category === 'Status') {
 			return BattleMoveSearch.GOOD_STATUS_MOVES.includes(id);
 		}
 		if (move.basePower < 75) {
@@ -1737,7 +1742,7 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 		}
 		return !BattleMoveSearch.BAD_STRONG_MOVES.includes(id);
 	}
-		 // listas de excepciones
+	// listas de excepciones
 	static readonly GOOD_STATUS_MOVES = [
 		'acidarmor', 'agility', 'aromatherapy', 'auroraveil', 'autotomize', 'banefulbunker', 'batonpass', 'bellydrum', 'bulkup', 'burningbulwark', 'calmmind', 'chillyreception', 'clangoroussoul', 'coil', 'cottonguard', 'courtchange', 'curse', 'defog', 'destinybond', 'detect', 'disable', 'dragondance', 'encore', 'extremeevoboost', 'filletaway', 'geomancy', 'glare', 'haze', 'healbell', 'healingwish', 'healorder', 'heartswap', 'honeclaws', 'kingsshield', 'leechseed', 'lightscreen', 'lovelykiss', 'lunardance', 'magiccoat', 'maxguard', 'memento', 'milkdrink', 'moonlight', 'morningsun', 'nastyplot', 'naturesmadness', 'noretreat', 'obstruct', 'painsplit', 'partingshot', 'perishsong', 'protect', 'quiverdance', 'recover', 'reflect', 'reflecttype', 'rest', 'revivalblessing', 'roar', 'rockpolish', 'roost', 'shedtail', 'shellsmash', 'shiftgear', 'shoreup', 'silktrap', 'slackoff', 'sleeppowder', 'sleeptalk', 'softboiled', 'spikes', 'spikyshield', 'spore', 'stealthrock', 'stickyweb', 'strengthsap', 'substitute', 'switcheroo', 'swordsdance', 'synthesis', 'tailglow', 'tailwind', 'taunt', 'thunderwave', 'tidyup', 'toxic', 'transform', 'trick', 'victorydance', 'whirlwind', 'willowisp', 'wish', 'yawn',
 	] as ID[] as readonly ID[];

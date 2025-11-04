@@ -1283,6 +1283,37 @@ export class BattleScene implements BattleSceneStub {
 			this.$spritesFront[spriteIndex].append(rock4.$el);
 			this.sideConditions[siden][id] = [rock1, rock2, rock3, rock4];
 			break;
+		case 'sharproot':
+			const root1 = new Sprite(BattleEffects.greenmetal1, {
+				display: 'block',
+				x: x + side.leftof(-30),
+				y: y - 20,
+				z: side.z,
+				opacity: 0.5,
+				scale: 0.8,
+			}, this);
+			const root2 = new Sprite(BattleEffects.greenmetal2, {
+				display: 'block',
+				x: x + side.leftof(35),
+				y: y - 15,
+				z: side.z,
+				opacity: 0.5,
+				scale: 0.8,
+			}, this);
+			const root3 = new Sprite(BattleEffects.greenmetal1, {
+				display: 'block',
+				x: x + side.leftof(50),
+				y: y - 10,
+				z: side.z,
+				opacity: 0.5,
+				scale: 0.8,
+			}, this);
+
+			this.$spritesFront[spriteIndex].append(root1.$el);
+			this.$spritesFront[spriteIndex].append(root2.$el);
+			this.$spritesFront[spriteIndex].append(root3.$el);
+			this.sideConditions[siden][id] = [root1, root2, root3];
+			break;
 		case 'gmaxsteelsurge':
 			const surge1 = new Sprite(BattleEffects.greenmetal1, {
 				display: 'block',

@@ -378,7 +378,7 @@ function toId() {
 			app.socket.close();
 		},
 		setPersistentName: function (name) {
-			/*if (location.host !== Config.routes.client) return;*/
+			/* if (location.host !== Config.routes.client) return; */
 			$.cookie('showdown_username', (name !== undefined) ? name : this.get('name'), {
 				expires: 14
 			});
@@ -506,7 +506,7 @@ function toId() {
 					self.updateLayout();
 				}
 
-				if (/*Dex.prefs('bwgfx') ||*/ Dex.prefs('noanim')) {
+				if (/* Dex.prefs('bwgfx') || */ Dex.prefs('noanim')) {
 					// since xy data is loaded by default, only call
 					// loadSpriteData if we want bw sprites or if we need bw
 					// sprite data (if animations are disabled)
