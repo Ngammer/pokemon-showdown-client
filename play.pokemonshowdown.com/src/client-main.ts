@@ -1062,8 +1062,7 @@ export class PSRoom extends PSStreamModel<Args | null> implements RoomOptions {
 		const room = PS.rooms[this.id] as ChatRoom;
 		const lastSeenTimestamp = PS.prefs.logtimes?.[PS.server.id]?.[this.id] || 0;
 		const lastMessageTime = +(room.lastMessage?.[1] || 0);
-		if ((lastMessageTime - room.timeOffset) <= lastSeenTimestamp) return;
-		this.isSubtleNotifying = true;
+		this.isSubtleNotifying = !((lastMessageTime + room.timeOffset) <= lastSeenTimestamp);
 		PS.update();
 	}
 	dismissNotificationAt(i: number) {
@@ -1814,7 +1813,7 @@ export const PS = new class extends PSModel {
 		"user-*": "*popup",
 		"viewuser-*": "*popup",
 		"volume": "*popup",
-		"options": "*popup",
+		"options": "*semimodal-popup",
 		"*": "*right",
 		"battle-*": "*",
 		"battles": "*right",
@@ -1825,7 +1824,29 @@ export const PS = new class extends PSModel {
 		"ladder-*": "*",
 		"view-*": "*",
 		"login": "*semimodal-popup",
-		"help-*": "chat",
+		"help-*": "*right",
+		"tourpopout": "*semimodal-popup",
+		"groupchat-*": "*right",
+		"users": "*popup",
+		"useroptions-*": "*popup",
+		"userlist": "*semimodal-popup",
+		"avatars": "*semimodal-popup",
+		"changepassword": "*semimodal-popup",
+		"register": "*semimodal-popup",
+		"forfeitbattle": "*semimodal-popup",
+		"replaceplayer": "*semimodal-popup",
+		"changebackground": "*semimodal-popup",
+		"confirmleaveroom": "*semimodal-popup",
+		"chatformatting": "*semimodal-popup",
+		"popup-*": "*semimodal-popup",
+		"roomtablist": "*semimodal-popup",
+		"battleoptions": "*semimodal-popup",
+		"battletimer": "*semimodal-popup",
+		"rules-*": "*modal-popup",
+		"resources": "*",
+		"game-*": "*",
+		"teamstorage-*": "*semimodal-popup",
+		"viewteam-*": "*",
 	});
 	/** List of rooms on the left side of the top tabbar */
 	leftRoomList: RoomID[] = [];
