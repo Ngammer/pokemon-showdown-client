@@ -635,7 +635,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const itemList = Object.keys(Dex.data.Items);
 		itemList.sort();
 
-		const greatItems = [['header', "Popular items"]];
 		const goodItems = [['header', "Items"]];
 		const specificItems = [['header', "Pok\u00e9mon-specific items"]];
 		const stats = [['header', "Stat-increasing items"]];
