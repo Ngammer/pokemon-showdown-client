@@ -572,7 +572,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 	 */
 	set: Dex.PokemonSet | null = null;
 
-	protected formatType: 'doubles' | 'bdsp' | 'bdspdoubles' | 'rs' | 'bw1' | 'letsgo' | 'metronome' | 'natdex' | 'nfe' |
+	protected formatType: 'singles' |'doubles' | 'bdsp' | 'bdspdoubles' | 'rs' | 'bw1' | 'letsgo' | 'metronome' | 'natdex' | 'nfe' |
 		'ssdlc1' | 'ssdlc1doubles' | 'predlc' | 'predlcdoubles' | 'predlcnatdex' | 'svdlc1' | 'svdlc1doubles' |
 		'svdlc1natdex' | 'stadium' | 'lc' | 'legendsza' | null = null;
 	isDoubles = false;
@@ -687,6 +687,12 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType = 'doubles';
 			this.isDoubles = true;
 		}
+		/*
+		if (format.includes('singles')) {
+			format = format.slice(7) as ID;
+			this.formatType = 'singles';
+		}
+		*/
 		if (this.formatType === 'letsgo') format = format.slice(6) as ID;
 		if (format.includes('metronome')) {
 			this.formatType = 'metronome';
