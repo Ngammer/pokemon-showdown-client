@@ -848,7 +848,8 @@ export class Side {
 		this.battle.lastMove = 'switch-in';
 		const effect = Dex.getEffect(kwArgs.from);
 		if (['batonpass', 'zbatonpass', 'shedtail', 'doubleteam'].includes(effect.id)) {
-			pokemon.copyVolatileFrom(this.lastPokemon!, effect.id === 'shedtail' ? 'shedtail' : effect.id === 'doubleteam' ? 'doubleteam' : false);
+			pokemon.copyVolatileFrom(this.lastPokemon!, effect.id === 'shedtail' ? 'shedtail' :
+				effect.id === 'doubleteam' ? 'doubleteam' : false);
 		} else if (this.battle.tier.includes(`Relay Race`) && !effect.id) {
 			if (this.lastPokemon && !this.lastPokemon.fainted) pokemon.copyVolatileFrom(this.lastPokemon, false);
 		}
@@ -3115,7 +3116,8 @@ export class Battle {
 			this.activateAbility(poke, fromeffect);
 			let minTimeLeft = 5;
 			let maxTimeLeft = 0;
-			if (effect.id.endsWith('terrain') || effect.id.endsWith('room') || effect.id.endsWith('gravity')) {
+			if (effect.id.endsWith('terrain') || effect.id.endsWith('room') || effect.id.endsWith('gravity') ||
+				effect.id.endsWith('mist')) {
 				for (let i = this.pseudoWeather.length - 1; i >= 0; i--) {
 					let pwID = toID(this.pseudoWeather[i][0]);
 					if (pwID.endsWith('terrain')) {
@@ -3123,7 +3125,11 @@ export class Battle {
 						continue;
 					}
 				}
-				if (this.gen > 6) maxTimeLeft = 8;
+				if (this.gen > 6 && effect.id.endsWith('terrain')) {
+					maxTimeLeft = 10;
+				} else {
+					maxTimeLeft = 8;
+				}
 			}
 			if (kwArgs.persistent) minTimeLeft += 2;
 			this.addPseudoWeather(effect.name, minTimeLeft, maxTimeLeft);

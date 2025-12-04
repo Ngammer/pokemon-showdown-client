@@ -574,7 +574,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 
 	protected formatType: 'doubles' | 'bdsp' | 'bdspdoubles' | 'rs' | 'bw1' | 'letsgo' | 'metronome' | 'natdex' | 'nfe' |
 		'ssdlc1' | 'ssdlc1doubles' | 'predlc' | 'predlcdoubles' | 'predlcnatdex' | 'svdlc1' | 'svdlc1doubles' |
-		'svdlc1natdex' | 'stadium' | 'lc' | 'legendsza' | 'nuevometa' | null = null;
+		'svdlc1natdex' | 'stadium' | 'lc' | 'legendsza' | null = null;
 	isDoubles = false;
 
 	/**
@@ -687,11 +687,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType = 'doubles';
 			this.isDoubles = true;
 		}
-		if (format.includes('nuevometa')) {
-			format = (format.includes('nuevometa') ? format.slice(9) : format.slice(11)) as ID;
-			if (!format) format = 'ou' as ID;
-		}
-		if (format.includes('doubles') && this.dex.gen > 4 && !this.formatType) this.formatType = 'doubles';
 		if (this.formatType === 'letsgo') format = format.slice(6) as ID;
 		if (format.includes('metronome')) {
 			this.formatType = 'metronome';
@@ -858,7 +853,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 		let genChar = `${gen}`;
 		if (
 			this.format.startsWith('vgc') ||
-			this.format.startsWith('nuevometa') ||
 			this.format.startsWith('bss') ||
 			this.format.startsWith('battlespot') ||
 			this.format.startsWith('battlestadium') ||
@@ -918,7 +912,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType === 'svdlc1doubles' ? 'gen9dlc1doubles' :
 			this.formatType === 'svdlc1natdex' ? 'gen9dlc1natdex' :
 			this.formatType === 'natdex' ? `gen${gen}natdex` :
-			this.formatType === 'nuevometa' ? `gen${gen}nuevometa` :
 			this.formatType === 'stadium' ? `gen${gen}stadium${gen > 1 ? gen : ''}` :
 			this.formatType === 'legendsza' ? `gen9legendsou` :
 			`gen${gen}`;
@@ -1048,8 +1041,6 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 			table = table['gen3rs'];
 		} else if (this.formatType === 'natdex') {
 			table = table[`gen${dex.gen}natdex`];
-		} else if (this.formatType === 'nuevometa') {
-			table = table[`gen${dex.gen}`];
 		} else if (this.formatType === 'metronome') {
 			table = table[`gen${dex.gen}metronome`];
 		} else if (this.formatType === 'nfe') {
@@ -1376,8 +1367,6 @@ class BattleItemSearch extends BattleTypedSearch<'item'> {
 			table = table['gen3rs'];
 		} else if (this.formatType === 'natdex') {
 			table = table[`gen${this.dex.gen}natdex`];
-		} else if (this.formatType === 'nuevometa') {
-			table = table[`gen${this.dex.gen}`];
 		} else if (this.formatType?.endsWith('doubles')) { // no natdex/bdsp doubles support
 			table = table[`gen${this.dex.gen}doubles`];
 		} else if (this.formatType === 'metronome') {
