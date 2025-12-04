@@ -687,10 +687,12 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType = 'doubles';
 			this.isDoubles = true;
 		}
+		/*
 		if (format.includes('singles')) {
 			format = format.slice(7) as ID;
 			this.formatType = 'singles';
 		}
+		*/
 		if (this.formatType === 'letsgo') format = format.slice(6) as ID;
 		if (format.includes('metronome')) {
 			this.formatType = 'metronome';
