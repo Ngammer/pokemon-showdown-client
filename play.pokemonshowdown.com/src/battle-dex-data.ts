@@ -673,16 +673,17 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	clammdeer: 1632 + 12,
 	arteagle: 1632 + 13,
 	// Nuevo meta formas
-	slastmaliberado: 1656 + 0,
+	pichuspikyeared: 1656 + 0,
 	delibirdholiday: 1656 + 1,
+	slastmaliberado: 1656 + 2,
 	// Nuevo meta totems
 	raticatealolatotem: 1668 + 0,
 	marowakalolatotem: 1668 + 1,
 	electrodehisuitotem: 1668 + 2,
 	arcaninehisuitotem: 1668 + 3,
 	xatutotemserious: 1668 + 4,
-	xatutotemgrief: 1668 + 4,
-	xatutotemwrath: 1668 + 4,
+	xatutotemgrief: 1668 + 5,
+	xatutotemwrath: 1668 + 6,
 	// Nuevo meta feudal
 	quagsirefeudal: 1704 + 0,
 	slowkingfeudal: 1704 + 1,
