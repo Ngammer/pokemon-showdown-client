@@ -1315,7 +1315,7 @@ export class BattleTooltips {
 			stats.spd = Math.floor(stats.spd * 1.5);
 		}
 		if (item === 'poweranklet') {
-			stats.spd = Math.floor(stats.def * 1.25);
+			stats.def = Math.floor(stats.def * 1.25);
 		}
 		if (item === 'powerband') {
 			stats.spd = Math.floor(stats.spd * 1.25);
