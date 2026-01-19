@@ -1318,7 +1318,7 @@ export class BattleTooltips {
 			stats.spd = Math.floor(stats.def * 1.25);
 		}
 		if (item === 'powerband') {
-			stats.spd = Math.floor(stats.def * 1.25);
+			stats.spd = Math.floor(stats.spd * 1.25);
 		}
 		if (item === 'deepseascale' && species === 'Gorebyss') {
 			stats.spa *= 2;
