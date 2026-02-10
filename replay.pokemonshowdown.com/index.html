@@ -19,10 +19,10 @@ https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
 
 -->
 
-<link rel="stylesheet" href="//pokemonshowdown.com/style/global.css?0.5525554121313905" />
-<link rel="stylesheet" href="//192.168.0.20:3000/style/font-awesome.css?0.9224258107669803" />
-<link rel="stylesheet" href="//192.168.0.20:3000/style/battle.css?0.680569864536207" />
-<link rel="stylesheet" href="//192.168.0.20:3000/style/utilichart.css?0.6385457373295396" />
+<link rel="stylesheet" href="//181.99.179.92:3001/style/global.css?0.40273905554864275" />
+<link rel="stylesheet" href="//181.99.179.92:3000/style/font-awesome.css?0.6063038124274089" />
+<link rel="stylesheet" href="//181.99.179.92:3000/style/battle.css?0.026126143812006397" />
+<link rel="stylesheet" href="//181.99.179.92:3000/style/utilichart.css?0.20361705573845068" />
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-26211653-1"></script>
@@ -54,6 +54,7 @@ https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
 		display: inline-block;
 		line-height: 22px;
 		font-size: 10pt;
+		vertical-align: top;
 	}
 	.optgroup .button {
 		height: 25px;
@@ -139,25 +140,15 @@ https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
 
 	<header>
 		<div class="nav-wrapper"><ul class="nav">
-			<li><a id="ps-link" class="button nav-first" href="//181.99.179.92:3001/"><img id="logo" src="//181.99.179.92:3001/images/pokemonshowdownbeta.png" srcset="//181.99.179.92:3001/images/pokemonshowdownbeta.png 1x, //181.99.179.92:3001/images/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
-			<li><a id="dex-link" class="button" href="//181.99.179.92:3003/">Pok&eacute;dex</a></li>
-			<li><a class="button cur" href="/">Replays</a></li>
-			<li><a class="button" href="//pokemonshowdown.com/ladder/">Ladder</a></li>
-			<li><a class="button nav-last" href="//pokemonshowdown.com/forums/">Forum</a></li>
-			<li><a id="play-link" class="button greenbutton nav-first nav-last" href="//181.99.179.92:3000/">Play</a></li>
+			<li><a class="button nav-first" href="//181.99.179.92:3001/"><img src="//181.99.179.92:3001/images/pokemonshowdownbeta.png" srcset="//181.99.179.92:3001/images/pokemonshowdownbeta.png 1x, //181.99.179.92:3001/images/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
+			<li><a class="button" href="//181.99.179.92:3001/dex/">Pok&eacute;dex</a></li>
+			<li><a class="button cur" href="/">Replay</a></li>
+			<li><a class="button purplebutton" href="//smogon.com/dex/" target="_blank">Strategy</a></li>
+			<li><a class="button nav-last purplebutton" href="//smogon.com/forums/" target="_blank">Forum</a></li>
+			<li><a class="button greenbutton nav-first nav-last" href="//181.99.179.92:3000/">Play</a></li>
 		</ul></div>
 	</header>
-	<script>
-		if (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')){
-			document.getElementById("logo").src = "//192.168.0.20:3001/images/pokemonshowdownbeta.png";
-			document.getElementById("logo").srcset = "//192.168.0.20:3001/images/pokemonshowdownbeta.png 1x, //192.168.0.20:3001/images/pokemonshowdownbeta@2x.png 2x";
-			document.getElementById("play-link").href = "//192.168.0.20:3000/";
-			document.getElementById("ps-link").href = "//192.168.0.20:3001/";
-		document.getElementById("dex-link").href = "//192.168.0.20:3003/";
-		document.getElementById("replay-link").href = "//192.168.0.20:3002/";
-		document.getElementById("calc-link").href = "//192.168.0.20:3004/";
-		}
-  </script>
+
 	<div class="main" id="main">
 
 		<noscript><section class="section">You need to enable JavaScript to use this page; sorry!</section></noscript>
@@ -166,27 +157,28 @@ https://replay.pokemonshowdown.com/gen7randomdoublesbattle-865046831.log
 
 </div>
 
-<script defer nomodule src="//192.168.0.20:3000/js/lib/ps-polyfill.js"></script>
-<script defer src="//192.168.0.20:3000/js/lib/preact.min.js"></script>
+<script defer nomodule src="//181.99.179.92:3000/js/lib/ps-polyfill.js"></script>
+<script defer src="//181.99.179.92:3000/js/lib/preact.min.js"></script>
 
-<script defer src="//192.168.0.20:3000/config/config.js?57f36214"></script>
-<script defer src="//192.168.0.20:3000/js/lib/jquery-1.11.0.min.js"></script>
-<script defer src="//192.168.0.20:3000/js/lib/html-sanitizer-minified.js"></script>
-<script defer src="//192.168.0.20:3000/js/battle-sound.js"></script>
-<script defer src="//192.168.0.20:3000/js/battledata.js?0.9485646556111467"></script>
-<script defer src="//192.168.0.20:3000/data/pokedex-mini.js?0.06704780302877977"></script>
-<script defer src="//192.168.0.20:3000/data/pokedex-mini-bw.js?0.8151573181703424"></script>
-<script defer src="//192.168.0.20:3000/data/graphics.js?0.5566854844923728"></script>
-<script defer src="//192.168.0.20:3000/data/pokedex.js?0.8438085942456066"></script>
-<script defer src="//192.168.0.20:3000/data/moves.js?0.08592012687552408"></script>
-<script defer src="//192.168.0.20:3000/data/abilities.js?0.7567646560605212"></script>
-<script defer src="//192.168.0.20:3000/data/items.js?0.7962075618882003"></script>
-<script defer src="//192.168.0.20:3000/data/teambuilder-tables.js?0.06090224067220018"></script>
-<script defer src="//192.168.0.20:3000/js/battle-tooltips.js?0.4479789393623539"></script>
-<script defer src="//192.168.0.20:3000/js/battle.js?0.614313706978252"></script>
+<script defer src="//181.99.179.92:3000/config/config.js?8ab915ad"></script>
+<script defer src="//181.99.179.92:3000/js/lib/jquery-1.11.0.min.js"></script>
+<script defer src="//181.99.179.92:3000/js/lib/html-sanitizer-minified.js"></script>
+<script defer src="//181.99.179.92:3000/js/battle-sound.js"></script>
+<script defer src="//181.99.179.92:3000/js/battledata.js?0.3221153012477911"></script>
+<script defer src="//181.99.179.92:3000/data/pokedex-mini.js?0.4884413141284145"></script>
+<script defer src="//181.99.179.92:3000/data/pokedex-mini-bw.js?0.5792997755064722"></script>
+<script defer src="//181.99.179.92:3000/data/graphics.js?0.9750031311400187"></script>
+<script defer src="//181.99.179.92:3000/data/pokedex.js?0.3293011456700152"></script>
+<script defer src="//181.99.179.92:3000/data/moves.js?0.627524262966991"></script>
+<script defer src="//181.99.179.92:3000/data/abilities.js?0.07602046784828054"></script>
+<script defer src="//181.99.179.92:3000/data/items.js?0.15467221489914396"></script>
+<script defer src="//181.99.179.92:3000/data/teambuilder-tables.js?0.7466322834622725"></script>
+<script defer src="//181.99.179.92:3000/js/battle-tooltips.js?0.880558189862972"></script>
+<script defer src="//181.99.179.92:3000/js/battle.js?0.9183745036529101"></script>
 
-<script defer src="js/utils.js?e31f9a17"></script>
-<script defer src="js/replays-battle.js?7008c182"></script>
+<script defer src="/js/utils.js?0.6961484813366063"></script>
+<script defer src="/js/replays-battle.js?0.6919467337704179"></script>
+<script defer src="/js/replays-index.js?0.6939859030474933"></script>
 
 
-<script defer src="js/replays.js?9d40a366"></script>
+<script defer src="/js/replays.js?0.5891918644176992"></script>
