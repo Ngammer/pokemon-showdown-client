@@ -1856,6 +1856,7 @@ export class PokemonSprite extends Sprite {
 		curse: ['Curse', 'bad'],
 		nightmare: ['Nightmare', 'bad'],
 		attract: ['Infatuation', 'bad'],
+		darknessgem: ['Blindness', 'bad'],
 		torment: ['Torment', 'bad'],
 		taunt: ['Taunt', 'bad'],
 		disable: ['Disable', 'bad'],
