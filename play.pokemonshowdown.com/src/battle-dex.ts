@@ -43,6 +43,7 @@ export declare namespace Dex {
 	export type StatNameExceptHP = DexData.StatNameExceptHP;
 	export type BoostStatName = DexData.BoostStatName;
 	export type TypeName = DexData.TypeName;
+	export type CategoryName = DexData.CategoryName;
 	export type StatusName = DexData.StatusName;
 	export type GenderName = DexData.GenderName;
 	export type NatureName = DexData.NatureName;
@@ -288,6 +289,9 @@ export const Dex = new class implements ModdedDex {
 		}
 		if (dex.gen === 9 && formatid.includes('legends')) {
 			dex = Dex.mod('gen9legendsou' as ID);
+		}
+		if (dex.gen === 9 && formatid.includes('champions')) {
+			dex = Dex.mod('champions' as ID);
 		}
 		return dex;
 	}
@@ -836,7 +840,7 @@ export const Dex = new class implements ModdedDex {
 		let left = (num % 12) * 40;
 		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ?
 			`;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
-		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v20) no-repeat scroll -${left}px -${top}px${fainted}`;
+		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v21) no-repeat scroll -${left}px -${top}px${fainted}`;
 	}
 
 	getTeambuilderSpriteData(pokemon: any, dex: ModdedDex = Dex): TeambuilderSpriteData {
@@ -980,8 +984,9 @@ export class ModdedDex {
 	pokeballs: string[] | null = null;
 	constructor(modid: ID) {
 		this.modid = modid;
-		const gen = parseInt(modid.charAt(3), 10);
-		if (!modid.startsWith('gen') || !gen) throw new Error("Unsupported modid");
+		let gen = parseInt(modid.charAt(3), 10);
+		if (this.modid === 'champions') gen = 9;
+		if ((modid !== 'champions' && !modid.startsWith('gen')) || !gen) throw new Error("Unsupported modid");
 		this.gen = gen;
 	}
 	moves = {

@@ -992,6 +992,10 @@ p.or:after {
 .roomcounters button:hover .usercount {
 	background: url(../sprites/gen5/Butterfree-Mega.png) center no-repeat;
 }
+.roomcounters .usercount.afd,
+.roomcounters button:hover .usercount.afd {
+	background: url(https://play.pokemonshowdown.com/sprites/afd/meloetta.png) center no-repeat;
+}
 .roomcounters .battlecount {
 	display: block;
 	width: 86px;
@@ -1003,6 +1007,10 @@ p.or:after {
 }
 .roomcounters button:hover .battlecount {
 	background: url(../sprites/gen5/fearill.png) center no-repeat;
+} 
+.roomcounters .battlecount.afd,
+.roomcounters button:hover .battlecount.afd {
+	background: url(../sprites/afd/fearow.png) center no-repeat;
 }
 
 .roomlist {
