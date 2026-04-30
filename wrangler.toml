@@ -1,0 +1,5 @@
+[build]
+command = "npm run build"
+
+[site]
+bucket = "./play.pokemonshowdown.com"
