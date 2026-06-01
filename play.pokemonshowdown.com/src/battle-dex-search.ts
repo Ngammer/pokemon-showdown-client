@@ -582,7 +582,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 
 	protected formatType: 'doubles' | 'bdsp' | 'bdspdoubles' | 'rs' | 'frlg' | 'bw1' | 'letsgo' | 'metronome' | 'natdex' |
 		'nfe' | 'ssdlc1' | 'ssdlc1doubles' | 'predlc' | 'predlcdoubles' | 'predlcnatdex' | 'svdlc1' | 'svdlc1doubles' |
-		'svdlc1natdex' | 'stadium' | 'lc' | 'legendsza' | 'champions' | null = null;
+		'svdlc1natdex' | 'stadium' | 'lc' | 'legendsza' | 'bug' | 'champions' | null = null;
 	isDoubles = false;
 
 	/**
@@ -935,6 +935,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType === 'natdex' ? `gen${gen}natdex` :
 			this.formatType === 'stadium' ? `gen${gen}stadium${gen > 1 ? gen : ''}` :
 			this.formatType === 'legendsza' ? `gen9legendsou` :
+			this.formatType === 'bug' ? 'gen9bugdex' :
 			this.formatType === 'champions' ? `champions` :
 			`gen${gen}`;
 		if (table?.[tableKey]) {
@@ -1836,6 +1837,7 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 		if (this.formatType?.startsWith('ssdlc1')) lsetTable = lsetTable['gen8dlc1'];
 		if (this.formatType?.startsWith('predlc')) lsetTable = lsetTable['gen9predlc'];
 		if (this.formatType?.startsWith('svdlc1')) lsetTable = lsetTable['gen9dlc1'];
+		if (this.formatType?.startsWith('bug')) lsetTable = lsetTable['gen9bugdex'];
 		while (learnsetid) {
 			let learnset = lsetTable.learnsets[learnsetid];
 			if (learnset) {
@@ -1864,6 +1866,12 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 					if (
 						this.formatType?.startsWith('dlc1') &&
 						BattleTeambuilderTable['gen8dlc1']?.nonstandardMoves.includes(moveid)
+					) {
+						continue;
+					}
+					if (
+						this.formatType?.startsWith('bug') &&
+						BattleTeambuilderTable['gen9bugdex']?.nonstandardMoves.includes(moveid)
 					) {
 						continue;
 					}
