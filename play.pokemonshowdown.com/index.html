@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!--
+                      ,///////,
+      +#########+     ///////,
+   +###############+  ///////
+  +#################+,//////,
+ +###################,/////,
+ ########+   +########////
+                     ////,  PokemonShowdown.com
+ ########+   +########///
+ +###################+//
+  +#################+
+   +###############+
+      +#########+///////,
+                ///////,
+
+Viewing source? We're open source! Check us out on GitHub!
+https://github.com/smogon/pokemon-showdown
+https://github.com/smogon/pokemon-showdown-client (you are here)
+
+Also visit us in the Dev chatroom:
+https://psim.us/dev
+
+-->
+
+		<meta charset="UTF-8" />
+<meta id="viewport" name="viewport" content="width=device-width" />
+<title>Showdown!</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<link rel="shortcut icon" href="//181.1.60.17:3000/favicon.ico" id="dynamic-favicon" />
+<link rel="stylesheet" href="//181.1.60.17:3000/style/battle.css?0.3380597862410537" />
+<link rel="stylesheet" href="//181.1.60.17:3000/style/client.css?0.980659453230013" />
+<link rel="stylesheet" href="//181.1.60.17:3000/style/sim-types.css?0.3409881567599803" />
+<link rel="stylesheet" href="//181.1.60.17:3000/style/utilichart.css?0.9559675869470257" />
+<link rel="stylesheet" href="//181.1.60.17:3000/style/font-awesome.css?0.32929718109555084" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="manifest" href="/manifest.json" />
+<script src="http://181.1.60.17:3000/config/config.js"></script>
+<script>
+			Config.testclient = true;
+			(function() {
+				if (location.search !== '') {
+					var m = /\?~~(([^:\/]*)(:[0-9]*)?)/.exec(location.search);
+					if (m) {
+						Config.server = {
+							id: m[1],
+							host: m[2],
+							port: (m[3] && parseInt(m[3].substr(1))) || 8000
+						};
+					} else {
+						alert('Unrecognised query string syntax: ' + location.search);
+					}
+				} else {
+					Config.server = {
+						id: 'showdown',
+						host: '181.1.60.17',
+						port: 8000,
+						httpport: 8000,
+					};
+				}
+				if (location.host.includes('192.168.0.20')) {
+					Config.server = {
+						id: 'showdown',
+						host: '192.168.0.20',
+						port: 8000
+					};
+				}
+			})();
+		</script>
+		<!--[if lte IE 8]><script>
+			Config.oldie = true;
+		</script><![endif]-->
+	</head>
+	<body>
+		<div id="header" class="header">
+			<img class="logo" src="//181.1.60.17:3000/pokemonshowdownbeta.png" alt="Pok&eacute;mon Showdown! (beta)" width="146" height="44" /><div class="maintabbarbottom"></div>
+		</div>
+		<div class="ps-room scrollable" id="mainmenu"><div class="mainmenuwrapper">
+			<div class="leftmenu">
+				<div class="activitymenu">
+					<div class="pmbox">
+						<div class="pm-window news-embed">
+							<h3><button class="closebutton" tabindex="-1" aria-label="Close"><i class="fa fa-times-circle"></i></button><button class="minimizebutton" tabindex="-1" aria-label="Minimize"><i class="fa fa-minus-circle"></i></button>Anuncios</h3>
+							<div class="pm-log" style="max-height:none">
+								<div class="newsentry"><h4>Nuevo Meta</h4><p>Bienvenido al Nuevo Meta! En este servidor podras probar los cambios!</p><p>&mdash;<strong>Ngammer</strong> <small class="date">on Dec 29, 2024</small></p></div>
+								<div class="newsentry"><h4>Nuevo Sprite</h4><p>Gracias a Adri por su diseño de Fearill y los Totems!</p><p>&mdash;<strong>Ngammer y Juansssss</strong> <small class="date">on Jan 4, 2025</small></p></div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mainmenu">
+			<div id="loading-message" class="mainmessage">Initializing... <noscript>FAILED<br /><br />Pok&eacute;mon Showdown requires JavaScript.</noscript></div>
+		</div>
+			</div>
+			<div class="rightmenu">
+			</div>
+			<div class="mainmenufooter">
+		<div class="bgcredit"></div>
+		<small><a href="//181.1.60.17:3003/" target="_blank">Pok&eacute;dex</a> | <a href="//181.1.60.17:3002/" target="_blank">Replays</a> | <a href="//pokemonshowdown.com/rules" target="_blank">Rules</a> | <a href="//181.1.60.17:3001/credits" target="_blank">Credits</a> | <a href="http://smogon.com/forums/" target="_blank">Forum</a> | <a href="//pokemonshowdown.com/privacy" target="_blank">Privacy policy</a></small>
+	</div>
+		</div></div>
+<script>
+	var LM = document.getElementById('loading-message');
+	LM.innerHTML += ' DONE<br />Loading libraries...';
+</script>
+<script nomodule src="//181.1.60.17:3000/js/lib/ps-polyfill.js"></script>
+<script src="//181.1.60.17:3000/config/config.js?0.5423996644903993"></script>
+<script src="//181.1.60.17:3000/js/lib/jquery-2.2.4.min.js"></script>
+<script src="//181.1.60.17:3000/js/lib/jquery-cookie.js"></script>
+<script src="//181.1.60.17:3000/js/lib/autoresize.jquery.min.js?0.6465551234189785"></script>
+<script src="//181.1.60.17:3000/js/battle-sound.js?0.6942793870735648"></script>
+<script src="../config/testclient-key.js"></script>
+<script src="//181.1.60.17:3000/js/lib/html-css-sanitizer-minified.js?0.23158588234552469"></script>
+<script src="//181.1.60.17:3000/js/lib/lodash.core.js?0.8433001474909124"></script>
+<script src="//181.1.60.17:3000/js/lib/backbone.js?0.9825646985020218"></script>
+<script src="//181.1.60.17:3000/js/lib/d3.v3.min.js"></script>
+
+<script>
+	LM.innerHTML += ' DONE<br />Loading data...';
+</script>
+
+<script src="//181.1.60.17:3000/js/battledata.js?0.3094581828107177"></script>
+<script src="//181.1.60.17:3000/js/storage.js?0.5595004835828151"></script>
+<script src="//181.1.60.17:3000/data/pokedex-mini.js?0.48896834123057364"></script>
+<script src="//181.1.60.17:3000/data/typechart.js?0.2145017110734071"></script>
+<script src="//181.1.60.17:3000/js/battle.js?0.16231398391005203"></script>
+<script src="//181.1.60.17:3000/js/lib/sockjs-1.4.0-nwjsfix.min.js"></script>
+<script src="//181.1.60.17:3000/js/lib/color-thief.min.js"></script>
+
+		<script>
+	LM.innerHTML += ' DONE<br />Loading client...';
+</script>
+
+<script src="//181.1.60.17:3000/data/commands.js?0.38803833545995337"></script>
+<script src="//181.1.60.17:3000/js/client.js?0.611121992888534"></script>
+<script src="//181.1.60.17:3000/js/client-topbar.js?0.14030919820508347"></script>
+<script src="//181.1.60.17:3000/js/client-mainmenu.js?0.26088416451263297"></script>
+<script src="//181.1.60.17:3000/js/client-teambuilder.js?0.20541373906563654"></script>
+<script src="//181.1.60.17:3000/js/client-ladder.js?0.8184170312584856"></script>
+<script src="//181.1.60.17:3000/js/client-chat.js?0.8939459332321984"></script>
+<script src="//181.1.60.17:3000/js/client-chat-tournament.js?0.6816880236608748"></script>
+<script src="//181.1.60.17:3000/js/battle-tooltips.js?0.3889193729458098"></script>
+<script src="//181.1.60.17:3000/js/client-battle.js?0.3508681751577204"></script>
+<script src="//181.1.60.17:3000/js/client-rooms.js?0.09947766512962652"></script>
+<script src="//181.1.60.17:3000/data/graphics.js?0.20355385016793415"></script>
+
+<script>
+	// framebust - see https://owasp.org/www-pdf-archive/OWASP_AppSec_Research_2010_Busting_Frame_Busting_by_Rydstedt.pdf
+	// should be robust against reflective XSS filters and navigation interception
+	var app;
+	if (self === top) {
+		app = new App();
+	} else {
+		LM.innerHTML += ' IN FRAME<br />Please visit Showdown directly.';
+		top.location = self.location;
+	}
+</script>
+
+<script src="//181.1.60.17:3000/data/pokedex.js?0.5715453323129609"></script>
+<script src="//181.1.60.17:3000/data/moves.js?0.7365644102755953"></script>
+<script src="//181.1.60.17:3000/data/items.js?0.42455545181299603"></script>
+<script src="//181.1.60.17:3000/data/abilities.js?0.44077403888184086"></script>
+
+<script src="//181.1.60.17:3000/data/search-index.js?0.9564816842954414"></script>
+<script src="//181.1.60.17:3000/data/teambuilder-tables.js?0.9159715689897073"></script>
+<script src="//181.1.60.17:3000/js/battle-dex-search.js?0.28554395947049316"></script>
+<script src="//181.1.60.17:3000/js/search.js?0.9038091022597239"></script>
+
+<script src="//181.1.60.17:3000/data/aliases.js?0.2227146138809818" async></script>
+<script src="//181.1.60.17:3000/js/clean-cookies.php" async></script>
