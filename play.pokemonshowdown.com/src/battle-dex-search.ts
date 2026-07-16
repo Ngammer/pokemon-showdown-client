@@ -1190,7 +1190,7 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 			'pokemoves', 'relayrace', 'revelationmons', 'sharingiscaring', 'teradonation', 'teraoverride', 'thecardgame',
 			'thelosersgame', 'trademarked', 'triples', 'typesplit', 'voltturnmayhem', 'flipped', 'monotype', 'stabmonsmixandmega',
 			'aaa', 'bh', 'doubles', // natdex abbreviations
-			'tiershift', 'linked', '4v4doublesuu', 'pokebilitiesaaa',
+			'tiershift', 'linked', '4v4doublesuu', 'pokebilitiesaaa', 'pokelike',
 		];
 		if (dex.gen >= 6) {
 			if (customBanlists.includes(format) && table.metagameBans?.[format]) {
