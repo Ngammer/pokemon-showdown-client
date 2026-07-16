@@ -14,7 +14,7 @@ body {
 	font-family: Verdana, Helvetica, Arial, sans-serif;
 
 	/* see https://pokemonshowdown.com/credits */
-	background: #344b6c url(../fx/client-bg-nuevometa.jpg) no-repeat left center fixed;
+	background: #344b6c url(../fx/client-bg-charizards.jpg) no-repeat left center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -987,15 +987,15 @@ p.or:after {
 }
 .roomcounters .usercount {
 	display: block;
-	width: 100px;
-	height: 90px;
+	width: 49px;
+	height: 63px;
 	position: absolute;
-	left: -70px;
-	bottom: -15px;
-	background: url(../sprites/gen5/Butterfree-Mega.png) center no-repeat;
+	left: -30px;
+	bottom: -5px;
+	background: url(https://play.pokemonshowdown.com/sprites/gen5/meloetta.png) center no-repeat;
 }
 .roomcounters button:hover .usercount {
-	background: url(../sprites/gen5/Butterfree-Mega.png) center no-repeat;
+	background: url(https://play.pokemonshowdown.com/sprites/gen5ani/meloetta.gif) center no-repeat;
 }
 .roomcounters .usercount.afd,
 .roomcounters button:hover .usercount.afd {
@@ -1003,19 +1003,19 @@ p.or:after {
 }
 .roomcounters .battlecount {
 	display: block;
-	width: 86px;
-	height: 85px;
+	width: 46px;
+	height: 76px;
 	position: absolute;
-	right: -60px;
-	bottom: -5px;
-	background: url(../sprites/gen5/fearill.png) center no-repeat;
+	right: -30px;
+	bottom: -10px;
+	background: url(https://play.pokemonshowdown.com/sprites/gen5/meloetta-pirouette.png) center no-repeat;
 }
 .roomcounters button:hover .battlecount {
-	background: url(../sprites/gen5/fearill.png) center no-repeat;
+	background: url(https://play.pokemonshowdown.com/sprites/gen5ani/meloetta-pirouette.gif) center no-repeat;
 } 
 .roomcounters .battlecount.afd,
 .roomcounters button:hover .battlecount.afd {
-	background: url(../sprites/afd/fearow.png) center no-repeat;
+	background: url(https://play.pokemonshowdown.com/sprites/afd/meloetta-pirouette.png) center no-repeat;
 }
 
 .roomlist {

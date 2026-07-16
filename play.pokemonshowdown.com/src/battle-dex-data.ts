@@ -681,6 +681,7 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	ramnarok: 1560 + 78,
 	ramnarokradiant: 1560 + 79,
 	flox: 1560 + 80,
+
 	// Nuevo Meta evos
 	fearill: 1644 + 0,
 	furrip: 1644 + 1,
@@ -717,8 +718,6 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	ursaringfeudal: 1716 + 5,
 	mantinefeudal: 1716 + 6,
 	kingdrafeudal: 1716 + 7,
-	donphanfeudal: 1716 + 8,
-	celebifeudal: 1716 + 9,
 };
 
 export const BattlePokemonIconIndexesLeft: { [id: string]: number } = {
@@ -1662,9 +1661,8 @@ export class Species implements Effect {
 		this.requiredItems = data.requiredItems || (data.requiredItem ? [data.requiredItem] : []);
 		this.tier = data.tier || '';
 
-		this.isTotem = !!(this.forme && ['-totem', '-alolatotem', '-hisuitotem',
-			'-totemjoy', '-totemgrief', '-totemwrath'].includes(this.formeid));
-		this.isMega = !!(this.forme && ['-mega', '-megax', '-megay'].includes(this.formeid));
+		this.isTotem = !!(this.forme && this.formeid.includes('totem'));
+		this.isMega = !!(this.forme && this.formeid.includes('mega'));
 		this.isPrimal = !!(this.forme && this.formeid === '-primal');
 		this.canGigantamax = !!data.canGigantamax;
 		this.cannotDynamax = !!data.cannotDynamax;
