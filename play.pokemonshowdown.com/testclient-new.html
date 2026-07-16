@@ -9,6 +9,29 @@
 	<link rel="stylesheet" href="style/utilichart.css" />
 	<meta name="robots" content="noindex" />
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<script src="https://play.pokemonshowdown.com/config/config.js"></script>
+	<script>
+			function loadRemoteData(src) {
+				var scriptEl = document.createElement('script');
+				scriptEl.src = src.replace(/.*\/(data|js)\//g, 'https://play.pokemonshowdown.com/$1/');
+				document.head.appendChild(scriptEl);
+			}
+			Config.testclient = true;
+			(function() {
+				if (location.search !== '') {
+					var m = /\?~~(([^:\/]*)(:[0-9]*)?)/.exec(location.search);
+					if (m) {
+						Config.server = {
+							id: m[1],
+							host: m[2],
+							port: (m[3] && parseInt(m[3].substr(1))) || 8000
+						};
+					} else {
+						alert('Unrecognised query string syntax: ' + location.search);
+					}
+				}
+			})();
+		</script>
 	<!--[if lte IE 8]><script>
 		window.Config = {"oldie": true};
 	</script><![endif]-->
@@ -24,7 +47,9 @@
 					<h3 class="mini-window-header"><button class="closebutton" tabindex="-1" aria-label="Close"><i class="fa fa-times-circle"></i></button>Anuncios</h3>
 					<div id="room-news" class="mini-window-contents ps-room-light scrollable" style="height: auto;">
 						<div class="readable-bg">
-							<div class="newsentry"><h4>Test client</h4><p>Welcome to the test client! You can test client changes here!</p><p>&mdash;<strong>Zarel</strong> <small class="date">on Sep 25, 2015</small></p></div>
+							<div class="newsentry"><h4>Nuevo Meta</h4><p>Bienvenido al Nuevo Meta! En este servidor podras probar los cambios!</p><p>&mdash;<strong>Ngammer</strong> <small class="date">on Dec 29, 2024</small></p></div>
+								<div class="newsentry"><h4>Nuevo Sprite</h4><p>Gracias a Adri por su diseño de Fearill y los Totems!</p><p>&mdash;<strong>Ngammer y Juansssss</strong> <small class="date">on Jan 4, 2025</small></p></div>
+								<div class="newsentry"><h4>Nuevo Sprite</h4><p>Gracias a Dusclop por su diseño de Sunfulwer y Octank!</p><p>&mdash;<strong>Ngammer y Juansssss</strong> <small class="date">on Mar 11, 2025</small></p></div>							</div>
 						</div>
 					</div>
 				</div>

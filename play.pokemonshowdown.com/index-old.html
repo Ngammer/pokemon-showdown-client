@@ -22,8 +22,7 @@ Also visit us in the Dev chatroom:
 https://psim.us/dev
 
 -->
-
-		<meta charset="UTF-8" />
+<meta charset="UTF-8" />
 <meta id="viewport" name="viewport" content="width=device-width" />
 <title>Showdown!</title>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -90,17 +89,21 @@ https://psim.us/dev
 						</div>
 					</div>
 				</div>
-				<div class="mainmenu">
+			</div>
+		</div>
+		<div class="mainmenu">
 			<div id="loading-message" class="mainmessage">Initializing... <noscript>FAILED<br /><br />Pok&eacute;mon Showdown requires JavaScript.</noscript></div>
 		</div>
-			</div>
-			<div class="rightmenu">
-			</div>
-			<div class="mainmenufooter">
-		<div class="bgcredit"></div>
-		<small><a href="//181.1.60.17:3003/" target="_blank">Pok&eacute;dex</a> | <a href="//181.1.60.17:3002/" target="_blank">Replays</a> | <a href="//pokemonshowdown.com/rules" target="_blank">Rules</a> | <a href="//181.1.60.17:3001/credits" target="_blank">Credits</a> | <a href="http://smogon.com/forums/" target="_blank">Forum</a> | <a href="//pokemonshowdown.com/privacy" target="_blank">Privacy policy</a></small>
 	</div>
-		</div></div>
+	<div class="rightmenu">
+	</div>
+	<div class="mainmenufooter">
+		<div class="bgcredit"></div>
+		<small>
+			<a href="//181.1.60.17:3003/" target="_blank">Pok&eacute;dex</a> | <a href="//181.1.60.17:3002/" target="_blank">Replays</a> | <a href="http://smogon.com/forums/" target="_blank">Forum</a> | <a href="//pokemonshowdown.com/rules" target="_blank">Rules</a> | <a href="//181.1.60.17:3001/credits" target="_blank">Credits</a> | <a href="//pokemonshowdown.com/privacy" target="_blank">Privacy</a>
+		</small>
+	</div>
+</div></div>
 <script>
 	var LM = document.getElementById('loading-message');
 	LM.innerHTML += ' DONE<br />Loading libraries...';
@@ -111,7 +114,6 @@ https://psim.us/dev
 <script src="//181.1.60.17:3000/js/lib/jquery-cookie.js"></script>
 <script src="//181.1.60.17:3000/js/lib/autoresize.jquery.min.js?"></script>
 <script src="//181.1.60.17:3000/js/battle-sound.js?"></script>
-<script src="../config/testclient-key.js"></script>
 <script src="//181.1.60.17:3000/js/lib/html-css-sanitizer-minified.js?"></script>
 <script src="//181.1.60.17:3000/js/lib/lodash.core.js?"></script>
 <script src="//181.1.60.17:3000/js/lib/backbone.js?"></script>
@@ -122,28 +124,28 @@ https://psim.us/dev
 </script>
 
 <script src="//181.1.60.17:3000/js/battledata.js?"></script>
-<script src="//181.1.60.17:3000/js/storage.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/storage.js?"></script>
 <script src="//181.1.60.17:3000/data/pokedex-mini.js?"></script>
 <script src="//181.1.60.17:3000/data/typechart.js?"></script>
 <script src="//181.1.60.17:3000/js/battle.js?"></script>
 <script src="//181.1.60.17:3000/js/lib/sockjs-1.4.0-nwjsfix.min.js"></script>
 <script src="//181.1.60.17:3000/js/lib/color-thief.min.js"></script>
 
-		<script>
+<script>
 	LM.innerHTML += ' DONE<br />Loading client...';
 </script>
 
 <script src="//181.1.60.17:3000/data/commands.js?"></script>
-<script src="//181.1.60.17:3000/js/client.js?"></script>
-<script src="//181.1.60.17:3000/js/client-topbar.js?"></script>
-<script src="//181.1.60.17:3000/js/client-mainmenu.js?"></script>
-<script src="//181.1.60.17:3000/js/client-teambuilder.js?"></script>
-<script src="//181.1.60.17:3000/js/client-ladder.js?"></script>
-<script src="//181.1.60.17:3000/js/client-chat.js?"></script>
-<script src="//181.1.60.17:3000/js/client-chat-tournament.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/client.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/client-topbar.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/client-mainmenu.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/client-teambuilder.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/client-ladder.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/client-chat.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/client-chat-tournament.js?"></script>
 <script src="//181.1.60.17:3000/js/battle-tooltips.js?"></script>
-<script src="//181.1.60.17:3000/js/client-battle.js?"></script>
-<script src="//181.1.60.17:3000/js/client-rooms.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/client-battle.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/client-rooms.js?"></script>
 <script src="//181.1.60.17:3000/data/graphics.js?"></script>
 
 <script>
@@ -166,7 +168,7 @@ https://psim.us/dev
 <script src="//181.1.60.17:3000/data/search-index.js?"></script>
 <script src="//181.1.60.17:3000/data/teambuilder-tables.js?"></script>
 <script src="//181.1.60.17:3000/js/battle-dex-search.js?"></script>
-<script src="//181.1.60.17:3000/js/search.js?"></script>
+<script src="//181.1.60.17:3000/js/oldclient/search.js?"></script>
 
 <script src="//181.1.60.17:3000/data/aliases.js?" async></script>
-<script src="//181.1.60.17:3000/js/clean-cookies.php" async></script>
+<script src="//181.1.60.17:3000/js/oldclient/clean-cookies.php" async></script>

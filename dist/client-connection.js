@@ -58,7 +58,7 @@ const PSLoginServer = new class {
     query(data) {
         let url = '/~~' + PS.server.id + '/action.php';
         if (location.pathname.endsWith('.html')) {
-            url = 'https://' + Config.routes.client + url;
+            url = 'https://' + 'play.pokemonshowdown.com' + url;
             // @ts-ignore
             if (typeof POKEMON_SHOWDOWN_TESTCLIENT_KEY === 'string') {
                 // @ts-ignore
