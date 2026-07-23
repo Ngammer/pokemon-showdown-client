@@ -104,6 +104,18 @@ function requireNoCache(pathSpec) {
 			index.push('galarian' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
 		} else if (name.endsWith(' Hisui')) {
 			index.push('hisuian' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
+		} else if (name.endsWith(' Kanto')) {
+			index.push('kantonian' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
+		} else if (name.endsWith(' Johto')) {
+			index.push('johtonian' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
+		} else if (name.endsWith(' Hoenn')) {
+			index.push('hoennian' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
+		} else if (name.endsWith(' Sinnoh')) {
+			index.push('sinnohan' + toID(name.slice(0, -7)) + ' ' + type + ' ' + id + ' 0');
+		} else if (name.endsWith(' Unova')) {
+			index.push('unovan' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
+		} else if (name.endsWith(' Kalos')) {
+			index.push('kalosian' + toID(name.slice(0, -6)) + ' ' + type + ' ' + id + ' 0');
 		}
 		const fullSplit = name.split(/ |-/).map(toID);
 		if (fullSplit.length < 2) return;
@@ -423,10 +435,11 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			overrideTier[species.id] = speciesTier;
 			if (species.forme) {
 				if (
-					[
-						'Aegislash', 'Castform', 'Cherrim', 'Cramorant', 'Eiscue', 'Meloetta', 'Mimikyu', 'Minior', 'Morpeko', 'Ramnarok', 'Wishiwashi',
+					([
+						'Aegislash', 'Aegislash-Johto', 'Castform', 'Cherrim', 'Cramorant', 'Eiscue', 'Meloetta', 'Mimikyu', 'Minior', 'Morpeko', 'Ramnarok', 'Wishiwashi',
 					].includes(species.baseSpecies) || species.forme.includes('Totem') || species.forme.includes('Zen') ||
-					(species.baseSpecies === 'Ogerpon' && species.forme.includes('Tera')) || species.isCosmeticForme
+					(species.baseSpecies === 'Ogerpon' && species.forme.includes('Tera')) || species.isCosmeticForme) &&
+					species.name !== 'Aegislash-Johto'
 				) {
 					continue;
 				}

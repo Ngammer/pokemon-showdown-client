@@ -571,6 +571,13 @@ class BattleTextParser {
                             id = 'stancechange';
                             templateName = 'transformEnd';
                             break;
+									 case 'aegislashjohtosplinter':
+                            id = 'stancechange';
+                            break;
+                        case 'aegislashjohto':
+                            id = 'stancechange';
+                            templateName = 'transformEnd';
+                            break;
                         case 'wishiwashischool':
                             id = 'schooling';
                             break;
