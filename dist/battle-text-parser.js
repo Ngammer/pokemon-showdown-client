@@ -599,6 +599,13 @@ class BattleTextParser {
                             id = 'iceface';
                             templateName = 'transformEnd';
                             break;
+								case 'eiscuehoennnorock':
+                            id = 'iceface';
+                            break;
+                        case 'eiscuehoenn':
+                            id = 'iceface';
+                            templateName = 'transformEnd';
+                            break;
                         case 'terapagosterastal':
                             id = 'terashift';
                             break;

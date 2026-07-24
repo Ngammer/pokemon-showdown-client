@@ -551,8 +551,8 @@ export class BattleTextParser {
 				case 'minior': id = 'shieldsdown'; templateName = 'transformEnd'; break;
 				case 'eiscuenoice': id = 'iceface'; break;
 				case 'eiscue': id = 'iceface'; templateName = 'transformEnd'; break;
-				case 'eiscuehoennnorock': id = 'rockface'; break;
-				case 'eiscuehoenn': id = 'rockface'; templateName = 'transformEnd'; break;
+				case 'eiscuehoennnorock': id = 'iceface'; break;
+				case 'eiscuehoenn': id = 'iceface'; templateName = 'transformEnd'; break;
 				case 'terapagosterastal': id = 'terashift'; break;
 				}
 			} else if (newSpecies) {
