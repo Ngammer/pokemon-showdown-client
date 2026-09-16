@@ -1873,6 +1873,11 @@ export class BattleTooltips {
 					if (value.abilityModify(0, 'Galvanize')) moveType = 'Electric';
 					if (value.abilityModify(0, 'Pixilate')) moveType = 'Fairy';
 					if (value.abilityModify(0, 'Refrigerate')) moveType = 'Ice';
+					if (value.abilityModify(0, 'Soaked')) moveType = 'Water';
+					if (value.abilityModify(0, 'Noxious')) moveType = 'Poison';
+					if (value.abilityModify(0, 'Steelized')) moveType = 'Steel';
+					if (value.abilityModify(0, 'Mineralize')) moveType = 'Rock';
+					if (value.abilityModify(0, 'Fighter Spirit')) moveType = 'Fighting';
 				}
 				if (value.abilityModify(0, 'Normalize')) moveType = 'Normal';
 			}
@@ -2523,8 +2528,13 @@ export class BattleTooltips {
 		// Moves which have base power changed due to items
 		if (serverPokemon.item) {
 			let item = this.battle.dex.items.get(serverPokemon.item);
-			if (move.id === 'fling' && item.fling) {
-				value.itemModify(item.fling.basePower);
+			if (move.id === 'fling' && item.fling && item.name === 'Shiny Stone' && this.pokemonHasType(pokemon, 'Fairy')) {
+				value.itemModify(1.5);
+			} else if (move.id === 'fling' && item.fling && item.name === 'Oval Stone') {
+				value.itemModify(0.6);
+			} else if (move.id === 'fling' && item.fling && item.fling.basePower > 80) {
+				value.set(item.fling.basePower);
+				value.itemModify(1);
 			}
 		}
 		// Moves which have base power changed according to weight
@@ -2631,9 +2641,6 @@ export class BattleTooltips {
 			value.abilityModify(1.1, "Ice Body");
 		}
 		if (move.type === 'Poison') {
-			value.abilityModify(1.1, "Stench");
-		}
-		if (move.type === 'Poison') {
 			value.abilityModify(1.1, "Liquid Ooze");
 		}
 		if (move.type === 'Fire') {
@@ -2678,6 +2685,11 @@ export class BattleTooltips {
 				value.abilityModify(this.battle.gen > 6 ? 1.2 : 1.3, "Aerilate");
 				value.abilityModify(1.2, "Dragonize");
 				value.abilityModify(1.2, "Galvanize");
+				value.abilityModify(1.2, "Soaked");
+				value.abilityModify(1.2, "Noxious");
+				value.abilityModify(1.2, "Steelized");
+				value.abilityModify(1.2, "Mineralize");
+				value.abilityModify(1.2, "Fighter Spirit");
 				value.abilityModify(this.battle.gen > 6 ? 1.2 : 1.3, "Pixilate");
 				value.abilityModify(this.battle.gen > 6 ? 1.2 : 1.3, "Refrigerate");
 			}
