@@ -596,6 +596,11 @@ export class BattleChoiceBuilder {
 					request.chosenTeamSize = request.side.pokemon.length;
 				}
 			}
+			for (const switchable of request.side.pokemon) {
+				if (toID(switchable.baseAbility) === 'symbiosis') {
+					request.chosenTeamSize = request.side.pokemon.length;
+				}
+			}
 			if (request.maxChosenTeamSize) {
 				request.chosenTeamSize = request.maxChosenTeamSize;
 			}
