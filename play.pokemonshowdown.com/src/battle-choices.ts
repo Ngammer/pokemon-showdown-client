@@ -592,12 +592,7 @@ export class BattleChoiceBuilder {
 			}
 			// Request full team order if one of our Pokémon has Illusion
 			for (const switchable of request.side.pokemon) {
-				if (toID(switchable.baseAbility) === 'illusion') {
-					request.chosenTeamSize = request.side.pokemon.length;
-				}
-			}
-			for (const switchable of request.side.pokemon) {
-				if (toID(switchable.baseAbility) === 'symbiosis') {
+				if (toID(switchable.baseAbility) === 'illusion' || toID(switchable.baseAbility) === 'symbiosis') {
 					request.chosenTeamSize = request.side.pokemon.length;
 				}
 			}
