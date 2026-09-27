@@ -745,9 +745,9 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	eiscuehoenn: 1776 + 19,
 	dudunsparcehoenn: 1776 + 20,
 	// Nuevo meta primal
-	castformsunnyprimal: 1800 + 0,
-	castformrainyprimal: 1800 + 1,
-	castformsnowyprimal: 1800 + 2,
+	castformsunnyprimal: 1800 + 3,
+	castformrainyprimal: 1800 + 4,
+	castformsnowyprimal: 1800 + 5,
 };
 
 export const BattlePokemonIconIndexesLeft: { [id: string]: number } = {
