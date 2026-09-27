@@ -706,6 +706,8 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	pichuspikyeared: 1716 + 0,
 	delibirdholiday: 1716 + 1,
 	slastmaliberado: 1716 + 2,
+	aegislashjohtosplinter: 1716 + 7,
+	eiscuehoennnorock: 1716 + 8,
 	// Nuevo meta totems
 	raticatealolatotem: 1728 + 0,
 	marowakalolatotem: 1728 + 1,
@@ -735,10 +737,17 @@ export const BattlePokemonIconIndexes: { [id: string]: number } = {
 	tinkatinkkanto: 1776 + 6,
 	tinkatuffkanto: 1776 + 7,
 	tinkatonkanto: 1776 + 8,
+	seviperjohto: 1776 + 9,
+	aegislashjohto: 1776 + 12,
 	wungsparcehoenn: 1776 + 15,
 	clawitzerhoenn: 1776 + 17,
 	carbinkhoenn: 1776 + 18,
+	eiscuehoenn: 1776 + 19,
 	dudunsparcehoenn: 1776 + 20,
+	// Nuevo meta primal
+	castformsunnyprimal: 1800 + 0,
+	castformrainyprimal: 1800 + 1,
+	castformsnowyprimal: 1800 + 2,
 };
 
 export const BattlePokemonIconIndexesLeft: { [id: string]: number } = {
