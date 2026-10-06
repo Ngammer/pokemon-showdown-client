@@ -1396,6 +1396,10 @@ class BattleAbilitySearch extends BattleTypedSearch<'ability'> {
 			abilitySet.unshift(['html', `Will be <strong>${species.abilities['0']}</strong> after Totem.`]);
 			species = dex.species.get(species.baseSpecies);
 		}
+		if (species.isPrimal) {
+			abilitySet.unshift(['html', `Will be <strong>${species.abilities['0']}</strong> after Primal Reversion.`]);
+			species = dex.species.get(species.baseSpecies);
+		}
 		abilitySet.push(['ability', toID(species.abilities['0'])]);
 		if (species.abilities['1']) {
 			abilitySet.push(['ability', toID(species.abilities['1'])]);
